@@ -8,39 +8,47 @@ from models.amenity import Amenity
 from models.city import City
 from models.gym import Gym
 from models.review import Review
-from models.user import User
+from models.client import Client
+from models.owner import Owner
 from models.city import City
-from models.base_model import Base
+from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
 
 load_dotenv()
 
-classes = {"Amenity": Amenity, "City": City,
-           "Gym": Gym, "Review": Review, "User": User}
+classes = {"Client": Client, "Gym": Gym, "City": City,
+           "Amenity": Amenity, "Review": Review, "Owner": Owner}
 
 
 class DBStorage:
-    """interaacts with the MySQL database"""
+    """interaacts with the POST database"""
     __engine = None
     __session = None
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
-        HBNB_ENV = getenv('HBNB_ENV')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(HBNB_MYSQL_USER,
-                                             HBNB_MYSQL_PWD,
-                                             HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
-        if HBNB_ENV == "test":
+        GYMNI_POST_USER = getenv('GYMNI_POST_USER')
+        GYMNI_POST_PWD = getenv('GYMNI_POST_PWD')
+        GYMNI_POST_HOST = getenv('GYMNI_POST_HOST')
+        GYMNI_POST_DB = getenv('GYMNI_POST_DB')
+        GYMNI_ENV = getenv('GYMNI_ENV')
+        self.__engine = create_engine(
+            'postgresql+psycopg2://{}:{}@{}/{}'.format(
+                GYMNI_POST_USER,
+                GYMNI_POST_PWD,
+                GYMNI_POST_HOST,
+                GYMNI_POST_DB
+    )
+)
+        if GYMNI_ENV == "test":
             Base.metadata.drop_all(self.__engine)
+
+    def clean(self):
+        Base.metadata.drop_all(self.__engine)
+        self.reload()
 
     def all(self, cls=None):
         """query on the current database session"""
@@ -77,21 +85,6 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id):
-        """
-        Returns the object based on the class name and its ID, or
-        None if not found
-        """
-        if cls not in classes.values():
-            return None
-
-        all_cls = models.storage.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return value
-
-        return None
-
     def count(self, cls=None):
         """
         count the number of objects in storage
@@ -104,5 +97,24 @@ class DBStorage:
                 count += len(models.storage.all(clas).values())
         else:
             count = len(models.storage.all(cls).values())
-
         return count
+
+    def get(self, cls, id):
+        """
+        Returns the object based on the class name and its ID, or
+        None if not found
+        """
+        inst = self.__session.query(cls).filter(
+            cls.id == id
+        ).first()
+        return inst
+    
+    def email_exists(self, cls, email):
+        inst = self.__session.query(cls).filter(
+            cls.email == email
+        ).first()
+        return inst
+
+
+    def get_item_by_id(self, cls, id):
+        pass

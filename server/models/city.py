@@ -10,8 +10,8 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
     name = Column(String(128), nullable=False)
     gymes = relationship("Gym",
-                            backref="cities",
-                            cascade="all, delete, delete-orphan")
+                         backref="cities",
+                         cascade="all, delete, delete-orphan")
 
     def __init__(self, *args, **kwargs):
         """initializes city"""

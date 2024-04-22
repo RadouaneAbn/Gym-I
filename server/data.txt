@@ -1,0 +1,27 @@
+create Gym
+fatso
+23890d78-38f5-4aca-a9ab-fd27d9d2c1af
+73d8e7d2-b664-4864-9c90-4c6bb2dfb64d
+the
+desc 1
+20
+0
+3dc4fdbb-facd-45ca-a582-4a6c4eb0835c
+link1, link2, link3
+
+create Owner
+red
+abn
+red@abn.mail.com
+1234
+
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.gym import Gym
+from models.client import Client
+from models.owner import Owner
+from models.review import Review
+from models import storage
+
+d1307827-a6e8-4943-a8cf-04c66ff7a084

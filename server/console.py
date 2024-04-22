@@ -2,20 +2,28 @@
 
 from models.amenity import Amenity
 from models.base_model import BaseModel
+import models.base_model
 from models.city import City
 from models.gym import Gym
-from models.user import User
+from models.client import Client
+from models.owner import Owner
 from models.review import Review
-from models import storage
+# from models import storage
 import models
 import cmd
 import shlex
 
-classes = {"BaseModel": BaseModel, "User": User, "Gym": Gym,
-           "City": City, "Amenity": Amenity, "Review": Review}
+classes = {"Client": Client, "Gym": Gym, "City": City, "Amenity": Amenity,
+           "Review": Review, "Owner": Owner}
 
 input_msg = {
-    "User": {
+    "Client": {
+        "first_name": "    -> [first_name] = ",
+        "last_name": "    -> [last_name]  = ",
+        "email": "    -> [email]      = ",
+        "password": "    -> [password]   = ",
+        },
+    "Owner": {
         "first_name": "    -> [first_name] = ",
         "last_name": "    -> [last_name]  = ",
         "email": "    -> [email]      = ",
@@ -24,12 +32,13 @@ input_msg = {
     "Gym" : {
         "name": "    -> [name]           = ",
         "city_id": "    -> [city_id]        = ",
-        "user_id": "    -> [user_id]        = ",
+        "owner_id": "    -> [owner_id]        = ",
         "location": "    -> [location]       = ",
         "description": "    -> [description]    = ",
         "price_by_month": "    -> [price_by_month] = ",
         "price_by_year": "    -> [price_by_year]  = ",
-        "amenities": "    -> [amenities]      = "
+        "amenities": "    -> [amenities]      = ",
+        "links":     "    -> [links]           = "
         },
     "City": {
         "name": "    -> [name] = "
@@ -39,7 +48,7 @@ input_msg = {
         },
     "Review": {
         "gym_id":  "    -> [gym_id]  = ",
-        "user_id": "    -> [user_id] = ",
+        "client_id": "    -> [client_id] = ",
         "text":    "    -> [text]    = "
         }
 }
@@ -97,14 +106,23 @@ class HBNBCommand(cmd.Cmd):
             if len(items) != 2:
                 print("!!! format should be key=value !!!")
                 continue
-            key = items[0].stript()
-            value = items[1].stript()
+            #  key = value  => ['key', 'value']
+            key = items[0].strip()
+            value = items[1].strip()
             if not key or not value:
                 print("!!! format should be key=value !!!")
                 continue
 
             if key not in ignore:
+                if key == "links":
+                    print(value)
+                    value = [link for link in value.split(", ")]
                 setattr(inst, key, value)
+            models.storage.save()
+
+    def do_reload(self, line):
+        """"""
+        models.storage.clean()
 
     
     def do_create(self, line):
@@ -114,7 +132,9 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(line)
         if not self.class_check(args):
             return
-        
+        if args[0] == "BaseModel":
+            new = BaseModel()
+            return
         class_input = input_msg[args[0]]
         try:
             for key, value in class_input.items():
@@ -124,7 +144,13 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if args[0] == "Gym":
+            if not new_dict["price_by_year"].strip():
+                new_dict["price_by_year"] = 0
+            if not new_dict["price_by_year"].strip():
+                new_dict["price_by_year"] = 0
             amenity_object_list = []
+            links_list = []
+
             all_amenities = models.storage.all(Amenity)
             for am_id in new_dict.pop("amenities").split(", "):
                 amenity = all_amenities.get(f"Amenity.{am_id}", None)
@@ -132,7 +158,8 @@ class HBNBCommand(cmd.Cmd):
                     print("\nmissing amenity id: [" + am_id + "]\n") 
                     return
                 amenity_object_list.append(amenity)
-                new_dict["amenities"] = amenity_object_list
+            new_dict["amenities"] = amenity_object_list
+            new_dict["links"] = new_dict.pop("links").split(", ")
 
         new_obj = classes[args[0]](**new_dict)
         new_obj.save()

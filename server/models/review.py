@@ -10,7 +10,7 @@ class Review(BaseModel, Base):
 
     __tablename__ = 'reviews'
     gym_id = Column(String(60), ForeignKey('gymes.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    client_id = Column(String(60), ForeignKey('clients.id'), nullable=False)
     text = Column(String(1024), nullable=False)
 
     def __init__(self, *args, **kwargs):
