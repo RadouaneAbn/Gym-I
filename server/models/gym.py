@@ -26,7 +26,7 @@ class Gym(BaseModel, Base):
     description = Column(String(1024), nullable=True)
     price_by_month = Column(Integer, nullable=False, default=0)
     price_by_year = Column(Integer, nullable=False, default=0)
-    profile_picture = Column(String(256), nullable=True)
+    profile_picture = Column(String(256), nullable=False)
     reviews = relationship("Review", backref="gym",
                            cascade="all, delete, delete-orphan")
     amenities = relationship("Amenity",

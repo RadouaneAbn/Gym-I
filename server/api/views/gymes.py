@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 from models.gym import Gym
+from models.amenity import Amenity
 from models import storage
 from fastapi import FastAPI, HTTPException
-from api.schemas.gym_schema import GymModel, GymModelPUT, GymModelUserPUT, GymModelAmenity
+from api.schemas.gym_schema import GymModel, GymModelPUT, GymModelAmenity
 
 gym_router = APIRouter()
 
@@ -19,6 +20,7 @@ async def get_gym(gym_id: str):
 
 @gym_router.post("/gymes/")
 async def create_gym(gym: GymModel):
+    gym.amenities = [storage.get(Amenity, amenity_id) for amenity_id in gym.amenities]
     new_gym = Gym(**gym.__dict__)
     new_gym.save() 
 

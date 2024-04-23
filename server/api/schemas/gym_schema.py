@@ -4,13 +4,14 @@ from typing import Optional
 class GymModel(BM):
     name: str
     city_id: str
-    user_id: str
+    owner_id: str
     location: str
     description: str
-    price_by_month: float
-    price_by_year: Optional[float]
-    amenities: list
-    links: Optional[list]
+    price_by_month: float = 0
+    price_by_year: float = 0
+    profile_picture: str
+    amenities: list = []
+    links: list = []
 
 class GymModelPUT(BM):
     name: Optional[str]
@@ -22,7 +23,7 @@ class GymModelPUT(BM):
 
 # for future use if the onwer wanted to change the ownership of teh gym
 # class GymModelUserPUT(BM):
-#     user_id: str
+#     owner_id: str
 
 class GymModelAmenity(BM):
     city_id: str = None
