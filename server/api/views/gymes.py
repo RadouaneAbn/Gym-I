@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from models.gym import Gym
 from models import storage
 from fastapi import FastAPI, HTTPException
-from api.schemas.gym_schema import GymModel, GymModelPUT, GymModelUserPUT
+from api.schemas.gym_schema import GymModel, GymModelPUT, GymModelUserPUT, GymModelAmenity
 
 gym_router = APIRouter()
 

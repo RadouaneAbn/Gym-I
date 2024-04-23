@@ -20,5 +20,10 @@ class GymModelPUT(BM):
     amenities: Optional[list]
     links: Optional[list]
 
-class GymModelUserPUT(BM):
-    user_id: str
+# for future use if the onwer wanted to change the ownership of teh gym
+# class GymModelUserPUT(BM):
+#     user_id: str
+
+class GymModelAmenity(BM):
+    city_id: str = None
+    amenities: list = None
