@@ -21,7 +21,7 @@
                 <a href="#" class="hidden md:inline-block"><img src="../images/gymi-high-resolution-logo-transparent (2).png" alt="Logo" class="w-24 pt-4"></a>
               </div>
             <div
-                class="nav-links duration-500 md:static absolute mt-1 md:bg-transparent bg-opacity-30 bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-opacity-90 bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     <li>
                         <a class="hover:text-gray-500" href="#">Home</a>
@@ -40,25 +40,38 @@
             </div>
     </header>
     <main id="Home">
-      <section class="container-mt-20">
-        <div class="flex flex-col items-center z-20 md:flex-row">
+      <section class="container-mt-20 h-screen md:h-full">
+        <div class="flex flex-col items-center z-10 md:flex-row">
           <div class="relative">
+            <nav class="flex z-20 absolute rounded-full bg-white bg-opacity-60 mt-2 w-[35%] ml-[35%] mr-[30%]">
+              <section class="w-full h-10 flex items-center">
+                <!-- Search icon container -->
+                <span class="w-10 h-full hidden md:flex items-center">
+                   <i class="uil uil-search-alt text-xl text-blue-800"></i>
+                </span>
+                <!-- Input -->
+                <input type="text" class="w-full bg-transparent h-full font-medium  ml-2 md:pl-2 focus:outline-none searchInput"
+                   placeholder="Search what you want ...">
+                   <button
+                   class="w-28 h-full bg-gray-800 hover:bg-gray-700 flex justify-center items-center rounded-full text-white font-medium">Search</button>
+             </section>
+            </nav>
             <img src="../images/pexels-olly-3838389.jpg" alt="bg" class="max-w-full">
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="bg-white bg-opacity-75 p-6 rounded-lg text-center">
-                <h1 class="text-3xl font-bold">Your personal gym concierge</h1>
-                <p>oshdjoiljco osndcjhbs kncbsjkcnls knckjnsdk knsckjoidnccsonck ksdjnckjnsdkncckjsdkc
+              <div class="bg-white bg-opacity-30 rounded-lg mr-[50%] text-center">
+                <h1 class="md:text-3xl font-bold md:py-2 text-xl">Your personal gym concierge</h1>
+                <p class="py-2 text-xs md:text-xl">oshdjoiljco osndcjhbs kncbsjkcnls knckjnsdk knsckjoidnccsonck ksdjnckjnsdkncckjsdkc
                   cnidsodicndoincisnckmslncsnpocsoc ncj enksck ncjkn iksencjkn  knejsc jc  coz jkjk d sdj jc
                   dsnckdsjcsdbckjd 
                 </p>
               </div>
             </div>
           </div>
-          <div>
-           
-          </div>
         </div>
       </section>
+      <div class="content">
+
+      </div>
       
     </main>
     <script>
@@ -68,18 +81,8 @@
             navLinks.classList.toggle('top-[9%]')
         }
     </script>
-    <!-- <nav class="flex rounded-full bg-white bg-opacity-60 mt-2 w-[35%] ml-[35%] mr-[30%]">
-      <section class="w-full h-10 flex items-center">
-        Search icon container
-        <span class="w-10 h-full hidden md:flex items-center">
-           <i class="uil uil-search-alt text-xl text-blue-800"></i>
-        </span>
-        Input
-        <input type="text" class="w-full bg-transparent h-full font-medium  ml-2 md:pl-2 focus:outline-none searchInput"
-           placeholder="Search what you want ...">
-           <button
-           class="w-28 h-full bg-lime-950 hover:bg-lime-900 flex justify-center items-center rounded-full text-white font-medium">Search</button>
-     </section>
-    </nav> -->
+    
 </body>
+<footer>
+</footer>
 </html>
