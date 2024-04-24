@@ -10,9 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <script src="frontend/scripts/script.js"></script>
-    <link rel="stylesheet" href="frontend/styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" src="frontend/styles/style.css">
     <title>gym & i</title>
 
 </head>
@@ -44,7 +43,7 @@
             </div>
     </header>
     <main id="Home">
-      <section class="container-mt-20 h-screen md:h-full">
+      <section class="container-mt-20  md:h-full">
         <div class="flex flex-col items-center z-10 md:flex-row">
           <div class="relative">
             <nav class="flex z-20 absolute rounded-full bg-white bg-opacity-60 mt-2 w-[35%] ml-[35%] mr-[30%]">
@@ -73,19 +72,43 @@
           </div>
         </div>
       </section>
-      <div class="top-8">
-        {% for gym in data %}
-          <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-400 dark:border-gray-700 image-{{ loop.index }}" id="{{ gym.id }}">
-            <a href="#"><img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="p-8 rounded-t-lg"></a>
-            <div class="px-5 pb-5">
-            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ gym.location }}</h5>
-            <p>{{ gym.description }}</p>
+      </div>
+
+      <section class="container-mt-20 md:h-full" style="height: 900; align-content: center;">
+        <div class="flex flex-row items-center z-10 md:flex-row">
+          <div class="swiper tranding-slider relative flex flex-wrap">
+            <div class="swiper-wrapper w-full">
+              {% for gym in data %}
+              <div style="width: 600px;" class="swiper-slide tranding-slide">
+                <div class=" bg-white border border-gray-200 rounded-lg  dark:bg-gray-400 dark:border-gray-700 image-{{ loop.index }}" id="{{ gym.id }}">
+                  <a class="">
+                    <img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="">
+                  </a>
+                  <div class="py-2 px-2">
+                    <h5 class="">{{ gym.name }}</h5>
+                    <p>{{ gym.description }}</p>
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+            <div class="tranding-slider-control w-full">
+              <div class="swiper-button-prev slider-arrow">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              </div>
+              <div class="swiper-button-next slider-arrow">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+              </div>
+              <div class="swiper-pagination"></div>
             </div>
           </div>
-        {% endfor %}
-      </div>
-      
+        </div>
+      </section>  
+
     </main>
+
+
+  
     <script>
         const navLinks = document.querySelector('.nav-links')
         function onToggleMenu(e){
@@ -93,6 +116,11 @@
             navLinks.classList.toggle('top-[9%]')
         }
     </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="frontend/scripts/script.js"></script>
+
     
 </body>
 <footer>

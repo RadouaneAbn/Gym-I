@@ -18,6 +18,7 @@ app.mount("/frontend", StaticFiles(directory="frontend"), name="static")
 
 
 
+
 templates = Jinja2Templates(directory="frontend/templates")
 
 @app.get("/home/")
