@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 from fastapi import APIRouter
-from models.client import Client
-from models import storage
+from server.models.client import Client
+from server.models import storage
 from fastapi import FastAPI, HTTPException
-from api.schemas.client_schema import ClientModel, ClientModelPUT, ClientModelPWD
+from server.api.schemas.client_schema import ClientModel, ClientModelPUT, ClientModelPWD
 from hashlib import md5
 
 

@@ -2,11 +2,11 @@
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from api.views.clients import client_router
-from api.views.owners import owner_router
-from api.views.amenities import amenity_router
-from api.views.cities import city_router
-from api.views.gymes import gym_router
+from server.api.views.clients import client_router
+from server.api.views.owners import owner_router
+from server.api.views.amenities import amenity_router
+from server.api.views.cities import city_router
+from server.api.views.gymes import gym_router
 
 app = FastAPI()
 app.include_router(client_router)
