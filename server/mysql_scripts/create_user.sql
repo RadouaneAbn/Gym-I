@@ -1,7 +1,2 @@
-CREATE USER 'radouane'@'localhost' IDENTIFIED BY 'radouane';
-
-GRANT ALL PRIVILEGES ON *.* TO 'radouane'@'localhost';
-
-FLUSH PRIVILEGES;
-
-CREATE DATABASE IF NOT EXISTS gymni;
+CREATE ROLE radouane WITH LOGIN PASSWORD 'radouane';
+ALTER ROLE radouane SUPERUSER;

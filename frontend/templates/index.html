@@ -1,48 +1,370 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+
 <head>
-    <title>Gym&I</title>
-    <link rel="shortcut icon" href="images/gymi-favicon-color.png" >
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <link href="frontend/output.css" rel="stylesheet">
+    <link rel="shortcut icon" href="frontend/images/gymi-favicon-white.png" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" src="frontend/styles/style.css">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="frontend/scripts/swiper.js"></script>
+    <title>gym & i</title>
+
 </head>
-<body>
-    <nav class="sticky top-0 z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 border-b border-gray-200">
-        <div class="max-w-5xl mx-auto px-4">
-          <div class="flex items-center justify-between h-16">
-            <div class="flex items-center justify-between">
-            <a href="#" class="w-10"><img src="images/gymi-favicon-color.png" alt="Logo" class="w-[100%]"></h1></a>
-            <a href="#" class="hidden md:inline-block"><img src="images/gymi-high-resolution-logo-transparent (2).png" alt="Logo" class="w-24 pt-2"></a>
-            <span class="text-3xl cursor-pointer mx-2 md:hidden block">
-              <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
-            </span>
-            </div>
-            <ul class="bg-white  md:space-x-4 md:h-16 md:bg-transparent md:flex md:items-center z-[-5] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 md:justify-between">
-              <!-- <div class="flex  items-center space-x-4 gap-[4vm] h-16 justify-between"> -->
-              <li><a href="#" class="hover:text-gray-600">Home</a></li>
-              <li><a href="#" class="hover:text-gray-600">About</a></li>
-              <li><a href="#" class="hover:text-gray-600">Premuim</a></li>
-              <li><a href="#" class="hover:text-gray-600">Contact</a></li>
-            <!-- </div> -->
-              <div class="flex  items-center space-x-4 gap-[4vm] h-10 justify-between">
-                <button class="md:-mt-1 md: pr-2 px-4 py-2 mt-2 md:text-gray-600 md:hover:text-gray-900  text-black hover:text-gray-600 border-r-2 border-gray-200 md:pr-3 md:bg-transparent bg-red-600 rounded-full md:rounded">Sign-in</button>
-                <!-- <button class=" md:-mt-1 md:pl-6 rounded-full  mt-2 md:inline-block px-4 py-2 bg-green-900 text-white hover:bg-green-950 hover:text-gray-600">Register</button> -->
-              </div>
+
+<body class="font-[Poppins] bg-gradient-to-t bg-gray-500">
+  <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 md:backdrop-blur-lg">
+    <nav class="flex justify-between items-center w-[92%] mx-auto">
+        <div class="flex py-2">
+            <img class="w-28 cursor-pointer" src="frontend/images/gymi-high-resolution-logo-black-transparent.png" alt="...">
+          </div>
+        <div
+            class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+            <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+                <li>
+                    <a class="hover:text-gray-500 duration-500" href="/">Home</a>
+                </li>
+                <li>
+                    <a class="hover:text-gray-500 duration-500" href="/about">About</a>
+                </li>
+                <li>
+                    <a class="hover:text-gray-500 duration-500" href="/offers">Offers</a>
+                </li>
+                <li class="inline-block md:hidden">
+                  <a class="hover:text-gray-500 duration-500" href="">sign up</a>
+              </li>
             </ul>
-            
+        </div>
+        <div class="flex items-center gap-6">
+            <button class=" duration-500 bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700">Sign in</button>
+            <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
+        </div>
+</header>
+    <main id="Home">
+      <section class="container-mt-20 h-[50%]">
+        <div class="flex flex-col items-center z-10 md:flex-row">
+          <div class="relative">
+            <nav class="flex z-10 absolute rounded-full bg-white bg-opacity-60 mt-2 w-[35%] ml-[35%] mr-[30%]">
+              <section class="w-full md:h-10 h-5 flex items-center">
+                <!-- Search icon container -->
+                <span class="w-10 h-10 hidden md:flex items-center">
+                   <i class="uil uil-search-alt text-xl text-blue-800"></i>
+                </span>
+                <!-- Input -->
+                <input type="text" class="w-full bg-transparent h-full font-medium  ml-2 md:pl-2 focus:outline-none text-xs md:text-sm searchInput"
+                   placeholder="Search for your favorit Gym ...">
+                   <button
+                   class=" duration-500 w-28 h-full bg-gray-800 hover:bg-gray-700 flex justify-center items-center rounded-full text-white font-medium md:text-sm text-xs">Search</button>
+             </section>
+            </nav>
+            <img src="frontend/images/pexels-olly-3838389.jpg" alt="bg" class="max-w-full">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-white bg-opacity-30 rounded-lg lg:mr-[50%] md:mr-[30%] text-center">
+                <h1 class="lg:text-5xl md:text-3xl font-bold md:py-2 text-2xl text-gray-950">Your Personal Gym Concierge</h1>
+                <p class="px-1 md:px-0 text-sm md:text-2xl text-gray-950">
+                  Redefining Fitness Engagement. Discover, 
+                  choose, and access top-tier gyms effortlessly. 
+                  Whether you're an owner showcasing your 
+                  offerings or an enthusiast seeking the perfect 
+                  workout spot, Gym&I has you covered.
+                </p>
+                <button 
+                class="bg-gray-900 hover:bg-gray-700 duration-500 my-2 text-sm md:text-xl z-30 w-[25%] md:w-[50%] h-5 md:h-10 text-gray-200 text-center rounded-full">
+                Register Now</button>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-      <script>
-        function Menu(e){
-          let list = document.querySelector('ul');
-          e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') , list.classList.add('opacity-100')) :( e.name = "menu" ,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
+      </section>
+      </div>
+
+      <section class="container-mt-20 md:h-full h-[50%]">
+        <!-- <img src="frontend/images/background_top.png" alt="bg" class="max-w-full fixed z-10">   -->
+        <div class="flex flex-row items-center z-11 md:flex-row">
+          <div class="swiper tranding-slider relative flex flex-wrap">
+            <div class="swiper-wrapper w-full">
+              {% for gym in data %}
+              <div class="swiper-slide tranding-slide w-[50%] items-center">
+                <div class="md:w-full w-[50%] bg-white border border-gray-200 rounded-lg  dark:bg-gray-400 dark:border-gray-700 image-{{ loop.index }}" id="{{ gym.id }}">
+                  <a class="">
+                    <img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="w-[100%]">
+                  </a>
+                  <div class="py-2 px-2">
+                    <h5 class="">{{ gym.name }}</h5>
+                    <!-- <p>{{ gym.description }}</p> -->
+                  </div>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+            <div class="tranding-slider-control w-full">
+              <div class="swiper-button-prev slider-arrow">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              </div>
+              <div class="swiper-button-next slider-arrow">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </section>  
+
+    </main>
+
+
+  
+    <script>
+        const navLinks = document.querySelector('.nav-links')
+        function onToggleMenu(e){
+            e.name = e.name === 'menu' ? 'close' : 'menu'
+            navLinks.classList.toggle('top-[9%]')
         }
-      </script>
-      <img src="images/logo3.png" alt="Logo"/>
+    </script>
+
+    
 </body>
+<footer class="bg-gray-200 text-gray-900">
+  <div class="container mx-auto py-14 px-6">
+    <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+      <div class="lg:col-span-4 cols-span-12 md:col-span-3">
+        <a href="#"><img class="h-10" src="frontend/images/gymi-high-resolution-logo-transparent.png" alt="logo"></a>
+        <p class="mt-4">
+          Thank you for choosing Gym&I as your 
+          fitness companion. We're dedicated to revolutionizing your 
+          fitness journey with our innovative web application. Discover 
+          top-tier gyms effortlessly, whether you're an owner showcasing your 
+          offerings or an enthusiast seeking the perfect workout spot. 
+          Gym&I has you covered every step of the way. 
+        </p>
+    </div>
+    <div class="lg:col-span-2 cols-span-12 md:col-span-4 mt-1">
+      <h5 class="tracking-wide font-semibold text-gray-900 ">Gym&I</h5>
+      <ul class="list mt-6 space-y-2">
+        <li>
+            <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">Home</a>
+        </li>
+        <li>
+            <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">About us</a>
+        </li>
+        <li>
+            <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">Pricing</a>
+        </li>
+        <li>
+          <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">Blog</a>
+        </li>
+      </ul>
+    </div>
+    <div class="lg:col-span-3 cols-span-12 md:col-span-4 mt-1">
+      <h5 class="tracking-wide font-semibold text-gray-900 ">Important Links</h5>
+      <ul class="list mt-6 space-y-2">
+        <li>
+            <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">Terms of Services</a>
+        </li>
+        <li>
+            <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">Privacy Policy</a>
+        </li>
+        <li>
+            <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">Documentation</a>
+        </li>
+        <li>
+          <a class="hover:text-gray-500 text-gray-900 ease-in-out duration-500 underline" href="#">API's</a>
+        </li>
+      </ul>
+    </div>
+    <div class="lg:col-span-3 cols-span-12 md:col-span-4 mt-1">
+      <h5 class="tracking-wide font-semibold text-gray-900 ">Collaborate</h5>
+      <p class="mt-6">Interested in partnering with Gym&I?
+         Share your email below to receive 
+        our collaboration contract and join the fitness revolution!
+      </p>
+      <form action="">
+        <div>
+        <label for="email-input">Write your Email<span class="text-red-600">*</span></label>
+        <input
+        type="email"
+        id="email-input"
+        class="mt-3 w-full py-2 px-3 bg-transparent rounded-full outline-none border border-gray-600 focus:border-gray-800 focus:ring-0"
+        placeholder="name@example.com">
+        <input
+        type="submit"
+        class="tracking-wide mt-1 w-full py-2 px-5 text-center bg-gray-900 text-gray-100 rounded-full hover:bg-gray-700 duration-500 text-base">
+        </div>
+      </form>
+    </div>
+    <div class="inline-block text-left flex-1 justify-between md:-mt-6 mt-2 space-y-2 z-30">
+      <div>
+        <h5 class="text-gray-900 font-semibold underline" href="#">Radouane</h5>
+        <div class="flex space-x-2 mt-2">
+          <a
+          href="#!"
+          type="button"
+          class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+          data-twe-ripple-init
+          data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 512 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+              </svg>
+            </span>
+          </a>
+          <a
+            href="#!"
+            type="button"
+            class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+            data-twe-ripple-init
+            data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href="#!"
+            type="button"
+            class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+            data-twe-ripple-init
+            data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
+              </svg>
+            </span>
+          </a>
+          <a
+            href="#!"
+            type="button"
+            class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+            data-twe-ripple-init
+            data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 496 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+              </svg>
+            </span>
+          </a>
+        </div>
+        </div>
+      <div>
+        <h5 class="text-gray-900 font-semibold underline" href="#">Abdlelhalim</h5>
+        <div class="flex space-x-2 mt-2">
+          <a
+          href="#!"
+          type="button"
+          class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+          data-twe-ripple-init
+          data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 512 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+              </svg>
+            </span>
+          </a>
+          <a
+            href="#!"
+            type="button"
+            class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+            data-twe-ripple-init
+            data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href="#!"
+            type="button"
+            class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+            data-twe-ripple-init
+            data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
+              </svg>
+            </span>
+          </a>
+          <a
+            href="#!"
+            type="button"
+            class="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
+            data-twe-ripple-init
+            data-twe-ripple-color="light">
+            <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 496 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-gray-600 mt-10">
+    <div class="md:text-left text-center container mx-auto py-7 px-6">
+      <p class="mb-2">
+        &copy;
+        <script>
+          document.write(new date().getFullYear());
+        </script>
+        Gym&I Alx SE Students Team
+      </p>
+    </div>
+  </div>
+</footer>
 </html>
