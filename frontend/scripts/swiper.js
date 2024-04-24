@@ -1,4 +1,5 @@
-const TrandingSlider = new Swiper('.tranding-slider', {
+$(document).ready(function () {
+  const TrandingSlider = new Swiper('.tranding-slider', {
     effect: 'coverflow',
     grabCursor: true,
     centeredSlides: true,
@@ -23,3 +24,4 @@ const TrandingSlider = new Swiper('.tranding-slider', {
     // }
   });
   
+});
