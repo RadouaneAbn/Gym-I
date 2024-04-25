@@ -7,14 +7,13 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import ARRAY
 
 gym_amenity = Table('gym_amenity', Base.metadata,
-                      Column('gym_id', String(60),
-                             ForeignKey('gymes.id', onupdate='CASCADE',
-                                        ondelete='CASCADE'),
-                                        primary_key=True),
-                      Column('amenity_id', String(60),
-                             ForeignKey('amenities.id', onupdate='CASCADE',
-                                        ondelete='CASCADE'),
-                                        primary_key=True))
+                    Column('gym_id', String(60),
+                           ForeignKey('gymes.id', onupdate='CASCADE',
+                                      ondelete='CASCADE'), primary_key=True),
+                    Column('amenity_id', String(60),
+                           ForeignKey('amenities.id', onupdate='CASCADE',
+                                      ondelete='CASCADE'), primary_key=True))
+
 
 class Gym(BaseModel, Base):
     """Representation of Gym """
