@@ -40,13 +40,15 @@ class DBStorage:
                 GYMNI_POST_USER,
                 GYMNI_POST_PWD,
                 GYMNI_POST_HOST,
-                GYMNI_POST_DB
-    )
-)
+                GYMNI_POST_DB))
+
         if GYMNI_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def clean(self):
+        """ This funtion deletes all tables from the database and
+            then create them again
+        """
         Base.metadata.drop_all(self.__engine)
         self.reload()
 
@@ -108,13 +110,12 @@ class DBStorage:
             cls.id == id
         ).first()
         return inst
-    
+
     def email_exists(self, cls, email):
+        """ This method checks if the user email is already in the database
+            'checks for duplicates'
+        """
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()
         return inst
-
-
-    def get_item_by_id(self, cls, id):
-        pass
