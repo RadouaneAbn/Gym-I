@@ -8,7 +8,6 @@ from server.models.gym import Gym
 from server.models.client import Client
 from server.models.owner import Owner
 from server.models.review import Review
-# from models import storage
 import server.models
 import cmd
 import shlex

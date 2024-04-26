@@ -20,6 +20,8 @@ class BaseModel:
     updated_at = Column(DateTime, default=datetime.now)
 
     def set_datetime(self, date_time):
+        """ This function sets the time if an attribute created_at/updated_at
+            is found or sets it to now """
         if date_time and isinstance(date_time, str):
             return datetime.strptime(date_time, time)
         return datetime.now()
@@ -59,7 +61,7 @@ class BaseModel:
         new_dict["__class__"] = self.__class__.__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
-        if show_password == False:
+        if not show_password:
             if "password" in new_dict:
                 del new_dict["password"]
         return new_dict
