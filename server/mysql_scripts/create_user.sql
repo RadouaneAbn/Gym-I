@@ -1,0 +1,2 @@
+CREATE ROLE radouane WITH LOGIN PASSWORD 'radouane';
+ALTER ROLE radouane SUPERUSER;
