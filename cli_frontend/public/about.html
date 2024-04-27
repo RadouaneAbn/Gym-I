@@ -3,30 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="../images/gymi-favicon-white.png" >
+    <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
+    <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" /> -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
-    <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
-    <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
-    <!-- <script src="frontend/scripts/swiper.js"></script> -->
-    <link rel="stylesheet" href="output.css">
-    <title>About us</title>
+    <!-- <link rel="stylesheet" href="output.css"> -->
+    <title>About</title>
 </head>
 
 <body class="bg-gray-200">
     <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-b-1 md:backdrop-blur-lg border-b-2 border-gray-500 border-opacity-10">
         <nav class="flex justify-between items-center w-[92%] mx-auto">
             <div class="flex py-2">
-                <a href="/"><img class="w-28 cursor-pointer" src="../images/gymi-high-resolution-logo-black-transparent.png" alt="..."></a>
+                <a href="/"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
               </div>
             <div
                 class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
@@ -50,14 +45,23 @@
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
     </header>
-    <main class="container-mt-20 bg-cover bg-center z-10"  style="background-image: url('../images/9213.jpg');">
+    <main class="container-mt-20 bg-cover bg-center z-10"  style="background-image: url('/cli_frontend/images/9213.jpg');">
         <section>
             <div class="flex flex-col items-center z-10 md:flex-row">
                 <div class="relative">
                     <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
                         <!-- Image -->
                         <div class="flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
-                            <img src="../images/alx-logo.png" alt="Gym&I Gym" class="w-[50%] rounded-full shadow-lg shadow-dark-3">
+                          <div 
+                          class="absolute top-0 -bottom-2 left-1 w-44 h-44 md:w-72 md:h-72 bg-amber-300 rounded-full mix-blend-multiply filter blur-2xl opacity-80 animate-blob">
+                          </div>
+                          <div 
+                          class="absolute top-0 -bottom-2 right-1 w-44 h-44 md:w-72 md:h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-80 animate-blob animation-delay-2000">
+                          </div>
+                          <div 
+                          class="absolute -bottom-14 left-24 md:left-44 w-44 h-44 md:w-72 md:h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-80 animate-blob animation-delay-4000">
+                          </div>
+                            <img src="/cli_frontend/images/alx-logo.png" alt="Gym&I Gym" class="w-[50%] rounded-full shadow-lg shadow-dark-3">
                         </div>
                         <!-- Description -->
                         <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-l-2 lg:border-gray-400">
@@ -65,7 +69,7 @@
                             <p class="text-lg text-black font-semibold">
                                 We selected the Gym&I project as part of our fundamental studies in ALX Fullstack Software Engineering to gain practical experience in developing a web application that serves a real-world need. Gym&I's mission to redefine fitness engagement aligns with our interest in building user-centric applications that improve people's lives. Through this project, we aim to learn valuable skills in frontend and backend development, database management, and user experience design.
                             </p>
-                            <p class="text-sm lg:text-gray-900 text-gray-200 mt-4">This project is the final project in our fundamental studies at ALX Fullstack Software Engineering.</p>
+                            <p class="text-sm text-gray-900 mt-4">This project is the final project in our fundamental studies at ALX Fullstack Software Engineering.</p>
                         </div>
                     </div>
                 </div>
@@ -78,8 +82,18 @@
           <div class="flex flex-col items-center z-10 md:flex-row">
               <div class="relative">
                   <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
+                    
                       <div class="lg:hidden flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
-                        <img src="../images/radoune_profile.jpeg" alt="Gym&I Gym" class=" w-[25%] md:w-[35%] rounded-full shadow-lg shadow-dark-3">
+                        <div 
+                          class="absolute top-0 -bottom-2 left-1 w-44 h-44 md:w-72 md:h-72 bg-amber-300 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob">
+                          </div>
+                          <div 
+                          class="absolute top-0 -bottom-2 right-1 w-44 h-44 md:w-72 md:h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob animation-delay-2000">
+                          </div>
+                          <div 
+                          class="absolute -bottom-14 md:left-44 w-44 h-44 md:w-72 md:h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob animation-delay-4000">
+                          </div>
+                        <img src="/cli_frontend/images/radoune_profile.jpeg" alt="Radouane" class="z-10 w-[25%] md:w-[35%] rounded-full shadow-lg shadow-dark-3">
                       </div>
                       <!-- Description -->
                       <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-r-2 lg:border-gray-400">
@@ -97,7 +111,16 @@
                         </div>
                       <!-- Image -->
                       <div class="hidden lg:flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
-                          <img src="../images/radoune_profile.jpeg" alt="Gym&I" class="w-[50%] rounded-full shadow-lg shadow-dark-3">
+                        <div 
+                          class="absolute top-0 -bottom-2 left-1 w-44 h-44 md:w-72 md:h-72 bg-amber-300 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob">
+                          </div>
+                          <div 
+                          class="absolute top-0 -bottom-2 right-1 w-44 h-44 md:w-72 md:h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob animation-delay-2000">
+                          </div>
+                          <div 
+                          class="absolute -bottom-14 md:left-44 w-44 h-44 md:w-72 md:h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob animation-delay-4000">
+                          </div>
+                          <img src="/cli_frontend/images/radoune_profile.jpeg" alt="Radouane" class="z-10 w-[50%] rounded-full shadow-lg shadow-dark-3">
                       </div>
                   </div>
               </div>
@@ -109,7 +132,16 @@
                 <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
                     <!-- Image -->
                     <div class="flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
-                        <img src="../images/halim.jpg" alt="Gym&I Gym" class="w-[25%] lg:w-[50%] md:w-[35%] rounded-full shadow-lg shadow-dark-3">
+                      <div 
+                          class="absolute top-0 -bottom-2 left-1 w-44 h-44 md:w-72 md:h-72 bg-amber-300 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob">
+                          </div>
+                          <div 
+                          class="absolute top-0 -bottom-2 right-1 w-44 h-44 md:w-72 md:h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob animation-delay-2000">
+                          </div>
+                          <div 
+                          class="absolute -bottom-14 md:left-44 w-44 h-44 md:w-72 md:h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-65 animate-blob animation-delay-4000">
+                          </div>
+                        <img src="/cli_frontend/images/halim.jpg" alt="halim" class="z-10 w-[25%] lg:w-[50%] md:w-[35%] rounded-full shadow-lg shadow-dark-3">
                     </div>
                     <!-- Description -->
                     <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-l-2 lg:border-gray-400">
@@ -130,11 +162,11 @@
         </div>
     </section>
     <div class="flex py-2 items-center justify-center">
-      <img src="../images/gymi-high-resolution-logo-black-transparent.png" alt="logo" class="w-[25%]">
+      <img src="/cli_frontend/images/gymi-high-resolution-logo-black-transparent.png" alt="logo" class="w-[25%]">
     </div>
-    <div class="flex-1 items-center justify-center text-center py-10 w-[75%] mx-auto">
+    <div class="flex-1 items-center justify-center text-center py-10 w-[75%] mx-auto space-y-10">
       <h2 class="text-4xl font-bold mb-4 text-gray-200">Summry</h2>
-      <p class="text-lg font-semibold text-gray-400 py-5">
+      <p class="text-lg font-semibold text-gray-300 py-5 leading-8">
         Gym&I stands as a pioneering initiative poised to redefine the fitness landscape, offering a 
         novel approach for gym enthusiasts to discover, select, and access fitness facilities across Morocco. 
         With Gy-me, individuals can seamlessly navigate through an array of fitness options, while gym owners gain enhanced visibility and operational efficiency.
@@ -164,7 +196,7 @@
       <div class="container mx-auto py-5 px-6 max-h-16">
       <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
         <div class="lg:col-span-4 cols-span-12 md:col-span-3">
-          <a href="#"><img class="h-10" src="../images/gymi-high-resolution-logo-black-transparent.png" alt="logo"></a>
+          <a href="#"><img class="h-10" src="/cli_frontend/images/gymi-high-resolution-logo-black-transparent.png" alt="logo"></a>
           <p class="mt-4">
             Thank you for choosing Gym&I as your 
             fitness companion. We're dedicated to revolutionizing your 

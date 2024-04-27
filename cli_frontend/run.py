@@ -14,9 +14,9 @@ from fastapi.requests import Request
 
 
 app = FastAPI()
-app.mount("/frontend", StaticFiles(directory="frontend"), name="static")
+app.mount("/cli_frontend", StaticFiles(directory="cli_frontend"), name="static")
 
-templates = Jinja2Templates(directory="frontend/templates")
+templates = Jinja2Templates(directory="cli_frontend/public")
 
 @app.get("/home/")
 async def home_redirect():
@@ -26,7 +26,7 @@ async def home_redirect():
 async def home(request: Request):
     all_gymes = md.storage.all(Gym).values()
     return templates.TemplateResponse(
-        "index.html",
+        "home.html",
         {
             "request": request,
             "data": all_gymes
