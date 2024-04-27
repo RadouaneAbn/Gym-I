@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 
-from models.amenity import Amenity
-from models.base_model import BaseModel
-import models.base_model
-from models.city import City
-from models.gym import Gym
-from models.client import Client
-from models.owner import Owner
-from models.review import Review
+from server.models.amenity import Amenity
+from server.models.base_model import BaseModel
+import server.models.base_model
+from server.models.city import City
+from server.models.gym import Gym
+from server.models.client import Client
+from server.models.owner import Owner
+from server.models.review import Review
 # from models import storage
-import models
+import server.models
 import cmd
 import shlex
 
@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
         class_name = None
         if line:
             class_name = classes[shlex.split(line)[0]]
-        all_inst = models.storage.all(class_name)
+        all_inst = server.models.storage.all(class_name)
         for inst in all_inst.values():
             print(inst)
 
@@ -93,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
             print(self.id_missing)
             return
 
-        inst = models.storage.get(classes[args[0]], args[1])
+        inst = server.models.storage.get(classes[args[0]], args[1])
         if not inst:
             print(self.inst_missing)
             return
@@ -118,11 +118,11 @@ class HBNBCommand(cmd.Cmd):
                     print(value)
                     value = [link for link in value.split(", ")]
                 setattr(inst, key, value)
-            models.storage.save()
+            server.models.storage.save()
 
     def do_reload(self, line):
         """"""
-        models.storage.clean()
+        server.models.storage.clean()
 
     
     def do_create(self, line):
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
             amenity_object_list = []
             links_list = []
 
-            all_amenities = models.storage.all(Amenity)
+            all_amenities = server.models.storage.all(Amenity)
             for am_id in new_dict.pop("amenities").split(", "):
                 amenity = all_amenities.get(f"Amenity.{am_id}", None)
                 if not amenity:
@@ -175,7 +175,7 @@ class HBNBCommand(cmd.Cmd):
             print(self.id_missing)
             return
 
-        inst = models.storage.get(classes[args[0]], args[1])
+        inst = server.models.storage.get(classes[args[0]], args[1])
         if not inst:
             print(self.inst_missing)
             return
@@ -190,13 +190,13 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print(self.id_missing)
         
-        inst = models.storage.get(classes[args[0]], args[1])
+        inst = server.models.storage.get(classes[args[0]], args[1])
         if not inst:
             print(self.inst_missing)
             return
         
-        models.storage.delete(inst)
-        models.storage.save()
+        server.models.storage.delete(inst)
+        server.models.storage.save()
 
     def class_check(self, args):
         """checks the <classname> and handles it's errors

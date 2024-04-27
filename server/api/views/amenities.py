@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from fastapi import APIRouter
-from models.amenity import Amenity
-from models import storage
+from server.models.amenity import Amenity
+from server.models import storage
 from fastapi import HTTPException
-from api.schemas.amenity_schema import AmenityModel
+from server.api.schemas.amenity_schema import AmenityModel
 
 
 amenity_router = APIRouter()

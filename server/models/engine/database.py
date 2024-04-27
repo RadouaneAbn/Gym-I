@@ -3,15 +3,15 @@
 Contains the class DBStorage
 """
 
-import models
-from models.amenity import Amenity
-from models.city import City
-from models.gym import Gym
-from models.review import Review
-from models.client import Client
-from models.owner import Owner
-from models.city import City
-from models.base_model import BaseModel, Base
+import server.models
+from server.models.amenity import Amenity
+from server.models.city import City
+from server.models.gym import Gym
+from server.models.review import Review
+from server.models.client import Client
+from server.models.owner import Owner
+from server.models.city import City
+from server.models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -94,9 +94,9 @@ class DBStorage:
         if not cls:
             count = 0
             for clas in all_class:
-                count += len(models.storage.all(clas).values())
+                count += len(server.models.storage.all(clas).values())
         else:
-            count = len(models.storage.all(cls).values())
+            count = len(server.models.storage.all(cls).values())
         return count
 
     def get(self, cls, id):

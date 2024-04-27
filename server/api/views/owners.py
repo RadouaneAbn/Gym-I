@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from fastapi import APIRouter
-from models.owner import Owner
-from models import storage
+from server.models.owner import Owner
+from server.models import storage
 from fastapi import HTTPException
-from api.schemas.owner_schema import OwnerModel, OwnerModelPUT, OwnerModelPWD
+from server.api.schemas.owner_schema import OwnerModel, OwnerModelPUT, OwnerModelPWD
 from hashlib import md5
 
 

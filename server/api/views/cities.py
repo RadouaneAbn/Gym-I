@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from fastapi import APIRouter
-from models.city import City
-from models import storage
+from server.models.city import City
+from server.models import storage
 from fastapi import HTTPException
-from api.schemas.city_schema import CityModel
+from server.api.schemas.city_schema import CityModel
 
 
 city_router = APIRouter()
