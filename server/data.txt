@@ -15,13 +15,13 @@ abn
 red@abn.mail.com
 1234
 
-from models.amenity import Amenity
-from models.base_model import BaseModel
-from models.city import City
-from models.gym import Gym
-from models.client import Client
-from models.owner import Owner
-from models.review import Review
-from models import storage
+from server.models.amenity import Amenity
+from server.models.base_model import BaseModel
+from server.models.city import City
+from server.models.gym import Gym
+from server.models.client import Client
+from server.models.owner import Owner
+from server.models.review import Review
+from server.models import storage
 
 d1307827-a6e8-4943-a8cf-04c66ff7a084

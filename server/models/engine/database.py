@@ -63,6 +63,11 @@ class DBStorage:
                     new_dict[key] = obj
         return (new_dict)
 
+
+    def all_list(self, cls=None):
+        """query on the current database session"""
+        return (self.__session.query(cls).all())
+
     def new(self, obj):
         """add the object to the current database session"""
         self.__session.add(obj)
@@ -118,4 +123,19 @@ class DBStorage:
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()
-        return inst
+        if not inst:
+            return False
+        return True
+
+    def get_page(self, cls, page = 1):
+        offset = (page - 1) * 10
+        limit = 10
+        page_insts = self.__session.query(cls)\
+            .offset(offset).limit(limit).all()
+        return page_insts
+
+    def gymes_in_cities(self, city_ids):
+        all_gymes = self.__session.query(Gym).filter(
+            Gym.city_id.in_(city_ids)
+        ).all()
+        return all_gymes

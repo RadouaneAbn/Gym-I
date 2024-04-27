@@ -2,28 +2,23 @@ from fastapi import APIRouter
 from server.models.gym import Gym
 from server.models.amenity import Amenity
 from server.models import storage
-from fastapi import FastAPI, HTTPException
-from server.api.schemas.gym_schema import GymModel, GymModelPUT, GymModelUserPUT, GymModelAmenity
+from server.api.schemas.gym_schema import GymModel, GymModelPUT, GymAmenity
 
 gym_amenity_router = APIRouter()
 
-@gym_amenity_router.post("/gymes/")
-async def get_gym_amenity(amenity_ids: GymModelAmenity):
-    amenities = amenity_ids.amenities
-    amenity_list = []
-    for amenity_id in amenities:
-        instance = storage.get(Amenity, amenity_id)
-        if not instance:
-            print("Amenity not found " + amenity_id)
-            continue
-        amenity_list.append(instance)
-    
-    all_gymes = storage.all(Gym).values()
+@gym_amenity_router.post("/gym_filter/")
+async def get_gym_amenity(data: GymAmenity):
+    amenity_list = [storage.get(Amenity, am_id) for am_id in data.amenity_ids]
+
+    if data.city_ids:
+        all_gymes = storage.gymes_in_cities(data.city_ids)
+    else:
+        all_gymes = storage.all_list(Gym)
 
     if amenity_list:
-        for gym in all_gymes:
-            if not all(amenity in gym.amenities for amenity in amenity_list):
-                all_gymes.pop(gym)
+        all_gymes = [gym for gym in all_gymes if all(
+            [amenity in gym.amenities for amenity in amenity_list])]
 
-    return all_gymes
+    return {f"{len(all_gymes)}": list(
+        map(lambda x: x.to_dict(), all_gymes))}
 
