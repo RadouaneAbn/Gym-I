@@ -55,3 +55,11 @@ async def home(request: Request):
             "data": all_gymes
         }
     )
+@app.get("/signin")
+async def about(request: Request):
+    return templates.TemplateResponse(
+        "signin.html",
+        {
+            "request": request,
+        }
+    )
