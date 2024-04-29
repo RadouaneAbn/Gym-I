@@ -15,6 +15,7 @@ function start() {
     const fields = document.querySelectorAll('.field')
     const showPwd = document.getElementById('show-pwd')
     const city = document.getElementById('cities-list')
+    const phoneNumber = document.getElementById('phone-number')
 
     $.ajax({
         type: 'Get',
@@ -28,11 +29,9 @@ function start() {
 
     fields.forEach(field => {
         field.addEventListener("click", function () {
-            field.style.border = "2px solid transparent";
+            field.style.border = "1px solid transparent";
         });
     })
-
-    // $('.chex').on('click', resetBorders);
 
     showPwd.addEventListener('click', function () {
         if (showPwd.checked) {
@@ -75,7 +74,7 @@ function start() {
             $('p.err-pwd').text('email already exists')
             return
         }
-        [firsNname, lastName, email, pwd, rPwd].forEach(field => {
+        [firsNname, lastName, email, pwd, rPwd, phoneNumber].forEach(field => {
             if (!field.value) {
                 field.style.border = "2px solid #F3755B";
                 valid *= 0;

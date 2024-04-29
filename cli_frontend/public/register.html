@@ -9,8 +9,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+      <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="cli_frontend/src/scripts/register.js"></script>
+    <style>
+      .err-email, .err-pwd {
+    margin-left: 15px;
+    font-size: small;
+    color: #ce0e00;
+}
+    </style>
     <title>Sign in</title>
 </head>
 <body class="font-[Poppins] bg-gray-200">
@@ -49,39 +58,46 @@
           </a>
           <h4 class="text-base font-semibold mt-3">Sign up into your account</h4>
         </div>
-        <form>
           <div class="grid sm:grid-cols-2 gap-y-7 gap-x-12">
             <div>
-              <label class="text-sm mb-2 block">First Name</label>
-              <input name="name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter name" />
+              <b class="text-sm mb-2 block">First Name</b>
+              <input id="first_name" name="first name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter name" autocomplete="first name"/>
             </div>
             <div>
-              <label class="text-sm mb-2 block">Last Name</label>
-              <input name="lname" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter last name" />
+              <b class="text-sm mb-2 block">Last Name</b>
+              <input id="last_name" name="last name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter last name" />
             </div>
             <div>
-              <label class="text-sm mb-2 block">Email Id</label>
-              <input name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter email" />
+              <b class="text-sm mb-2 block">Email</b>
+              <input id="email" name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 border-[2px] rounded-md outline-gray-900 field" placeholder="Enter email" autocomplete="email"/>
+              <p class="err-email">&nbsp;</p>
             </div>
             <div>
-              <label class="text-sm mb-2 block">Mobile No.</label>
-              <input name="number" type="number" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter mobile number" />
+              <b class="text-sm mb-2 block">Mobile No.</b>
+              <input id="phone-number" name="phone number" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter mobile number" />
+            </div>
+            <div class="cities">
+              <b>Choose a city:</b>
+              <select name="cities" id="cities-list" >
+                  <option id="None">No specific city</option>
+              </select>
+          </div>
+            <div>
+              <b class="text-sm mb-2 block">Password</b>
+              <input id="pwd" name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter password"/>
             </div>
             <div>
-              <label class="text-sm mb-2 block">Password</label>
-              <input name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter password" />
-            </div>
-            <div>
-              <label class="text-sm mb-2 block">Confirm Password</label>
-              <input name="cpassword" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter confirm password" />
+              <b class="text-sm mb-2 block">Confirm Password</b>
+              <input id="r-pwd" name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter confirm password" />
+              <p class="err-pwd">&nbsp;</p>
+              <input type="checkbox" name="fef" id="show-pwd"> Show password
             </div>
           </div>
           <div class="!mt-10">
-            <button type="button" class="min-w-[150px] py-3 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-[#222] focus:outline-none">
+            <button id="submit" type="button" class="min-w-[150px] py-3 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-[#222] focus:outline-none">
               Sign up
             </button>
           </div>
-        </form>
       </div>
     </main>
     <script>
