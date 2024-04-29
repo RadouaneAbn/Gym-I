@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.requests import Request
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
@@ -21,6 +22,7 @@ templates = Jinja2Templates(directory="cli_frontend/public")
 @app.get("/home/")
 async def home_redirect():
     return RedirectResponse(url="/")
+
 
 @app.get("/")
 async def home(request: Request):
@@ -33,6 +35,7 @@ async def home(request: Request):
         }
     )
 
+
 @app.get("/about")
 async def about(request: Request):
     return templates.TemplateResponse(
@@ -41,6 +44,27 @@ async def about(request: Request):
             "request": request,
         }
     )
+
+
+@app.get("/login")
+async def login(request: Request):
+    return templates.TemplateResponse(
+        "login.html",
+        {
+            "request": request,
+        }
+    )
+
+
+@app.get("/register")
+async def login(request: Request):
+    return templates.TemplateResponse(
+        "register.html",
+        {
+            "request": request,
+        }
+    )
+
 
 @app.get("/offers")
 async def home(request: Request):

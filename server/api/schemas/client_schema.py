@@ -4,6 +4,7 @@ from typing import Optional
 class ClientModel(BM):
     first_name: str
     last_name: str
+    # city_id: str
     email: str
     password: str
 
@@ -15,3 +16,5 @@ class ClientModelPWD(BM):
     old_password: str
     new_password: str
 
+class EmailCheck(BM):
+    email: str

@@ -123,7 +123,7 @@ class DBStorage:
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()
-        if not inst:
+        if inst:
             return False
         return True
 

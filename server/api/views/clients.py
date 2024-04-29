@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from server.models.client import Client
 from server.models import storage
 from fastapi import FastAPI, HTTPException
-from server.api.schemas.client_schema import ClientModel, ClientModelPUT, ClientModelPWD
+from server.api.schemas.client_schema import ClientModel, ClientModelPUT, ClientModelPWD, EmailCheck
 from hashlib import md5
 
 
@@ -22,8 +22,6 @@ async def get_user(client_id: str):
 
 @client_router.post("/clients/")
 async def create_client(client: ClientModel):
-    if storage.email_exists(Client, client.email):
-        raise HTTPException(status_code=409, detail="Email already exists.")
     new_client = Client(**client.__dict__)
     new_client.save()
 
@@ -57,3 +55,8 @@ async def delete_client(client_id: str):
         raise HTTPException(status_code=404, detail="Not Found")
     storage.delete(client)
     storage.save()
+
+@client_router.post("/emailcheck/")
+async def email_check(data: EmailCheck):
+    print(data.email)
+    return storage.email_exists(Client, data.email)

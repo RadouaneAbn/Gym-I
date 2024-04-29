@@ -8,6 +8,7 @@ from server.api.views.amenities import amenity_router
 from server.api.views.cities import city_router
 from server.api.views.gymes import gym_router
 from server.api.views.gym_amenities import gym_amenity_router
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
@@ -17,6 +18,14 @@ app.include_router(amenity_router)
 app.include_router(city_router)
 app.include_router(gym_router)
 app.include_router(gym_amenity_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # List of allowed origins
+    allow_credentials=True,  # Allow cookies and authentication headers
+    allow_methods=["*"],  # Allowed HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 
 
 @app.exception_handler(HTTPException)
