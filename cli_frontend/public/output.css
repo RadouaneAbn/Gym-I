@@ -824,6 +824,10 @@ video {
   height: 50%;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .max-h-16 {
   max-height: 4rem;
 }
@@ -906,6 +910,14 @@ video {
 
 .w-auto {
   width: auto;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.w-72 {
+  width: 18rem;
 }
 
 .min-w-\[150px\] {
@@ -1730,6 +1742,10 @@ video {
     left: 11rem;
   }
 
+  .md\:left-20 {
+    left: 5rem;
+  }
+
   .md\:col-span-3 {
     grid-column: span 3 / span 3;
   }
@@ -1797,6 +1813,28 @@ video {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+      transform: translate(20px, -20px) scale(1.1);
+    }
+
+    66% {
+      transform: translate(-10px, 10px) scale(0.9);
+    }
+
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  .md\:animate-blob {
+    animation: blob 7s infinite;
   }
 
   .md\:grid-cols-12 {
@@ -1869,10 +1907,23 @@ video {
     line-height: 1.75rem;
   }
 
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
   .md\:backdrop-blur-lg {
     --tw-backdrop-blur: blur(16px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
             backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  }
+
+  .md\:animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .md\:animation-delay-4000 {
+    animation-delay: 4s;
   }
 
   .md\:hover\:bg-transparent:hover {
@@ -1913,12 +1964,20 @@ video {
     display: none;
   }
 
+  .lg\:h-72 {
+    height: 18rem;
+  }
+
   .lg\:w-1\/2 {
     width: 50%;
   }
 
   .lg\:w-\[50\%\] {
     width: 50%;
+  }
+
+  .lg\:w-72 {
+    width: 18rem;
   }
 
   .lg\:animate-none {
@@ -1973,6 +2032,10 @@ video {
 
   .lg\:leading-\[50px\] {
     line-height: 50px;
+  }
+
+  .lg\:animation-delay-2000 {
+    animation-delay: 2s;
   }
 }
 
