@@ -1,203 +1,95 @@
 <!DOCTYPE html>
-<html>
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
-
-/* Full-width input fields */
-.in, .pwd-c {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  background: #f1f1f1;
-}
-
-.in2 {
-    width: 100%;
-  padding: 15px;
-  margin: 5px 0 0 0;
-  display: inline-block;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  background: #f1f1f1;
-}
-
-.err-email, .err-pwd {
-    margin-top: 0;
-    margin-left: 15px;
-    font-size: small;
-    color: #f44336;
-}
-.err-pwd {
-    transform: translateY(-15px)
-}
-
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-button:hover {
-  opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: #474e5d;
-  padding-top: 20px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
- 
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.cities {
-    margin-bottom: 25px;
-}
-
-#cities-list {
-    width: 170px;
-}
-
-/* input.in2 {
-    border: 2px !important;
-    border-color: #f44336 !important;
-} */
- 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
-}
-</style>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
+    <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="cli_frontend/src/scripts/register.js"></script>
+    <title>Sign in</title>
 </head>
-<body>
-
-<div id="id01" class="modal">
-  <div class="modal-content">
-    <div class="container">
-        <div class="chex">
-      <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
-      <hr>
-        
-      <div class="name-t" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-
-        <span>
-
-            <b>First Name</b>
-            <input type="text" placeholder="Enter your first name" id="first_name" name="first name" class="in field" autocomplete="first name">
-        </span>
-          
-        <span>
-
-            <b>Last Name</b>
-            <input type="text" placeholder="Enter your last name" id="last_name" name="last name" class="in field" autocomplete="last name">
-        </span>
-          
+<body class="font-[Poppins] bg-gray-200">
+    <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-b-1 md:backdrop-blur-lg border-b-2 border-gray-500 border-opacity-10">
+        <nav class="flex justify-between items-center w-[92%] mx-auto">
+            <div class="flex py-2">
+                <a href="/"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
+              </div>
+            <div
+                class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                <ul class="flex w-full md:flex-row flex-col md:items-center md:gap-[4vw] gap-5 justify-center">
+                    <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/'">
+                        <a class="font-medium" href="/">Home</a>
+                    </li>
+                    <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/about'">
+                        <a class="font-medium" href="/about">About</a>
+                    </li>
+                    <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/offers'">
+                        <a class="font-medium" href="/offers">offers</a>
+                    </li>
+                    <li class="duration-150 h-10 border-b-2 bg-[#333] hover:bg-[#222]  border-gray-500 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/signin'">
+                      <a  class="font-medium">sign in</a>
+                  </li>
+                </ul>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="/signin"><button type="button" class="hidden md:flex duration-500 bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700">Sign in</button></a>
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
+            </div>
+    </header>
+    <main class="h-full w-auto bg-cover bg-center"  style="background-image: url('/cli_frontend/images/9213.jpg');">
+        <div class="max-w-4xl mx-auto font-[sans-serif] text-[#333] px-6 py-3 bg-gray-200 bg-opacity-90">
+        <div class="text-center mb-16">
+          <a href="javascript:void(0)"><img
+            src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="logo" class='w-52 inline-block' />
+          </a>
+          <h4 class="text-base font-semibold mt-3">Sign up into your account</h4>
         </div>
-      <b>Email</b>
-      <input type="text" placeholder="Enter Email" name="email" id="email" class="in2 field" autocomplete="email">
-      <p class="err-email">&nbsp;</p>
-
-      <div class="cities">
-        <b>Choose a city:</b>
-        <select name="cities" id="cities-list" >
-            <option id="None">No specific city</option>
-        </select>
-    </div>
-
-      <b>Password</b>
-      <input type="password" placeholder="Enter Password" name="pwd" id="pwd" class="pwd-c field">
-
-      <b>Repeat Password</b>
-      <input type="password" placeholder="Repeat Password" id="r-pwd" class="pwd-c field" name="password">
-      <p class="err-pwd">&nbsp;</p>
-      <input type="checkbox" name="fef" id="show-pwd"> Show password
-      
-      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-    </div>
-      <button id="submit">Sign Up</button>
-    </div>
-</div>
-</div>
-
+        <form>
+          <div class="grid sm:grid-cols-2 gap-y-7 gap-x-12">
+            <div>
+              <label class="text-sm mb-2 block">First Name</label>
+              <input name="name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter name" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Last Name</label>
+              <input name="lname" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter last name" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Email Id</label>
+              <input name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter email" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Mobile No.</label>
+              <input name="number" type="number" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter mobile number" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Password</label>
+              <input name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter password" />
+            </div>
+            <div>
+              <label class="text-sm mb-2 block">Confirm Password</label>
+              <input name="cpassword" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900" placeholder="Enter confirm password" />
+            </div>
+          </div>
+          <div class="!mt-10">
+            <button type="button" class="min-w-[150px] py-3 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-[#222] focus:outline-none">
+              Sign up
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script>
+        const navLinks = document.querySelector('.nav-links')
+        function onToggleMenu(e){
+            e.name = e.name === 'menu' ? 'close' : 'menu'
+            navLinks.classList.toggle('top-[9%]')
+        }
+    </script>
 </body>
 </html>

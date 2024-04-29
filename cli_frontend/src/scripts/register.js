@@ -150,16 +150,4 @@ function start() {
         return true
     }
 
-
-
-
-
-
-    // $('.signupbtn').on('click', function () {
-    //     if (formValid) {
-
-    //     } else {
-
-    //     }
-    // })
 }
