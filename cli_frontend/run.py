@@ -63,3 +63,12 @@ async def about(request: Request):
             "request": request,
         }
     )
+
+@app.get("/register")
+async def about(request: Request):
+    return templates.TemplateResponse(
+        "register.html",
+        {
+            "request": request,
+        }
+    )
