@@ -99,8 +99,6 @@ function start() {
         }
 
         if (valid) {
-            console.log('create client')
-            
             $.ajax({
                 type: 'POST',
                 url: 'http://0.0.0.0:5002/clients/',
@@ -116,6 +114,7 @@ function start() {
                     else { $('p.err').text('email already exists') }
                 }
             })
+            window.location.href = '/';
         }
     })
 
