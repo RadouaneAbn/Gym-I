@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
+    <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
+    <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
+    <!-- <script src="frontend/scripts/swiper.js"></script> -->
+    <title>Offers</title>
+
+</head>
+
+<body class="font-[Poppins] bg-gray-200">
+  <header class="sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 backdrop-blur-lg border-b-2 border-gay-500">
+    <nav class="flex justify-between items-center w-[92%] mx-auto">
+        <div class="flex py-2">
+            <a href="/"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
+        </div>
+        <!-- <div
+        class="nav-links z-20 duration-500 md:hidden absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+        <ul class="flex w-full md:flex-row flex-col md:items-center md:gap-[4vw] gap-5 justify-center">
+          <li class="duration-500 h-10 border-b-2 border-gray-600 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/'">
+              <a class="font-medium" href="/profile">profile</a>
+          </li>
+          <li class="duration-500 h-10 border-b-2 border-gray-600 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/profile'">
+              <a class="font-medium" href="/setting">settings</a>
+          </li>
+          <li class="duration-500 h-10 border-b-2 border-gray-600 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/setting'">
+              <a class="font-medium" href="/payement">payement</a>
+          </li>
+          <li class="duration-150 h-10 border-b-2 bg-gray-800 border-gray-500 hover:bg-gray-700 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/payement'">
+            <a  class="font-medium">sign out</a>
+        </li>
+      </ul>
+    </div> -->
+    
+        <div class="flex items-center gap-6">
+          <div class="md:w-12 md:h-12 w-8 h-8 mr-8 items-center justify-center relative">
+          <a href="#"><img class="rounded-full min-w-[80%] min-h-[80%] border-gray-800 border-2 hover:w-11 hover:h-11" alt="images" src="/cli_frontend/images/halim.jpg"></img></a>
+          </div>
+          <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:relative z-90"></ion-icon>
+        </div>
+        
+  </header>
+  <div class="font-[Poppins] container-mt-20 flex flex-row">
+    <nav class="bg-gray-900 p-4 w-full">
+      <div
+        class="container max-w-6xl mx-auto flex flex-col sm:flex-row gap-8 items-center">
+        <!-- Search area -->
+        <div class="relative w-full">
+          <input
+            type="text"
+            id="search"
+            class="bg-gray-700 rounded-full p-2 pl-10 transition focus:w-full"
+            placeholder="Gym Name..."/>
+          <svg
+            class="absolute left-2 top-1/2 -translate-y-1/2"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
+        </div>
+       <!-- Input Number -->
+      <div class="-py-1 px-2 md:w-auto h-10 flex flex-row items-center justify-center mx-auto bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700" data-hs-input-number="">
+        <div class="w-1/2 pr-1 h-full flex justify-between items-center gap-x-3 border-r-2 border-gray-500">
+          <div class="md:flex-auto">
+            <span class="md:block hidden font-medium text-sm text-gray-800 dark:text-white">
+              Max
+            </span>
+            <span class="md:block hidden text-xs text-gray-500 dark:text-neutral-400">
+              $25/M
+            </span>
+          </div>
+          <div class="flex items-center gap-x-1.5">
+            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+              <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+              </svg>
+            </button>
+            <input class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="0" data-hs-input-number-input="">
+            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+              <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="w-30 h-full pl-1 flex justify-between items-center gap-x-3">
+          <div>
+            <span class="md:block hidden font-medium text-sm text-gray-800 dark:text-white">
+              Max
+            </span>
+            <span class="md:block hidden text-xs text-gray-500 dark:text-neutral-400">
+              $500/M
+            </span>
+          </div>
+          <div class="flex items-center gap-x-1.5">
+            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+              <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+              </svg>
+            </button>
+            <input class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="0" data-hs-input-number-input="">
+            <button type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+              <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+<!-- End Input Number -->
+      </div>
+    </nav>
+  </div>
+    <div class="containermt-20 mx-auto py-14 px-6">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 lg:pt-5">
+          {% for gym in data %}
+          <div
+            class="block rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark">
+            <a href="#!">
+              <img
+                class="rounded-t-lg h-[55%] md:h-[45%] w-full"
+                src="{{ gym.profile_picture }}"
+                alt="" />
+            </a>
+            <div class="p-6 text-surface dark:text-white h-[35%] md:h-[45%] max-w-full">
+              <h5 class="mb-2 text-xl font-medium leading-tight">{{ gym.name }}</h5>
+              <p class="mb-4 text-base">
+                {{ gym.description }}
+              </p>
+              </div>
+              <div class="pl-7 flex pb-3">
+              <button
+              type="button"
+              class="inline-block bg-gray-900 hover:bg-gray-800 rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+              data-twe-ripple-init
+              data-twe-ripple-color="light">
+              Book Now
+            </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+  
+    <script>
+        const navLinks = document.querySelector('.nav-links')
+        function onToggleMenu(e){
+            e.name = e.name === 'menu' ? 'close' : 'menu'
+            navLinks.classList.toggle('top-[9%]')
+        }
+    </script>
+    
+</body>
+</html>
