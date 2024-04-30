@@ -18,3 +18,7 @@ class ClientModelPWD(BM):
 
 class EmailCheck(BM):
     email: str
+
+class ClientLogin(BM):
+    email: str
+    password: str

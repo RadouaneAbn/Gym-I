@@ -3,8 +3,10 @@ from fastapi import APIRouter
 from server.models.client import Client
 from server.models import storage
 from fastapi import FastAPI, HTTPException
-from server.api.schemas.client_schema import ClientModel, ClientModelPUT, ClientModelPWD, EmailCheck
+from server.api.schemas.client_schema import (
+    ClientModel, ClientModelPUT, ClientModelPWD, EmailCheck, ClientLogin)
 from hashlib import md5
+from server.models.hash import Hash
 
 
 client_router = APIRouter()
@@ -45,7 +47,7 @@ async def update_user_password(client_id: str, client: ClientModelPWD):
     if target_client.password != hashed_new_password:
         raise HTTPException(status_code=401, detail="Wrong password")
     
-    target_client.password = hashed_new_password
+    target_client.password = client.new_password
     target_client.save()
 
 @client_router.delete("/clients/{client_id}/")
@@ -60,3 +62,14 @@ async def delete_client(client_id: str):
 async def email_check(data: EmailCheck):
     print(data.email)
     return storage.email_exists(Client, data.email)
+
+@client_router.post("/clients/login")
+async def client_login(info: ClientLogin):
+    user = storage.get_user(Client, info.email)
+    print(user)
+    if not user:
+        return False
+    if not Hash.validate_pwd(info.password, user.password):
+        return False
+
+    return user.to_dict()

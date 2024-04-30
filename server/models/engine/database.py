@@ -139,3 +139,9 @@ class DBStorage:
             Gym.city_id.in_(city_ids)
         ).all()
         return all_gymes
+    
+    def get_user(self, cls, email):
+        inst = self.__session.query(cls).filter(
+            cls.email == email
+        ).first()
+        return inst

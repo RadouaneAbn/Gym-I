@@ -9,8 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+      <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="cli_frontend/src/scripts/login.js"></script>
     <title>Sign in</title>
 </head>
 <body class="font-[Poppins] bg-gray-200">
@@ -58,15 +60,17 @@
                 workout spot, Gym&I has you covered.</p>
               <p class="text-sm mt-10 text-white">Don't have an account <a href="/register" class="text-indigo-900 font-semibold underline ml-1">Register here</a></p>
             </div>
-            <form class="bg-white rounded-xl px-6 py-8 space-y-6 max-w-md md:ml-auto max-md:mx-auto w-full">
+            <div class="bg-white rounded-xl px-6 py-8 space-y-6 max-w-md md:ml-auto max-md:mx-auto w-full">
               <h3 class="text-3xl font-extrabold mb-12 max-md:text-center">
                 Sign in
               </h3>
               <div>
-                <input name="email" type="email" autocomplete="email" required class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-[#333]" placeholder="Email address" />
+                <input name="email" type="email" autocomplete="email" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-[#333]" placeholder="Email address" id="email"/>
+                <p class="px-2 font-semibold" id="err-email" style="color: #F3755B;">&nbsp;</p>
               </div>
               <div>
-                <input name="password" type="password" autocomplete="current-password" required class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-[#333]" placeholder="Password" />
+                <input name="password" type="password" autocomplete="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-[#333]" placeholder="Password" id="pwd"/>
+                <p class="px-2 font-semibold" id="err-pwd" style="color: #F3755B;">&nbsp;</p>
               </div>
               <div class="text-sm text-right">
                 <a href="jajvascript:void(0);" class="text-blue-600 hover:underline">
@@ -74,7 +78,7 @@
                 </a>
               </div>
               <div class="!mt-10">
-                <button type="button" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-[#222] focus:outline-none">
+                <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#333] hover:bg-[#222] focus:outline-none" id="submit">
                   Log in
                 </button>
               </div>
@@ -116,7 +120,7 @@
                   </svg>
                 </button> -->
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
