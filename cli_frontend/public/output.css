@@ -2351,6 +2351,10 @@ video {
     display: inline-flex;
   }
 
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:w-auto {
     width: auto;
   }
@@ -2617,6 +2621,10 @@ video {
 
   .md\:hover\:bg-transparent:hover {
     background-color: transparent;
+  }
+
+  .group:hover .md\:group-hover\:hidden {
+    display: none;
   }
 }
 
