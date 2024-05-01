@@ -82,3 +82,12 @@ async def home(request: Request):
             "data": all_gymes
         }
     )
+
+@app.get("/profile")
+async def about(request: Request):
+    return templates.TemplateResponse(
+        "profile.html",
+        {
+            "request": request,
+        }
+    )
