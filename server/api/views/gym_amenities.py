@@ -20,5 +20,5 @@ async def get_gym_amenity(data: GymAmenity):
             [amenity in gym.amenities for amenity in amenity_list])]
 
     return {f"{len(all_gymes)}": list(
-        map(lambda x: x.to_dict(), all_gymes))}
+        map(lambda x: x.to_dict(pop=["amenities"]), all_gymes))}
 

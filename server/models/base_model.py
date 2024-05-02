@@ -51,7 +51,7 @@ class BaseModel:
         server.models.storage.new(self)
         server.models.storage.save()
 
-    def to_dict(self, show_password=False):
+    def to_dict(self, show_password=False, pop=[]):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
         if "created_at" in new_dict:
@@ -61,7 +61,9 @@ class BaseModel:
         new_dict["__class__"] = self.__class__.__name__
         new_dict.pop("_sa_instance_state", None)
         new_dict.pop("password", None)
-        new_dict.pop("amenities", None)
+        # new_dict.pop("amenities", None)
+        for item in pop:
+            new_dict.pop(item, None)
         # if "_sa_instance_state" in new_dict:
         #     del new_dict["_sa_instance_state"]
         # if not show_password:
