@@ -12,7 +12,7 @@ import time
 gymes_list = []
 am = storage.get(Amenity, "31ff1ce9-f0a5-4b60-9557-4b0b14b34730")
 
-for i in range(10000):
+for i in range(1000):
     gym = Gym(name=f"test gym-{i + 1}",
               city_id="c77d94e6-9f82-4db1-8298-e69c64554cd4",
               owner_id="75fddd11-54d6-4db5-83b6-5c8e47fe2642",
@@ -22,19 +22,21 @@ for i in range(10000):
               price_by_year=0,
               amenities = [am],
               links=[])
+    gymes_list.append(gym)
     gym.save()
     print(f"\r {i}", end="")
 
+print()
 print("all gymes created")
 
 def lunch_test():
     try:
-        for i in range(1, 1000):
+        for i in range(1, 100):
             offset = (i - 1) * 10
             limit = offset + 10
 
             st = time.time()
-            all_gym = storage.all_2(Gym)[offset:limit]
+            all_gym = storage.all_list(Gym)[offset:limit]
             en = time.time()
 
             st_2 = time.time()
@@ -71,14 +73,13 @@ def getpage(page = 1):
 
 if __name__ == "__main__":
     while True:
-        n = int(input("n = "))
-        getpage(n)
-    #     if input("quit? ") == "":
-    #         lunch_test()
-    #     else:
-    #         for gym in gymes_list:
-    #             gym.delete()
-    #             storage.save() 
-    #         print("all gymes deleted")
-    #         break
+        # n = int(input("n = "))
+        # print("max =", n / 10)
+        # getpage(n)
+        lunch_test()
+        for gym in gymes_list:
+            gym.delete()
+        storage.save() 
+        print("all gymes deleted")
+
             

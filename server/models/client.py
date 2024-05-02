@@ -10,6 +10,7 @@ from hashlib import md5
 class Client(Person, Base):
     """Representation of a user """
     __tablename__ = 'clients'
+    gym = relationship("Gym", backref="client")
     reviews = relationship("Review", backref="client")
 
     def __init__(self, *args, **kwargs):
