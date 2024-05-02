@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", function() {
       const input = this.parentElement.querySelector("[data-hs-input-number-input]");
       let value = parseInt(input.value);
-      if (!isNaN(value) && value > 20) {
-        input.value = value - 1;
+      if (!isNaN(value) && value > 20 && value < 150) {
+        input.value = value - 10;
       } else {
         input.value = 20; // Set to 0 if value is already 0 or NaN
       }
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", function() {
       const input = this.parentElement.querySelector("[data-hs-input-number-input]");
       let value = parseInt(input.value);
-      if (!isNaN(value) && value < 150) {
-        input.value = value + 1;
+      if (!isNaN(value) && value < 150 && value > 20) {
+        input.value = value + 20;
       } else {
         input.value = 150; // Set to 1 if value is NaN
       }
