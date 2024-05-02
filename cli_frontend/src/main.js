@@ -2,6 +2,14 @@ document.addEventListener("DOMContentLoaded", function() {
   const decrementButtons = document.querySelectorAll("[data-hs-input-number-decrement]");
   const incrementButtons = document.querySelectorAll("[data-hs-input-number-increment]");
   const inputFields = document.querySelectorAll("[data-hs-input-number-input]");
+  const buttons = document.querySelectorAll('.btn-gym_id')
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const urlItem = '/user/gymes/' + btn.id;
+      window.location.href = urlItem
+    })
+  })
 
   decrementButtons.forEach(button => {
     button.addEventListener("click", function() {

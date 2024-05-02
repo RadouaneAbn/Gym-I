@@ -6,11 +6,12 @@ from server.models.client import Client
 from server.models.gym import Gym
 from server.models.owner import Owner
 from server.models.review import Review
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.requests import Request
+from server.models import storage
 
 
 app = FastAPI()
@@ -91,3 +92,10 @@ async def about(request: Request):
             "request": request,
         }
     )
+
+@app.get("/user/gymes/{gym_id}")
+async def get_gym_info(gym_id: str):
+    gym = storage.get(Gym, gym_id)
+    if gym is None:
+        raise HTTPException(status_code=404, detail="Not Found")
+    return gym.to_dict()
