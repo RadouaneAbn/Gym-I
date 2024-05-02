@@ -592,10 +592,6 @@ video {
   position: static;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .\!absolute {
   position: absolute !important;
 }
@@ -1069,18 +1065,6 @@ video {
 
 .max-w-6xl {
   max-width: 72rem;
-}
-
-.max-w-\[26rem\] {
-  max-width: 26rem;
-}
-
-.max-w-\[32px\] {
-  max-width: 32px;
-}
-
-.max-w-\[40px\] {
-  max-width: 40px;
 }
 
 .max-w-\[26rem\] {
