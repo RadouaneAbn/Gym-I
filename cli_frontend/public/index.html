@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <!-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> -->
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/cli_frontend/src/main.js"></script>
+    <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
+    <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
+    <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
+    <!-- <script src="frontend/scripts/swiper.js"></script> -->
+    <title>Gym&I</title>
+
+</head>
+
+<body class="font-[Poppins] bg-gray-200">
+  <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 backdrop-blur-lg border-b-2 border-gay-500">
+    <nav class="flex justify-between items-center w-[92%] mx-auto">
+        <div class="flex py-2">
+            <a href="/user"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
+        </div>
+        <div class="group">
+        <img alt="tania andrew"
+        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+        class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
+        data-popover-target="profile-menu" />
+      <ul role="menu" data-popover="profile-menu" data-popover-placement="bottom"
+        class="absolute hidden group-hover:flex right-1 z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+        <a href="/profile"><button role="menuitem"
+          class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M16 8C16 10.1217 15.1571 12.1566 13.6569 13.6569C12.1566 15.1571 10.1217 16 8 16C5.87827 16 3.84344 15.1571 2.34315 13.6569C0.842855 12.1566 0 10.1217 0 8C0 5.87827 0.842855 3.84344 2.34315 2.34315C3.84344 0.842855 5.87827 0 8 0C10.1217 0 12.1566 0.842855 13.6569 2.34315C15.1571 3.84344 16 5.87827 16 8ZM10 5C10 5.53043 9.78929 6.03914 9.41421 6.41421C9.03914 6.78929 8.53043 7 8 7C7.46957 7 6.96086 6.78929 6.58579 6.41421C6.21071 6.03914 6 5.53043 6 5C6 4.46957 6.21071 3.96086 6.58579 3.58579C6.96086 3.21071 7.46957 3 8 3C8.53043 3 9.03914 3.21071 9.41421 3.58579C9.78929 3.96086 10 4.46957 10 5ZM8 9C7.0426 8.99981 6.10528 9.27449 5.29942 9.7914C4.49356 10.3083 3.85304 11.0457 3.454 11.916C4.01668 12.5706 4.71427 13.0958 5.49894 13.4555C6.28362 13.8152 7.13681 14.0009 8 14C8.86319 14.0009 9.71638 13.8152 10.5011 13.4555C11.2857 13.0958 11.9833 12.5706 12.546 11.916C12.147 11.0457 11.5064 10.3083 10.7006 9.7914C9.89472 9.27449 8.9574 8.99981 8 9Z"
+              fill="#90A4AE"></path>
+          </svg>
+          <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+            My Profile
+          </p>
+        </button></a>
+        <a href="/payement"><button role="menuitem"
+          class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M9.48999 1.17C9.10999 -0.39 6.88999 -0.39 6.50999 1.17C6.45326 1.40442 6.34198 1.62213 6.18522 1.80541C6.02845 1.9887 5.83063 2.13238 5.60784 2.22477C5.38505 2.31716 5.1436 2.35564 4.90313 2.33709C4.66266 2.31854 4.42997 2.24347 4.22399 2.118C2.85199 1.282 1.28199 2.852 2.11799 4.224C2.65799 5.11 2.17899 6.266 1.17099 6.511C-0.390006 6.89 -0.390006 9.111 1.17099 9.489C1.40547 9.54581 1.62322 9.65719 1.80651 9.81407C1.98979 9.97096 2.13343 10.1689 2.22573 10.3918C2.31803 10.6147 2.35639 10.8563 2.33766 11.0968C2.31894 11.3373 2.24367 11.5701 2.11799 11.776C1.28199 13.148 2.85199 14.718 4.22399 13.882C4.42993 13.7563 4.66265 13.6811 4.90318 13.6623C5.14371 13.6436 5.38527 13.682 5.60817 13.7743C5.83108 13.8666 6.02904 14.0102 6.18592 14.1935C6.34281 14.3768 6.45419 14.5945 6.51099 14.829C6.88999 16.39 9.11099 16.39 9.48899 14.829C9.54599 14.5946 9.65748 14.377 9.8144 14.1939C9.97132 14.0107 10.1692 13.8672 10.3921 13.7749C10.6149 13.6826 10.8564 13.6442 11.0969 13.6628C11.3373 13.6815 11.57 13.7565 11.776 13.882C13.148 14.718 14.718 13.148 13.882 11.776C13.7565 11.57 13.6815 11.3373 13.6628 11.0969C13.6442 10.8564 13.6826 10.6149 13.7749 10.3921C13.8672 10.1692 14.0107 9.97133 14.1939 9.81441C14.377 9.65749 14.5946 9.546 14.829 9.489C16.39 9.11 16.39 6.889 14.829 6.511C14.5945 6.45419 14.3768 6.34281 14.1935 6.18593C14.0102 6.02904 13.8666 5.83109 13.7743 5.60818C13.682 5.38527 13.6436 5.14372 13.6623 4.90318C13.681 4.66265 13.7563 4.42994 13.882 4.224C14.718 2.852 13.148 1.282 11.776 2.118C11.5701 2.24368 11.3373 2.31895 11.0968 2.33767C10.8563 2.35639 10.6147 2.31804 10.3918 2.22574C10.1689 2.13344 9.97095 1.9898 9.81407 1.80651C9.65718 1.62323 9.5458 1.40548 9.48899 1.171L9.48999 1.17ZM7.99999 11C8.79564 11 9.55871 10.6839 10.1213 10.1213C10.6839 9.55871 11 8.79565 11 8C11 7.20435 10.6839 6.44129 10.1213 5.87868C9.55871 5.31607 8.79564 5 7.99999 5C7.20434 5 6.44128 5.31607 5.87867 5.87868C5.31606 6.44129 4.99999 7.20435 4.99999 8C4.99999 8.79565 5.31606 9.55871 5.87867 10.1213C6.44128 10.6839 7.20434 11 7.99999 11Z"
+              fill="#90A4AE"></path>
+          </svg>
+          <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+            Payement
+          </p>
+        </button></a>
+        <a href="/pro"><button role="menuitem"
+          class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M2 0C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V12C0 12.5304 0.210714 13.0391 0.585786 13.4142C0.960859 13.7893 1.46957 14 2 14H12C12.5304 14 13.0391 13.7893 13.4142 13.4142C13.7893 13.0391 14 12.5304 14 12V2C14 1.46957 13.7893 0.960859 13.4142 0.585786C13.0391 0.210714 12.5304 0 12 0H2ZM2 2H12V9H10L9 11H5L4 9H2V2Z"
+              fill="#90A4AE"></path>
+          </svg>
+          <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+            PRO Account
+          </p>
+        </button></a>
+        <a href="/help"><button role="menuitem"
+          class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M16 8C16 10.1217 15.1571 12.1566 13.6569 13.6569C12.1566 15.1571 10.1217 16 8 16C5.87827 16 3.84344 15.1571 2.34315 13.6569C0.842855 12.1566 0 10.1217 0 8C0 5.87827 0.842855 3.84344 2.34315 2.34315C3.84344 0.842855 5.87827 0 8 0C10.1217 0 12.1566 0.842855 13.6569 2.34315C15.1571 3.84344 16 5.87827 16 8ZM14 8C14 8.993 13.759 9.929 13.332 10.754L11.808 9.229C12.0362 8.52269 12.0632 7.76679 11.886 7.046L13.448 5.484C13.802 6.249 14 7.1 14 8ZM8.835 11.913L10.415 13.493C9.654 13.8281 8.83149 14.0007 8 14C7.13118 14.0011 6.27257 13.8127 5.484 13.448L7.046 11.886C7.63267 12.0298 8.24426 12.039 8.835 11.913ZM4.158 9.117C3.96121 8.4394 3.94707 7.72182 4.117 7.037L4.037 7.117L2.507 5.584C2.1718 6.34531 1.99913 7.16817 2 8C2 8.954 2.223 9.856 2.619 10.657L4.159 9.117H4.158ZM5.246 2.667C6.09722 2.22702 7.04179 1.99825 8 2C8.954 2 9.856 2.223 10.657 2.619L9.117 4.159C8.34926 3.93538 7.53214 3.94687 6.771 4.192L5.246 2.668V2.667ZM10 8C10 8.53043 9.78929 9.03914 9.41421 9.41421C9.03914 9.78929 8.53043 10 8 10C7.46957 10 6.96086 9.78929 6.58579 9.41421C6.21071 9.03914 6 8.53043 6 8C6 7.46957 6.21071 6.96086 6.58579 6.58579C6.96086 6.21071 7.46957 6 8 6C8.53043 6 9.03914 6.21071 9.41421 6.58579C9.78929 6.96086 10 7.46957 10 8Z"
+              fill="#90A4AE"></path>
+          </svg>
+          <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+            Help
+          </p>
+        </button></a>
+        <hr class="my-2 border-blue-gray-50" role="menuitem" />
+        <a href="/"></a><button role="menuitem"
+          class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+          <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M1 0C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V13C0 13.2652 0.105357 13.5196 0.292893 13.7071C0.48043 13.8946 0.734784 14 1 14C1.26522 14 1.51957 13.8946 1.70711 13.7071C1.89464 13.5196 2 13.2652 2 13V1C2 0.734784 1.89464 0.48043 1.70711 0.292893C1.51957 0.105357 1.26522 0 1 0ZM11.293 9.293C11.1108 9.4816 11.01 9.7342 11.0123 9.9964C11.0146 10.2586 11.1198 10.5094 11.3052 10.6948C11.4906 10.8802 11.7414 10.9854 12.0036 10.9877C12.2658 10.99 12.5184 10.8892 12.707 10.707L15.707 7.707C15.8945 7.51947 15.9998 7.26516 15.9998 7C15.9998 6.73484 15.8945 6.48053 15.707 6.293L12.707 3.293C12.6148 3.19749 12.5044 3.12131 12.3824 3.0689C12.2604 3.01649 12.1292 2.9889 11.9964 2.98775C11.8636 2.9866 11.7319 3.0119 11.609 3.06218C11.4861 3.11246 11.3745 3.18671 11.2806 3.2806C11.1867 3.3745 11.1125 3.48615 11.0622 3.60905C11.0119 3.73194 10.9866 3.86362 10.9877 3.9964C10.9889 4.12918 11.0165 4.2604 11.0689 4.3824C11.1213 4.50441 11.1975 4.61475 11.293 4.707L12.586 6H5C4.73478 6 4.48043 6.10536 4.29289 6.29289C4.10536 6.48043 4 6.73478 4 7C4 7.26522 4.10536 7.51957 4.29289 7.70711C4.48043 7.89464 4.73478 8 5 8H12.586L11.293 9.293Z"
+              fill="#90A4AE"></path>
+          </svg>
+          <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+            Sign Out
+          </p>
+        </button></a>
+      </ul>
+    </div>
+    </nav>
+    <div class="font-[Poppins] sticky container-mt-20 flex flex-row">
+      <nav class="bg-gray-900 p-4 w-full">
+        <div
+          class="container max-w-6xl mx-auto flex flex-col sm:flex-row gap-8 items-center">
+          <!-- filters area -->
+          <div class="relative w-full">
+            <input
+              type="text"
+              id="search"
+              class="bg-gray-700 rounded-full p-2 pl-10 transition focus:w-full"
+              placeholder="Gym Name..."/>
+            <svg
+              class="absolute left-2 top-1/2 -translate-y-1/2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+              <path d="M21 21l-6 -6" />
+            </svg>
+          </div>
+          <div class="flex items-center justify-center">
+            <div class="flex relative items-center justify-center mx-2 sm:mt-1 sm:inline-flex z-20">
+              <button id="hs-dropdown-auto-close-inside-cities" type="button" class="hs-dropdown-toggle group focus:outline-none w-28 h-10 py-1 -mt-1 px-2 mx-auto relative flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+                Amenities
+                <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+          
+              <div class="group-hover:block group-focus-within:block absolute top-full right-0.5 w-30 h-40 overflow-y-scroll scrollbare-hide hidden bg-white shadow-md rounded-lg p-2 mt-1 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Mentors</span>
+                  </label>
+                </div>
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Air-condition</span>
+                  </label>
+                </div>
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Drinks</span>
+                  </label>
+                </div>
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-archive-cities" name="hs-dropdown-item-checkbox-archive-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-archive-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Shower</span>
+                  </label>
+                </div>
+              </div>
+              </button>
+            </div>
+            
+            <div class="flex relative items-center justify-center mx-2 sm:mt-1 sm:inline-flex z-20">
+              <button id="hs-dropdown-auto-close-inside-cities" type="button" class="hs-dropdown-toggle group focus:outline-none w-28 h-10 py-1 -mt-1 px-2 mx-auto relative flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+                Cities
+                <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+          
+              <div class="group-hover:block group-focus-within:block absolute top-full left-0.5 w-30 h-40 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 mt-1 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Agadir</span>
+                  </label>
+                </div>
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Casablanka</span>
+                  </label>
+                </div>
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Agadir</span>
+                  </label>
+                </div>
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                  <div class="flex items-center h-5 mt-1">
+                    <input id="hs-dropdown-item-checkbox-archive-cities" name="hs-dropdown-item-checkbox-archive-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                  </div>
+                  <label for="hs-dropdown-item-checkbox-archive-cities" class="ms-3.5">
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Marrakech</span>
+                  </label>
+                </div>
+              </div>
+              </button>
+            </div>
+          </div>
+          
+         <!-- Input Number -->
+        <div class="py-1 px-2 w-auto h-10 flex flex-row items-center justify-center mx-auto bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700" data-hs-input-number="">
+          <div class="w-1/2 pr-1 h-full flex justify-between items-center gap-x-3 border-r-2 border-gray-500">
+            <div class="md:flex-auto">
+              <span class="md:inline-block hidden font-medium text-sm text-gray-800 dark:text-white">
+                Min
+              </span>
+            </div>
+            <div class="flex items-center gap-x-1.5">
+              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+                <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                </svg>
+              </button>
+              <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="20" data-hs-input-number-input="">
+              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+                <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="w-30 h-full pl-1 flex justify-between items-center gap-x-3">
+            
+            <div class="flex items-center gap-x-1.5">
+              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+                <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                </svg>
+              </button>
+              <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="150" data-hs-input-number-input="">
+              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+                <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <span class="md:inline-block hidden font-medium text-sm text-gray-800 dark:text-white">
+                Max
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- End Input Number -->
+        
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+  <div class="container mx-auto py-8 px-6">
+      <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 lg:pt-5">
+        {% for gym in data %}
+        <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+          <div
+            class="relative mx-4 mt-4 h-44 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+            <img
+              class="h-[100%] w-full"
+              src="{{ gym.profile_picture }}"
+              alt="ui/ux review check" />
+            <div
+              class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60">
+            </div>
+            <button
+              class="!absolute  top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button">
+              <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                  <path
+                    d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z">
+                  </path>
+                </svg>
+              </span>
+            </button>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+              <h5 class="block h-14 overflow-hidden font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
+                {{ gym.name }}
+              </h5>
+              <p class="w-10 flex items-center justify-center font-semibold text-red-600 ">{{ gym.price}}100$</p>
+            </div>
+              <p
+                class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                  class="-mt-0.5 h-5 w-5 text-yellow-700">
+                  <path fill-rule="evenodd"
+                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                5.0
+              </p>
+            </div>
+            <p class="block h-32 font-sans text-base antialiased font-light leading-relaxed text-gray-700 overflow-hidden">
+              {{ gym.description }}
+            </p>
+          </div>
+          <div class="p-6 pt-3">
+            <button id="gym"
+              class="block w-full overflow-hidden select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button">
+              Reserve
+            </button>
+          </div>
+        </div> 
+        {% endfor %}
+      </div>
+  </div>
+  </main>
+  <div class="flex items-center justify-center w-full h-32 pb-5 gap-4">
+  <button
+    class="flex items-center border-gray-300 border-2 gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+    type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+      aria-hidden="true" class="w-4 h-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+    </svg>
+    Previous
+  </button>
+  <div class="flex items-center gap-2">
+    <button
+      class="relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        1
+      </span>
+    </button>
+    <button
+      class="relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        2
+      </span>
+    </button>
+    <button
+      class="relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full bg-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        3
+      </span>
+    </button>
+    <button
+      class="relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        4
+      </span>
+    </button>
+    <button
+      class="relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        5
+      </span>
+    </button>
+  </div>
+  <button
+    class="flex items-center border-gray-300 border-2 gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+    type="button">
+    Next
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+      aria-hidden="true" class="w-4 h-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+    </svg>
+  </button>
+  </div> 
+</body>
+</html>

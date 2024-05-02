@@ -72,3 +72,22 @@ async def about(request: Request):
             "request": request,
         }
     )
+@app.get("/user")
+async def home(request: Request):
+    all_gymes = md.storage.all(Gym).values()
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "data": all_gymes
+        }
+    )
+
+@app.get("/profile")
+async def about(request: Request):
+    return templates.TemplateResponse(
+        "profile.html",
+        {
+            "request": request,
+        }
+    )
