@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./public/**/*.{html,js}"],
+  variants: {
+    extend : {
+      display: ['group-focus']
+    },
+  },
   theme: {
     extend: {
       animation: {
