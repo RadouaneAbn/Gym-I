@@ -103,19 +103,30 @@ async def about(request: Request):
 async def get_gym_info(gym_id: str, request: Request):
     gym = storage.get(Gym, gym_id)
     reviews = md.storage.all(Review).values()
+    rv = []
     if gym is None:
         raise HTTPException(status_code=404, detail="Not Found")
     
     setattr(gym, "city", storage.get(City, gym.city_id).name)
     
+    count = 0
     for review in reviews:
-        setattr(review, "user_name", md.storage.get(Client, review.client_id).first_name)
+        if review.gym_id == gym_id and count < 3:
+            count += 1
+            review_data = {
+                "user_name": md.storage.get(Client, review.client_id).first_name,
+                "review_text": review.text,
+                "review_date": review.updated_at.strftime("%Y-%m-%d")
+            }
+            rv.append(review_data)
     
     return templates.TemplateResponse(
         "gym.html",
         {
             "request": request,
             "gym": gym.to_dict(),
-            "reviews": reviews
+            "reviews": rv,
+            "amenities": [am.name for am in gym.amenities]
+
         }
     )
