@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """ holds class Gym"""
 from server.models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
+from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from server.models.amenity import Amenity
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import ARRAY
