@@ -29,7 +29,7 @@
     <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 backdrop-blur-lg border-b-2 border-gay-500">
       <nav class="flex justify-between items-center w-[92%] mx-auto">
           <div class="flex py-2">
-              <a href="/user"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
+              <a href="/user/gymes"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
           </div>
           <div class="group relative right-3">
           <img alt="tania andrew"
@@ -133,8 +133,31 @@
                 </button>
             </div>
         </div>
-        <div>
-
+        <div class="mx-auto text-center md:max-w-1/2 py-10">
+          <h3 class="mb-6 text-3xl font-bold">What they said about <span class="text-red-800"> {{ gym.name}}</span></h3>
+        </div>
+        
+        <div class="grid gap-6 text-center md:grid-cols-3 lg:gap-12">
+          {% set count = {'value': 0} %}
+          {% for review in reviews %}
+            {% if review.gym_id == gym.id and count.value < 3 %}
+              {{ count.update({'value': count.value + 1}) }}
+          <div class="mb-12 md:mb-0">
+            <div class="mb-6 flex justify-center">
+              <img
+                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                class="w-32 rounded-full shadow-lg dark:shadow-black/30" />
+            </div>
+            <h5 class="mb-4 text-xl font-semibold">{{ review.user_name }}</h5>
+            <h6 class="mb-4 font-semibold text-primary dark:text-primary-400">
+              {{ review.updated_at }}
+            </h6>
+            <p class="mb-4 text-neutral-600 dark:text-neutral-300">
+              {{ review.text }}
+            </p>
+          </div>
+          {% endif %}
+          {% endfor %}
         </div>
     </main>
 

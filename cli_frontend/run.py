@@ -73,7 +73,7 @@ async def about(request: Request):
             "request": request,
         }
     )
-@app.get("/user")
+@app.get("/user/gymes")
 async def home(request: Request):
     all_gymes = md.storage.all(Gym).values()
     cities = md.storage.all(City).values()
@@ -102,13 +102,20 @@ async def about(request: Request):
 @app.get("/user/gymes/{gym_id}")
 async def get_gym_info(gym_id: str, request: Request):
     gym = storage.get(Gym, gym_id)
+    reviews = md.storage.all(Review).values()
     if gym is None:
         raise HTTPException(status_code=404, detail="Not Found")
+    
     setattr(gym, "city", storage.get(City, gym.city_id).name)
+    
+    for review in reviews:
+        setattr(review, "user_name", md.storage.get(Client, review.client_id).first_name)
+    
     return templates.TemplateResponse(
         "gym.html",
         {
             "request": request,
-            "gym": gym.to_dict()
+            "gym": gym.to_dict(),
+            "reviews": reviews
         }
     )
