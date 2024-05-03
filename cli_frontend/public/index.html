@@ -29,7 +29,7 @@
   <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 backdrop-blur-lg border-b-2 border-gay-500">
     <nav class="flex justify-between items-center w-[92%] mx-auto">
         <div class="flex py-2">
-            <a href="/user"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
+            <a href="/user/gymes"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
         </div>
         <div class="group">
         <img alt="tania andrew"
@@ -49,7 +49,7 @@
             My Profile
           </p>
         </button></a>
-        <a href="/payement"><button role="menuitem"
+        <a href="/profile"><button role="menuitem"
           class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -60,7 +60,7 @@
             Payement
           </p>
         </button></a>
-        <a href="/pro"><button role="menuitem"
+        <a href="/profile"><button role="menuitem"
           class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -71,7 +71,7 @@
             PRO Account
           </p>
         </button></a>
-        <a href="/help"><button role="menuitem"
+        <a href="/profile"><button role="menuitem"
           class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -133,39 +133,17 @@
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
           
-              <div class="group-hover:block group-focus-within:block absolute top-full right-0.5 w-30 h-40 overflow-y-scroll scrollbare-hide hidden bg-white shadow-md rounded-lg p-2 mt-1 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+              <div class="group-hover:block group-focus-within:block absolute top-full right-0.5 w-30 h-44 overflow-y-scroll scrollbare-hide hidden bg-white shadow-md rounded-lg p-2 mt-1 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                {% for amenity in amenities %}
                 <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
                   <div class="flex items-center h-5 mt-1">
                     <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                   </div>
                   <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Mentors</span>
+                    <span class="mt-1 block text-sm text-left font-medium text-gray-800 dark:text-neutral-300">{{ amenity.name }}</span>
                   </label>
                 </div>
-                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <div class="flex items-center h-5 mt-1">
-                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                  </div>
-                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Air-condition</span>
-                  </label>
-                </div>
-                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <div class="flex items-center h-5 mt-1">
-                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                  </div>
-                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Drinks</span>
-                  </label>
-                </div>
-                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <div class="flex items-center h-5 mt-1">
-                    <input id="hs-dropdown-item-checkbox-archive-cities" name="hs-dropdown-item-checkbox-archive-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                  </div>
-                  <label for="hs-dropdown-item-checkbox-archive-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Shower</span>
-                  </label>
-                </div>
+                {% endfor %}
               </div>
               </button>
             </div>
@@ -176,40 +154,18 @@
                 <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-          
-              <div class="group-hover:block group-focus-within:block absolute top-full left-0.5 w-30 h-40 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 mt-1 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+              <div class="group-hover:block group-focus-within:block absolute top-full left-0.5 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 mt-1 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                {% for city in cities%} 
                 <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+         
                   <div class="flex items-center h-5 mt-1">
                     <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                   </div>
                   <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Agadir</span>
+                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">{{ city.name }}</span>
                   </label>
                 </div>
-                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <div class="flex items-center h-5 mt-1">
-                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                  </div>
-                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Casablanka</span>
-                  </label>
-                </div>
-                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <div class="flex items-center h-5 mt-1">
-                    <input id="hs-dropdown-item-checkbox-delete-cities" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                  </div>
-                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Agadir</span>
-                  </label>
-                </div>
-                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <div class="flex items-center h-5 mt-1">
-                    <input id="hs-dropdown-item-checkbox-archive-cities" name="hs-dropdown-item-checkbox-archive-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                  </div>
-                  <label for="hs-dropdown-item-checkbox-archive-cities" class="ms-3.5">
-                    <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">Marrakech</span>
-                  </label>
-                </div>
+                {% endfor %}
               </div>
               </button>
             </div>
@@ -299,7 +255,7 @@
               <h5 class="block h-14 overflow-hidden font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
                 {{ gym.name }}
               </h5>
-              <p class="w-10 flex items-center justify-center font-semibold text-red-600 ">{{ gym.price}}100$</p>
+              <p class="w-10 flex items-center justify-center font-semibold text-red-600 ">{{ gym.price_by_month}}$</p>
             </div>
               <p
                 class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
@@ -312,7 +268,8 @@
                 5.0
               </p>
             </div>
-            <p class="block h-32 font-sans text-base antialiased font-light leading-relaxed text-gray-700 overflow-hidden">
+            <p class="text-gray-700">City:<p class="text-base h-8 text-blue-950">{{ gym.city }}</p></p>
+            <p class="block h-14 font-sans text-xs antialiased font-light leading-relaxed text-gray-700 overflow-hidden">
               {{ gym.description }}
             </p>
           </div>
