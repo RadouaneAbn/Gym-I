@@ -101,14 +101,14 @@
 
     <!-- Main Content -->
     <main class="container mx-auto my-10">
-        <div class="md:flex items-center justify-cente p-6">
+      <h1 class="text-3xl font-bold flex items-center justify-center">{{gym.name}}</h1>
+        <div class="md:flex w-full h-auto items-center justify-cente p-6">
             <!-- Gym Image -->
             <div class="md:w-1/2 flex justify-center border-r-2 border-gray-400">
                 <img src="{{gym.profile_picture}}" alt="Gym" class="w-full rounded-s-2xl px-2">
             </div>
             <!-- Gym Details -->
             <div class="md:w-1/2 md:ml-8 mt-4 md:mt-0">
-                <h1 class="text-3xl font-bold">{{gym.name}}</h1>
                 <p class="text-gray-700 mt-2">{{gym.description}}</p>
                 <div class="mt-4">
                     <p class="text-gray-700">Price:</p>
@@ -128,19 +128,19 @@
                 </p>
                 <p class="text-gray-700">City:<p class="text-base text-blue-950">{{gym.city}}</p></p>
                 <p class="text-gray-700">Location:<p class="text-base text-blue-950">{{gym.location}}</p></p>
-                <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
+                <button class="mt-4 md:w-40  bg-gray-950 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-full">
                     Book Now
                 </button>
             </div>
         </div>
         <!-- amenities gym -->
-        <div class="mx-auto text-center md:max-w-1/2 py-10">
+        <div class="mx-auto text-center md:max-w-1/2 py-10 mt-5">
           <h3 class="mb-6 text-3xl font-bold">Amenities</h3>
         </div>
-        <div class="flex mx-auto w-2/3 h-40 justify-center items-center rounded ">
+        <div class="flex flex-wrap w-full h-24 justify-center items-center">
           {% for amenity in amenities %}
-          <div class="w-auto h-auto flex-wrap ">
-            <p class="text-xs">{{ amenity }}</p>
+          <div class="w-auto h-auto flex-wrap rounded-xl bg-gray-400 bg-opacity-10 border-2 border-gray-300 mx-1 p-2">
+            <p class="text-xs text-nowrap">{{ amenity }}</p>
           </div>
           {% endfor %}
         </div>
@@ -151,12 +151,9 @@
           <h3 class="mb-6 text-3xl font-bold">What they said about <span class="text-red-800"> {{ gym.name}}</span></h3>
         </div>
         
-        <div class="mx-auto flex gap-6 text-center">
+        <div class="mx-auto flex-1 w-full gap-6 text-center">
           {% for review in reviews %}
                 <div class="mb-12 rounded-xl bg-white bg-opacity-40 w-1/3 h-auto py-8 px-2 mx-2 md:mb-0">
-                  <div class="mb-6 flex justify-center">
-                    <img src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg" class="w-32 rounded-full shadow-lg dark:shadow-black/30" />
-                  </div>
                   <h5 class="mb-4 text-xl font-semibold">{{ review.user_name }}</h5>
                   <h6 class="mb-4 font-semibold text-primary dark:text-primary-400">
                     {{ review.review_date }}
