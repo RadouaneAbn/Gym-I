@@ -7,9 +7,9 @@ $(document).ready(function () {
     slidesPerView: 'auto',
     coverflowEffect: {
       rotate: 0,
-      stretch: 0,
+      stretch: -50,
       depth: 700,
-      modifier: 2.5,
+      modifier: 1.5,
     },
     pagination: {
       el: '.swiper-pagination',
@@ -19,9 +19,8 @@ $(document).ready(function () {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    // autoplay: {
-    //   delay: 10000,
-    // }
+    autoplay: {
+      delay: 3000,
+    }
   });
-  
 });

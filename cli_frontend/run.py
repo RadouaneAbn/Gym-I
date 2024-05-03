@@ -25,7 +25,7 @@ async def home_redirect():
 
 @app.get("/")
 async def home(request: Request):
-    all_gymes = md.storage.all(Gym).values()
+    all_gymes = md.storage.all_list(Gym)[:5]
     return templates.TemplateResponse(
         "home.html",
         {
