@@ -53,7 +53,7 @@ async def home(request: Request):
         "offers.html",
         {
             "request": request,
-            "data": all_gymes
+            "data": all_gymes,
         }
     )
 @app.get("/signin")
@@ -76,11 +76,17 @@ async def about(request: Request):
 @app.get("/user")
 async def home(request: Request):
     all_gymes = md.storage.all(Gym).values()
+    cities = md.storage.all(City).values()
+    amenities = md.storage.all(Amenity).values()
+    for gym in all_gymes:
+        setattr(gym, "city", md.storage.get(City, gym.city_id).name)
     return templates.TemplateResponse(
         "index.html",
         {
             "request": request,
-            "data": all_gymes
+            "data": all_gymes,
+            "cities": cities,
+            "amenities": amenities
         }
     )
 
@@ -94,8 +100,15 @@ async def about(request: Request):
     )
 
 @app.get("/user/gymes/{gym_id}")
-async def get_gym_info(gym_id: str):
+async def get_gym_info(gym_id: str, request: Request):
     gym = storage.get(Gym, gym_id)
     if gym is None:
         raise HTTPException(status_code=404, detail="Not Found")
-    return gym.to_dict()
+    setattr(gym, "city", storage.get(City, gym.city_id).name)
+    return templates.TemplateResponse(
+        "gym.html",
+        {
+            "request": request,
+            "gym": gym.to_dict()
+        }
+    )
