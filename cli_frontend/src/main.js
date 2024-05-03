@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const inputFields = document.querySelectorAll("[data-hs-input-number-input]");
   const buttons = document.querySelectorAll('.btn-gym_id')
 
+
   buttons.forEach(btn => {
     btn.addEventListener('click', function() {
       const urlItem = '/user/gymes/' + btn.id;
