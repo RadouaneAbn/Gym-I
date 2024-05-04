@@ -16,6 +16,7 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
+from math import ceil
 
 
 load_dotenv()
@@ -129,8 +130,8 @@ class DBStorage:
         return True
 
     def get_page(self, cls, page = 1):
-        offset = (page - 1) * 10
-        limit = 10
+        offset = (page - 1) * 12
+        limit = 12
         page_insts = self.__session.query(cls)\
             .offset(offset).limit(limit).all()
         return page_insts
@@ -146,3 +147,9 @@ class DBStorage:
             cls.email == email
         ).first()
         return inst
+    
+    def pages_count(self, cls):
+        count = self.__session.query(cls).count()
+        return ceil(count / 12)
+    
+    # def advanced_filter(self, cls, cities)

@@ -16,7 +16,7 @@
   
   <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="/cli_frontend/src/main.js"></script>
+  <!-- <script src="/cli_frontend/src/main.js"></script> -->
   <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
   <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
@@ -112,9 +112,9 @@
                 <p class="text-gray-700 mt-2">{{gym.description}}</p>
                 <div class="mt-4">
                     <p class="text-gray-700">Price:</p>
-                    <p class="text-base font-medium text-red-600">${{gym.price_by_month}}$/month</p>
+                    <p class="text-base font-medium text-red-600">{{gym.price_by_month}}$/month</p>
                     {% if gym.price_by_year != 0 %}
-                    <p class="text-base font-medium text-red-600">${{gym.price_by_year}}$/year</p>
+                    <p class="text-base font-medium text-red-600">{{gym.price_by_year}}$/year</p>
                     {% endif %}
                 </div>
                 <p class=" flex mt-4 text-gray-700">{{gym.rate}}
@@ -126,8 +126,8 @@
                 </svg>
                 5.0
                 </p>
-                <p class="text-gray-700">City:<p class="text-base text-blue-950">{{gym.city}}</p></p>
-                <p class="text-gray-700">Location:<p class="text-base text-blue-950">{{gym.location}}</p></p>
+                <p class="text-gray-700 text-2xl">City: <span class="text-xl text-blue-950">{{city_name}}</span></p>
+                <p class="text-gray-700 text-2xl">Location: <span class="text-xl text-blue-950">{{gym.location}}</span></p>
                 <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
                     Book Now
                 </button>
@@ -137,10 +137,10 @@
         <div class="mx-auto text-center md:max-w-1/2 py-10">
           <h3 class="mb-6 text-3xl font-bold">Amenities</h3>
         </div>
-        <div class="flex mx-auto w-2/3 h-40 justify-center items-center rounded ">
+        <div class="flex flex-wrap w-full h-24 justify-center items-center">
           {% for amenity in amenities %}
-          <div class="w-auto h-auto flex-wrap ">
-            <p class="text-xs">{{ amenity }}</p>
+          <div class="w-auto h-auto flex-wrap rounded-xl bg-gray-400 bg-opacity-10 border-2 border-gray-300 mx-1 p-2">
+            <p class="text-xs text-nowrap">{{ amenity }}</p>
           </div>
           {% endfor %}
         </div>
@@ -171,7 +171,7 @@
     </main>
 
     <!-- Your additional scripts -->
-    <script src="/cli_frontend/src/main.js"></script>
+    <!-- <script src="/cli_frontend/src/main.js"></script> -->
 </body>
 
 </html>

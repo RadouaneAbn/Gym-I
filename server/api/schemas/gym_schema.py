@@ -24,6 +24,7 @@ class GymModelPUT(BM):
 class GymAmenity(BM):
     city_ids: list = []
     amenity_ids: list = []
+    page: int = 1
 
 # for future use if the onwer wanted to change the ownership of teh gym
 # class GymModelUserPUT(BM):

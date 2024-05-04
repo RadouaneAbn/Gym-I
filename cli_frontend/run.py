@@ -6,12 +6,13 @@ from server.models.client import Client
 from server.models.gym import Gym
 from server.models.owner import Owner
 from server.models.review import Review
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.requests import Request
 from server.models import storage
+from typing import Optional, List
 
 
 app = FastAPI()
@@ -73,16 +74,22 @@ async def about(request: Request):
             "request": request,
         }
     )
-@app.get("/user")
-async def home(request: Request):
-    all_gymes = md.storage.all(Gym).values()
-    return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
-            "data": all_gymes
-        }
-    )
+
+# @app.post("/user/gymes")
+# async def home(request: Request, page: int = Query(1, description="Page number", gt=0)):
+#     all_gymes = md.storage.get_page(Gym, page)
+#     for gym in all_gymes:
+#         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
+#     return templates.TemplateResponse(
+#         "index.html",
+#         {
+#             "request": request,
+#             "cities": storage.all_list(City),
+#             "amenities": storage.all_list(Amenity),
+#             "data": all_gymes,
+#             "count": storage.pages_count(Gym)
+#         }
+#     )
 
 @app.get("/profile")
 async def about(request: Request):
@@ -98,11 +105,30 @@ async def get_gym_info(gym_id: str, request: Request):
     gym = storage.get(Gym, gym_id)
     if gym is None:
         raise HTTPException(status_code=404, detail="Not Found")
-    # return gym.to_dict()
     return templates.TemplateResponse(
-        "profile.html",
+        "gym.html",
         {
             "request": request,
-            "gym": gym
+            "amenities": [am.name for am in gym.amenities],
+            "gym": gym.to_dict(pop=["amenities"]),
+            "city_name": storage.get(City, gym.city_id).name
+        }
+    )
+
+
+# async def home(request: Request, page: int = Query(1, description="Page number", gt=0)):
+@app.get("/user/gymes")
+async def home(request: Request):
+    all_gymes = md.storage.get_page(Gym, 1)
+    for gym in all_gymes:
+        setattr(gym, "city_name", storage.get(City, gym.city_id).name)
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "cities": storage.all_list(City),
+            "amenities": storage.all_list(Amenity),
+            "data": all_gymes,
+            "count": storage.pages_count(Gym)
         }
     )
