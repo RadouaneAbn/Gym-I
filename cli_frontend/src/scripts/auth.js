@@ -9,7 +9,7 @@ if (!token) {
         }
     })
     .then(data => {
-        console.log(data.status)
+        // console.log(data.status) // 200
         if (data.status === 401) {
             window.location.href = '/signin';
         }

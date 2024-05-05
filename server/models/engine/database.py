@@ -151,5 +151,3 @@ class DBStorage:
     def pages_count(self, cls):
         count = self.__session.query(cls).count()
         return ceil(count / 12)
-    
-    # def advanced_filter(self, cls, cities)

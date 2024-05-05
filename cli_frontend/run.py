@@ -194,12 +194,12 @@ async def home(request: Request):
     for gym in all_gymes:
         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
     return templates.TemplateResponse(
-        "user.html",
+        "userhome.html",
         {
             "request": request,
             "cities": storage.all_list(City),
             "amenities": storage.all_list(Amenity),
-            "data": all_gymes,
             "count": storage.pages_count(Gym)
+            # "data": all_gymes,
         }
     )

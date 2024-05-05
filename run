@@ -1,0 +1,6 @@
+#!/bin/bash
+
+gnome-terminal --tab -- bash -c "uvicorn --host 0.0.0.0 --port 5002 server.api.app:app --reload"
+gnome-terminal --tab -- bash -c "uvicorn --host 0.0.0.0 --port 5000 cli_frontend.run:app --reload"
+gnome-terminal --tab -- bash -c "cd cli_frontend; npm run build"
+

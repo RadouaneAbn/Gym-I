@@ -87,8 +87,7 @@ async def client_login(info: ClientLogin):
     user = authenticate_user(info.email, info.password)
     # print("user = ", user)
     token = create_access_token({
-        "sub": user.email,
-        "id": user.id
+        "sub": user.email
     })
     return {"access_token": token, "token_type": "bearer"}
 

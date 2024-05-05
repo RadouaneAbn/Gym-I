@@ -15,7 +15,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <!-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> -->
-        <!-- <script src="/cli_frontend/src/scripts/main.js"></script> -->
+        <script src="/cli_frontend/src/scripts/userHome.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
     <title>Gym&I</title>
 
@@ -38,6 +38,7 @@
         </div>
         <div class="group">
         <img alt="tania andrew"
+        id="profile_picture"
         src="https://i.ibb.co/GsZmxgR/no-pf.jpg&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
         class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
         data-popover-target="profile-menu" />
@@ -139,7 +140,19 @@
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                {% for amenity in amenities %}
+                <div onclick="toggleCheckbox(this)" class="amenity_btn" id="{{ amenity.id }}">
+                <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
 
+                    <div class="flex items-center h-5 mt-1">
+                      <input style="pointer-events: none;" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class="shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                    </div>
+                    <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                      <span class="mt-1 block text-sm text-left font-medium text-gray-800 dark:text-neutral-300">{{ amenity.name }}</span>
+                    </label>
+                  </div>
+                </div>
+                {% endfor %}
               </div>
               </button>
             </div>
@@ -151,7 +164,19 @@
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
               <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
-
+                {% for city in cities%}
+                <div onclick="toggleCheckbox(this)" class="city_btn" id="{{ city.id }}">
+                  <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                    
+                    <div class="flex items-center h-5 mt-1">
+                      <input style="pointer-events: none;" name="hs-dropdown-item-checkbox-delete-cities" type="checkbox" class=" shrink-0 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                    </div>
+                    <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                      <span class="mt-1 block text-sm font-semibold text-gray-800 dark:text-neutral-300">{{ city.name }}</span>
+                    </label>
+                  </div>
+                </div>
+                {% endfor %}
               </div>
               </button>
             </div>
@@ -222,6 +247,71 @@
       </div>
   </div>
   </main>
+
+  <!-- pagination -->
   <div class="flex items-center justify-center w-full h-32 pb-5 gap-4">
 
+    <button
+    id="prev_btn"
+    data-n="0"
+    style="visibility: hidden;"
+    class="prev_vis flex items-center border-gray-300 border-2 gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+    type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+      aria-hidden="true" class="w-4 h-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+    </svg>
+    PREV
+  </button>
+
+  <div class="flex items-center gap-2">
+    <button
+      id="prev_holder"
+      style="visibility: hidden;"
+      class="prev_vis relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        0
+      </span>
+    </button>
+
+    <button
+      id="cur_holder"
+      disabled="true"
+      class="relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md transition-all bg-gray-700"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        1
+      </span>
+    </button>
+    {% if count > 1 %}
+    <button
+      id="next_holder"
+      data-n="{{ count }}"
+      class="next_vis relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        2
+      </span>
+    </button>
+    {% endif %}
   </div>
+
+  <button
+    id="next_btn"
+    data-count="{{count}}"
+    style="visibility: visible;"
+    class="next_vis flex items-center border-gray-300 border-2 gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+    type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+      aria-hidden="true" class="w-4 h-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+    </svg>
+    NEXT
+  </button>
+
+</div>
+
+</div>
+
+</body>
