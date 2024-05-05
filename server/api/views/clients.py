@@ -106,7 +106,7 @@ def authenticate_user(email, password):
 def create_access_token(info: dict, expires_delta: timedelta = timedelta(minutes=15)):
     data = info.copy()
     # print("data = ", data)
-    expire = datetime.utcnow() + timedelta(minutes=1)
+    expire = datetime.utcnow() + timedelta(minutes=60)
     data.update({"exp": expire})
     # print(expire)
 

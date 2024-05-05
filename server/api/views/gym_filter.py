@@ -22,16 +22,12 @@ async def get_gym_amenity(data: GymAmenity):
         all_gymes = storage.gymes_in_cities(data.city_ids)
     else:
         all_gymes = storage.all_list(Gym)
-    # end = time()
-    # print(end - st)
-    # if amenity_list:
-    #     all_gymes = [gym for gym in all_gymes if all(
-    #         [amenity in gym.amenities for amenity in amenity_list])]
 
     filtered_gymes = []
-    for gym in all_gymes:
-        if amenity_list.issubset(gym.amenities):
-            filtered_gymes.append(gym)
+    if amenity_list:
+        for gym in all_gymes:
+            if amenity_list.issubset(gym.amenities):
+                filtered_gymes.append(gym)
 
     if filtered_gymes:
         all_gymes = filtered_gymes

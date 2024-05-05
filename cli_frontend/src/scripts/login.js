@@ -1,12 +1,6 @@
 $(document).ready(function () {
     start();
     emailSyntax();
-
-    // [email, pwd].forEach(field => {
-    //     field.addEventListener('click', function () {
-    //         field.html('&nbsp;')
-    //     })
-    // })
 });
 let valid;
 let email;
@@ -66,13 +60,10 @@ function validate() {
 function requestLogin() {
     console.log('req')
     $('#err-signin').html('&nbsp;');
-
-    
-
     $.ajax ({
         type: 'post',
-        // url: 'http://0.0.0.0:5002/clients/login',
-        url: '/token',
+        url: 'http://0.0.0.0:5002/clients/login',
+        // url: '/token',
         contentType: 'application/json',
         data: JSON.stringify({
             email: email.value,
@@ -80,11 +71,10 @@ function requestLogin() {
         }),
         success: function (token) {
             // console.log('/' + user.id)
-            sessionStorage.setItem('_token', token.access_token)
-            // window.location.href = '/me';
-            redirectToMeOrLogin();
-            // console.log(localStorage.getItem('_token'));
-            // window.location.href = '/me';
+            localStorage.setItem('access_token', token.access_token)
+            localStorage.setItem('token_type', 'Bearer')
+            // redirectToMeOrLogin();
+            window.location.href = '/user/gymes';
         },
         statusCode: {
             404: function () {
@@ -107,28 +97,60 @@ function requestLogin() {
 
 
 function redirectToMeOrLogin() {
-    const token = sessionStorage.getItem('_token');
+    const token = localStorage.getItem('_token');
     // console.log('tok:', token)
     if (token) {
-        $.ajax({
-            url: '/me',
-            type: 'GET',
-            Headers: {
-                'Authorization': 'Bearer ' + token
-            },
-            success: function (data) {
-                // window.location.href = '/me'; 
-                console.log('data:', data)
-            },
-            error: function (xhr, status, error) {
-                console.log('Error:', xhr.responseText);  // Handle unauthorized access or other errors
-                if (xhr.status === 401) {
-                  console.log('Unauthorized - Token might be invalid or expired');
-                  // Redirect to login or show an error message
-                window.location.href = '/signin'; 
-                }
-              },
-        })
+        // function submitToken() {
+        //     const form = document.createElement('form');
+        //     form.method = 'GET';
+        //     form.action = '/user/gymes';
+
+        //     const hiddenField = document.createElement('input');
+        //     hiddenField.type = 'hidden';
+        //     hiddenField.name = 'authorization';
+        //     hiddenField.value = `Bearer ${token}`
+        //     form.append(hiddenField);
+
+        //     document.body.appendChild(form);
+        //     // console.log(form)
+        //     form.submit();
+        // }
+        // submitToken()
+        
+        // fetch('/user/gymes', {
+        //     method: 'GET',
+        //     headers: {
+        //       'Authorization': `Bearer ${token}`,
+        //       'Content-Type': 'application/json'
+        //     }
+        //   })
+        //   .then(res => res.json())
+        //   .then(data => {
+        //     console.log(data)
+        //     const blobUrl = URL.createObjectURL(new Blob([data], { type: "text/html" }));
+        //     const newWindow = window.location(blobUrl, "_blank");
+
+        //   })
+
+        // $.ajax({
+        //     url: '/user/gymes',
+        //     type: 'GET',
+        //     Headers: {
+        //         'Authorization': 'Bearer ' + token
+        //     },
+        //     success: function (data) {
+        //         // window.location.href = '/me'; 
+        //         // console.log('data:', data)
+        //     },
+        //     error: function (xhr, status, error) {
+        //         console.log('Error:', xhr.responseText);  // Handle unauthorized access or other errors
+        //         if (xhr.status === 401) {
+        //           console.log('Unauthorized - Token might be invalid or expired');
+        //           // Redirect to login or show an error message
+        //         window.location.href = '/signin'; 
+        //         }
+        //       },
+        // })
     } else {
         console.log('token not found')
         window.location.href = '/signin'; 
