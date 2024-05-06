@@ -28,8 +28,8 @@ $(document).ready(function () {
     coverflowEffect: {
       rotate: 0,
       stretch: 0,
-      depth: 700,
-      modifier: 2.5,
+      depth: 400,
+      modifier: 2,
     },
     pagination: {
       el: '.swiper-pagination',

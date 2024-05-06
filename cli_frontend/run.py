@@ -25,12 +25,12 @@ async def home_redirect():
 
 @app.get("/")
 async def home(request: Request):
-    all_gymes = md.storage.all(Gym).values()
+    all_gymes = [gym.to_dict() for gym in md.storage.all(Gym).values()]
     return templates.TemplateResponse(
         "home.html",
         {
             "request": request,
-            "data": all_gymes
+            "data": all_gymes[:10]
         }
     )
 

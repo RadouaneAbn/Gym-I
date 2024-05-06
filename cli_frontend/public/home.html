@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="font-[Poppins]">
+<body class="font-[Poppins] bg-zinc-100">
   <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 md:backdrop-blur-lg">
     <nav class="flex justify-between items-center w-[92%] mx-auto">
         <div class="flex py-2">
@@ -35,7 +35,7 @@
             class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
             <ul class="flex w-full md:flex-row flex-col md:items-center md:gap-[4vw] gap-5 justify-center">
               <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#home'">
-                  <a class="font-medium" href="#home">Home</a>
+                  <a class="font-medium" href="#hero">Home</a>
               </li>
               <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#about'">
                   <a class="font-medium" href="#about">About</a>
@@ -44,7 +44,7 @@
                   <a class="font-medium" href="#offers">Offers</a>
               </li>
               <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#developers'">
-                <a class="font-medium" href="#about">Developers</a>
+                <a class="font-medium" href="#developers">Developers</a>
             </li>
               <li class="duration-150 h-10 border-b-2 bg-zinc-900 border-gray-500 hover:bg-zinc-800 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/signin'">
                 <a  class="font-medium">sign up</a>
@@ -124,7 +124,7 @@
             </div>
         </div>
     </section>
-    <section id="devlopers" class="z-90 container-mt-2">
+    <section id="developers" class="z-90 container-mt-2">
       <div class="flex justify-center text-center py-5 font-bold md:text-5xl text-3xl underline ">
         <h6>Gym&I Developers</h6>
       </div>
@@ -184,22 +184,21 @@
     </div>
 </section>
 <div class="border-b border-zinc-600 mx-20 my-10"></div>
-<section id="offers" class="container-mt-20 flex-1 mb-20 mt-10">
+<section id="offers" class="container-mt-20 flex-1 mb-20 mt-10 h-screen">
   <div class="flex justify-center text-center py-10 font-bold md:text-5xl text-3xl underline ">
     <h1>Gym&I Partners</h1>
   </div>
-  <div class="flex flex-row items-center z-20 py-2 rounded-full">
+  <div class="flex flex-row items-center z-20 rounded-full h-2/3 mt-20 w-full">
     <div class="swiper tranding-slider relative flex flex-wrap h-full">
       <div class="swiper-wrapper">
         {% for gym in data %}
-        <div class="swiper-slide tranding-slide w-[50%] h-full shadow-black">
-          <div class=" mb-3 md:w-full w-[100%] h-[100%] bg-zinc-400 border bg-opacity-40 border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-900 image-{{ loop.index }}" id="{{ gym.id }}">
-            <a class=" px-1 pt-1 w-[70%]">
-              <img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="w-[100%]">
+        <div class="mb-20 swiper-slide tranding-slide md:w-[50%] w-full h-[90%]">
+          <div class="w-full h-full bg-zinc-900 border border-gray-200 rounded-xl image-{{ loop.index }} shadow-zinc-900 shadow-xl" id="{{ gym.id }}">
+            <a class="w-full h-full">
+              <img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="h-full w-full border bg-opacity-40 border-gray-200 rounded-xl opacity-90">
             </a>
-            <div class="px-2 pb-4 w-full font-semibold text-center text-xl">
+            <div class="text-white  py-10 text-4xl w-full absolute left-1 bottom-1 font-semibold text-center overflow-clip">
               <h5 class="">{{ gym.name }}</h5>
-              <!-- <p>{{ gym.description }}</p> -->
             </div>
           </div>
         </div>
@@ -218,14 +217,7 @@
   </div>
   
 </section> 
-<div class="h-screen w-[75%] mx-auto my-20 relative flex flex-col rounded-3xl border-e-2 border-b-2 border-zinc-600 bg-cover bg-center items-center justify-center shadow-2xl" style="background-image: url(https://yofitt.com/wp-content/uploads/2023/03/Yofitt-Background-1.jpg?id=3057);">
-  <div class="absolute inset-0 mx-auto my-auto flex items-center justify-center w-[55%] h-1/2 rounded-3xl border-b-2 border-e-2 border-green-900 shadow-green-900 shadow-lg bg-cover bg-top" style="background-image: url('https://yofitt.com/wp-content/uploads/2023/05/Green-BG.jpg?id=3988');">
-    <!-- Content of the green div -->
-  </div>
-</div>
-<!-- <div class="flex py-2 items-center justify-center my-5">
-  <img src="/cli_frontend/images/gymi-high-resolution-logo-black-transparent.png" alt="logo" class="w-[35%]">
-</div> -->
+
 <div class="flex-1 items-center justify-center py-10 mx-20 space-y-10 border-t border-zinc-500">
   <h2 class="text-4xl font-bold mb-4 text-center text-yellow-700">Summry</h2>
   <p class="text-lg font-semibold text-zinc-900 py-5 leading-8">
