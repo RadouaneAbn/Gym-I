@@ -34,28 +34,6 @@ async def home(request: Request):
         }
     )
 
-@app.get("/about")
-async def about(request: Request):
-    return templates.TemplateResponse(
-        "about.html",
-        {
-            "request": request,
-        }
-    )
-
-@app.get("/offers")
-async def home(request: Request):
-    all_gymes = md.storage.all(Gym).values()
-    for gym in all_gymes:
-        setattr(gym, "city", md.storage.get(City, gym.city_id).name)
-
-    return templates.TemplateResponse(
-        "offers.html",
-        {
-            "request": request,
-            "data": all_gymes,
-        }
-    )
 @app.get("/signin")
 async def about(request: Request):
     return templates.TemplateResponse(
