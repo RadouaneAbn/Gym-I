@@ -201,7 +201,7 @@ function changeMainContent(Content) {
       });
 
   });
-
+// Add event listener to the 'profile' button after DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM Loaded");
     var profileButton = document.getElementById('Profile');
@@ -216,7 +216,7 @@ function changeMainContent(Content) {
         changeMainContent(profileMain); // Call the function to change the content
       });
   });
-
+// Add event listener to the 'help' button after DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM Loaded");
     var helpButton = document.getElementById('Help');
@@ -231,7 +231,7 @@ function changeMainContent(Content) {
         changeMainContent(helpMain); // Call the function to change the content
       });
   });
-
+// Add event listener to the 'pro account' button after DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM Loaded");
     var proButton = document.getElementById('Pro');

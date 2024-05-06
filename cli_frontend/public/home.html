@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="font-[Poppins] bg-gray-200">
+<body class="font-[Poppins]">
   <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-gray-200 border-b-1 md:backdrop-blur-lg">
     <nav class="flex justify-between items-center w-[92%] mx-auto">
         <div class="flex py-2">
@@ -34,96 +34,218 @@
         <div
             class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
             <ul class="flex w-full md:flex-row flex-col md:items-center md:gap-[4vw] gap-5 justify-center">
-              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/'">
-                  <a class="font-medium" href="/">Home</a>
+              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#home'">
+                  <a class="font-medium" href="#home">Home</a>
               </li>
-              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/about'">
-                  <a class="font-medium" href="/about">About</a>
+              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#about'">
+                  <a class="font-medium" href="#about">About</a>
               </li>
-              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/offers'">
-                  <a class="font-medium" href="/offers">offers</a>
+              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#offers'">
+                  <a class="font-medium" href="#offers">Offers</a>
               </li>
-              <li class="duration-150 h-10 border-b-2 bg-gray-800 border-gray-500 hover:bg-gray-700 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/signin'">
+              <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '#developers'">
+                <a class="font-medium" href="#about">Developers</a>
+            </li>
+              <li class="duration-150 h-10 border-b-2 bg-zinc-900 border-gray-500 hover:bg-zinc-800 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/signin'">
                 <a  class="font-medium">sign up</a>
             </li>
           </ul>
         </div>
         <div class="sign-in flex items-center gap-6">
-          <a href="/signin"><button type="button" class="hidden md:flex duration-500 bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700" href="">Sign in</button></a>
+          <a href="/signin"><button type="button" class="hidden text-center justify-center items-center md:flex h-10 w-30 duration-500 bg-zinc-900 text-white px-5 py-2 rounded-full hover:bg-zinc-700">Sign in</button></a>
           <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
         </div>
 </header>
     <main id="Home">
-      <section class="container-mt-20 z-90 border-y-2 border-gray-400">
-        <div class="flex flex-col items-center z-10 md:flex-row">
-          <div class="relative">
-            <nav class="flex z-10 absolute rounded-full bg-white bg-opacity-60 mt-2 w-[35%] ml-[35%] mr-[30%]">
-              <section class="w-full md:h-10 h-5 flex items-center">
-                <!-- Search icon container -->
-                <span class="w-10 h-10 hidden md:flex items-center">
-                   <i class="uil uil-search-alt text-xl text-blue-800"></i>
-                </span>
-                <!-- Input -->
-                <input type="text" class="w-full bg-transparent h-full font-medium  ml-2 md:pl-2 focus:outline-none text-xs md:text-sm searchInput"
-                   placeholder="Search for your favorit Gym ...">
-                   <button
-                   class=" duration-500 w-28 h-full bg-gray-800 hover:bg-gray-700 flex justify-center items-center rounded-full text-white font-medium md:text-sm text-xs">Search</button>
-             </section>
-            </nav>
-            <img src="/cli_frontend/images/pexels-olly-3838389.jpg" alt="bg" class="max-w-full">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="bg-white lg:-mt-20 bg-opacity-30 rounded-lg lg:mr-[50%] md:mr-[30%] text-center">
-                <h1 class="lg:text-5xl md:text-3xl font-bold md:py-2 text-2xl text-gray-950">Your Personal Gym Concierge</h1>
-                <p class="px-1 md:px-0 text-sm md:text-2xl text-gray-950">
-                  Redefining Fitness Engagement. <br>Discover, 
-                  choose, and access top-tier gyms effortlessly. <br>
-                  Whether you're an owner showcasing your 
-                  offerings or an enthusiast seeking the perfect 
-                  workout spot, Gym&I has you covered.
-                </p>
-                <button 
-                class="bg-gray-900 hover:bg-gray-700 duration-500 my-2 text-sm md:text-xl z-30 w-[25%] md:w-[50%] h-5 md:h-10 text-gray-200 text-center rounded-full">
-                Register Now</button>
-              </div>
-            </div>
-          </div>
+      <section id="hero" class="container-mt-20 justify-center items-center relative border-b-2 border-gray-400 w-full h-screen overflow-hidden">
+        <div class="w-full h-full bg-black flex ">
+          <img src="/cli_frontend/images/danielle-cerullo-CQfNt66ttZM-unsplash.jpg" alt="bg" class="w-auto md:w-full opacity-35 h-screen object-cover object-bottom"> 
+        </div>
+        <div class="absolute inset-0 mx-auto px-10 flex flex-col items-center justify-center">
+          <h2 class="text-6xl py-4 text-white font-medium items-center justify-center">Your Personal <span class="font-bold">Gym </span>Concierge</h2>
+          <p class="text-xl py-4 w-[70%] font-serif text-white items-center justify-center md:text-center">Redefining Fitness Engagement. Discover, choose, and access top-tier gyms effortlessly. Whether you're an owner or an enthusiast, Gym&I has you covered.</p>
+          <a href="/register" class="py-5"><button type="button" class="flex h-16 w-64 duration-500 justify-center items-center text-center text-2xl border-4 border-zinc-500 bg-transparent text-white py-2 rounded-full hover:border-white hover:bg-white hover:bg-opacity-10 hover:shadow hover:shadow-white">Start Now <span class="text-4xl whitespace-pre "> ></span></button></a>
         </div>
       </section>
-      </div>
-
-      <section class="container-mt-20 bg-gradient-to-r from-black via-gray-100 to-black">
-        <div class="flex flex-row items-center z-20 py-2 rounded-full">
-          <div class="swiper tranding-slider relative flex flex-wrap">
-            <div class="swiper-wrapper">
-              {% for gym in data %}
-              <div class="swiper-slide tranding-slide w-[50%] h-full shadow-black">
-                <div class=" mb-3 md:w-full w-[100%] h-[100%] bg-gray-200 border bg-opacity-90 border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-900 image-{{ loop.index }}" id="{{ gym.id }}">
-                  <a class=" px-1 pt-1 w-[70%]">
-                    <img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="w-[100%]">
-                  </a>
-                  <div class="px-2 pb-4 w-full font-semibold text-center">
-                    <h5 class="">{{ gym.name }}</h5>
-                    <!-- <p>{{ gym.description }}</p> -->
-                  </div>
-                </div>
-              </div>
-                {% endfor %}
+      <section class="w-[80%] h-full py-10 mx-auto my-20 shadow-2xl rounded-2xl border-s-2 border-b-2 border-zinc-600 bg-cover bg-top" style="background-image: url(https://yofitt.com/wp-content/uploads/2023/03/Yofitt-Background-1.jpg?id=3057);">
+        <h1 class="text-5xl font-bold font-[Poppins] flex-1 justify-center items-center text-center">why Gym&I</h1>
+        <div class="w-full mx-auto p-10 md:flex flex-1 items-center justify-center">
+          <div class="text-center m-5 rounded-es-3xl shadow-xl bg-opacity-30 bg-zinc-300 border-2 border-zinc-300">
+            <h1 class="text-2xl pt-2 font-semibold text-yellow-700 underline">
+              anywhere
+            </h1>
+            <div class="justify-center items-center text-center px-10 py-5">
+              <p class="text-xl overflow-clip">
+                this a decreption for the gym&i benefits that will be full it after
+              </p>
             </div>
-            <div class="tranding-slider-control w-full flex items-center justify-between">
-              <a href="#" class="swiper-button-prev slider-arrow pr-36 pl-10">
-                <ion-icon name="arrow-back-outline" ></ion-icon>
-              </a>
-              <a href="#" class="swiper-button-next slider-arrow pl-36 pr-10">
-                <ion-icon name="arrow-forward-outline"></ion-icon>
-              </a>
-              <div class="swiper-pagination -mb-4"></div>
+          </div>
+          <div class="text-center m-5 rounded-se-3xl shadow-xl bg-opacity-30 bg-zinc-300 border-2 border-zinc-300">
+            <h1 class="text-2xl pt-2 font-semibold text-yellow-700 underline">
+              easy
+            </h1>
+            <div class="justify-center items-center text-center px-10 py-5">
+              <p class="text-xl overflow-clip">
+                this a decreption for the gym&i benefits that will be full it after
+              </p>
+            </div>
+          </div>
+          <div class="text-center m-5 rounded-es-3xl shadow-xl bg-opacity-30 bg-zinc-300 border-2 border-zinc-300">
+            <h1 class="text-2xl pt-2 font-semibold text-yellow-700 underline">
+              choise
+            </h1>
+            <div class="justify-center items-center text-center px-10 py-5">
+              <p class="text-xl overflow-clip">
+                this a decreption for the gym&i benefits that will be full it after
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <section id="about" class="mt-20">
+        <h1 class="mx-auto my-20 flex-1 justify-center items-center text-center text-5xl font-bold">About Gym&I</h1>
+        <div class="flex flex-col items-center z-10 md:flex-row">
+            <div class="relative">
+                <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
+                    <!-- Image -->
+                    <div class="flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
+                        <img src="/cli_frontend/images/alx-logo.png" alt="Gym&I Gym" class="w-[50%] rounded-full shadow-lg shadow-dark-3">
+                    </div>
+                    <!-- Description -->
+                    <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-l-2 lg:border-gray-400">
+                        <h2 class="text-3xl font-bold text-black mb-8 px-8">Gym&I - Redefining Fitness Engagement</h2>
+                        <p class="text-lg text-black font-semibold">
+                            We selected the Gym&I project as part of our fundamental studies in ALX Fullstack Software Engineering to gain practical experience in developing a web application that serves a real-world need. Gym&I's mission to redefine fitness engagement aligns with our interest in building user-centric applications that improve people's lives. Through this project, we aim to learn valuable skills in frontend and backend development, database management, and user experience design.
+                        </p>
+                        <p class="text-sm text-gray-900 mt-4">This project is the final project in our fundamental studies at ALX Fullstack Software Engineering.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="devlopers" class="z-90 container-mt-2">
+      <div class="flex justify-center text-center py-5 font-bold md:text-5xl text-3xl underline ">
+        <h6>Gym&I Developers</h6>
+      </div>
+      <div class="flex flex-col items-center z-10 md:flex-row">
+          <div class="relative">
+              <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
+                
+                  <div class="lg:hidden flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
+                    <img src="/cli_frontend/images/radoune_profile.jpeg" alt="Radouane" class="z-10 w-[25%] md:w-[35%] rounded-full shadow-lg shadow-dark-3">
+                  </div>
+                  <!-- Description -->
+                  <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-r-2 lg:border-gray-400">
+                    <h2 class="text-3xl font-bold text-black mb-4">Radouane Abounouas</h2>
+                    <p class="text-lg text-black font-semibold">
+                      Radouane played a key role in managing the 
+                      database and developing the Python backend. 
+                      His responsibilities included ensuring efficient data storage, 
+                      retrieval, and processing, as well as implementing backend APIs 
+                      for seamless interaction with the frontend. Radouane's expertise significantly 
+                      contributed to the project's 
+                      backend architecture and functionality( <a href="https://github.com/RadouaneAbn" target="_blank" class="underline text-red-800 text-sm">Github</a>).
+
+                    </p>
+                    </div>
+                  <!-- Image -->
+                  <div class="hidden lg:flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
+                      <img src="/cli_frontend/images/radoune_profile.jpeg" alt="Radouane" class="z-10 w-[50%] rounded-full shadow-lg shadow-dark-3">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <section class="z-90 py-4">
+    <div class="flex flex-col items-center z-10 md:flex-row">
+        <div class="relative">
+            <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
+                <!-- Image -->
+                <div class="flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
+                    <img src="/cli_frontend/images/halim.jpg" alt="halim" class="z-10 w-[25%] lg:w-[50%] md:w-[35%] rounded-full shadow-lg shadow-dark-3">
+                </div>
+                <!-- Description -->
+                <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-l-2 lg:border-gray-400">
+                    <h2 class="text-3xl font-bold text-black mb-4">Abdelhalim Elbouaami</h2>
+                    <p class="text-lg text-black font-semibold">
+                      Abdelhalim, alongside Radouane, contributed to 
+                      Flask development and DevOps practices. He was instrumental 
+                      in setting up the Flask framework, managing deployment pipelines, 
+                      and configuring servers for optimal performance. Additionally, 
+                      Abdelhalim made substantial contributions to frontend development, 
+                      leveraging his skills in HTML, CSS, jQuery, and Tailwind CSS 
+                      to craft an intuitive user 
+                      interface and enhance the overall user experience( <a href="https://github.com/Halim-bou" target="_blank" class="underline text-red-800 text-sm">Github</a>).
+                    </p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="border-b border-zinc-600 mx-20 my-10"></div>
+<section id="offers" class="container-mt-20 flex-1 mb-20 mt-10">
+  <div class="flex justify-center text-center py-10 font-bold md:text-5xl text-3xl underline ">
+    <h1>Gym&I Partners</h1>
+  </div>
+  <div class="flex flex-row items-center z-20 py-2 rounded-full">
+    <div class="swiper tranding-slider relative flex flex-wrap h-full">
+      <div class="swiper-wrapper">
+        {% for gym in data %}
+        <div class="swiper-slide tranding-slide w-[50%] h-full shadow-black">
+          <div class=" mb-3 md:w-full w-[100%] h-[100%] bg-zinc-400 border bg-opacity-40 border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-900 image-{{ loop.index }}" id="{{ gym.id }}">
+            <a class=" px-1 pt-1 w-[70%]">
+              <img src="{{ gym.profile_picture }}" alt="{{ gym.name }}" class="w-[100%]">
+            </a>
+            <div class="px-2 pb-4 w-full font-semibold text-center text-xl">
+              <h5 class="">{{ gym.name }}</h5>
+              <!-- <p>{{ gym.description }}</p> -->
             </div>
           </div>
         </div>
-      </section>  
+          {% endfor %}
+      </div>
+      <div class="tranding-slider-control w-full flex items-center justify-between">
+        <a href="#" class="swiper-button-prev slider-arrow pr-36 pl-10">
+          <ion-icon name="arrow-back-outline" ></ion-icon>
+        </a>
+        <a href="#" class="swiper-button-next slider-arrow pl-36 pr-10">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </a>
+        <div class="swiper-pagination -mb-4"></div>
+      </div>
+    </div>
+  </div>
+  
+</section> 
+<div class="h-screen w-[75%] mx-auto my-20 relative flex flex-col rounded-3xl border-e-2 border-b-2 border-zinc-600 bg-cover bg-center items-center justify-center shadow-2xl" style="background-image: url(https://yofitt.com/wp-content/uploads/2023/03/Yofitt-Background-1.jpg?id=3057);">
+  <div class="absolute inset-0 mx-auto my-auto flex items-center justify-center w-[55%] h-1/2 rounded-3xl border-b-2 border-e-2 border-green-900 shadow-green-900 shadow-lg bg-cover bg-top" style="background-image: url('https://yofitt.com/wp-content/uploads/2023/05/Green-BG.jpg?id=3988');">
+    <!-- Content of the green div -->
+  </div>
+</div>
+<!-- <div class="flex py-2 items-center justify-center my-5">
+  <img src="/cli_frontend/images/gymi-high-resolution-logo-black-transparent.png" alt="logo" class="w-[35%]">
+</div> -->
+<div class="flex-1 items-center justify-center py-10 mx-20 space-y-10 border-t border-zinc-500">
+  <h2 class="text-4xl font-bold mb-4 text-center text-yellow-700">Summry</h2>
+  <p class="text-lg font-semibold text-zinc-900 py-5 leading-8">
+    Gym&I stands as a pioneering initiative poised to redefine the fitness landscape, offering a 
+    novel approach for gym enthusiasts to discover, select, and access fitness facilities across Morocco. 
+    With Gy-me, individuals can seamlessly navigate through an array of fitness options, while gym owners gain enhanced visibility and operational efficiency.
+    This innovative platform caters to a diverse range of stakeholders within the Moroccan fitness industry. 
+    Gym owners benefit from Gy-me's capacity to boost visibility, attract new members, and streamline membership management. 
+    Meanwhile, users enjoy unparalleled flexibility in their fitness routines, with access to a wide network of gyms 
+    tailored to their preferences and lifestyle.
+    Furthermore, Gym&I holds significance for potential investors and partners seeking opportunities within the Moroccan
+    fitness market. As a beacon of innovation, Gym&I presents itself as an attractive avenue for collaboration and investment
+    in cutting-edge fitness technology solutions tailored to the local context.
+  </p>
+</div>
+      
 
     </main>
-
+    
+    </div>
 
   
     <script>
