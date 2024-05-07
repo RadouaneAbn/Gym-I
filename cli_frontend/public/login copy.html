@@ -23,7 +23,8 @@
     <title>Sign up</title>
 </head>
 <body>
-    <div id="profile_pic_container"
+    <form id="profile_pic_container" action="http://0.0.0.0:5002/uploadtest"
+    enctype="multipart/form-data"
     class="bg-gray-900 bg-opacity-50 w-full h-screen flex justify-center items-center">
     <!-- style="visibility: hidden;" -->
         <div 
@@ -37,34 +38,40 @@
             id="profile-pic" style="height: 300px; width: 300px;">
             <div class="mt-10 flex justify-between px-8 w-full">
                 <label style="width: 160px; height: 50px;" for="input-file" class=" bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">Upload image</label>
-                <label id="next" style="width: 160px; height: 50px;"  class="bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
+                <button type="submit" id="next" style="width: 160px; height: 50px;"  class="bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
                     Next
-                </label>
+                </button>
                 
             </div>
             <input name="file_upload" type="file" accept="image/*" id="input-file" style="display: none;">
         </div>
-    </div>
+    </form>
 
       <script>
 
         const profilePic = document.getElementById('profile-pic');
         const inputFile = document.getElementById('input-file');
         const next = document.getElementById('next');
-        
+
         inputFile.onchange = function () {
             profilePic.src = URL.createObjectURL(inputFile.files[0])
         }
 
-        next.onclick = function(e) {
-            e.preventDefault(); 
-            const dataForm = new FormData();
-            dataForm.append('file_upload', inputFile.files[0]);
-            fetch('http://0.0.0.0:5002/uploadtest', {
-            method: 'POST',
-            body: dataForm,
-        })
-        }
+        
+
+
+    //     next.onclick = function() {
+    //         // const dataForm = new FormData();
+    //         // e.preventDefault();
+    //         // dataForm.append('image', inputFile.files[0]);
+    //         fetch('http://0.0.0.0:5002/uploadtest', {
+    //         method: 'POST',
+    //         body: inputFile.files[0],
+    //         headers: {
+    //             'Accept': 'application/json',
+    //   }
+    //     })
+    //     }
 
             
       </script>

@@ -104,21 +104,21 @@ async def client_login(info: ClientLogin):
     })
     return {"access_token": token, "token_type": "bearer"}
 
-# @app.post("/user/gymes")
-# async def home(request: Request, page: int = Query(1, description="Page number", gt=0)):
-#     all_gymes = md.storage.get_page(Gym, page)
-#     for gym in all_gymes:
-#         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
-#     return templates.TemplateResponse(
-#         "index.html",
-#         {
-#             "request": request,
-#             "cities": storage.all_list(City),
-#             "amenities": storage.all_list(Amenity),
-#             "data": all_gymes,
-#             "count": storage.pages_count(Gym)
-#         }
-#     )
+@app.get("/user/gymes_test")
+async def home_test(request: Request, page: int = Query(1, description="Page number", gt=0)):
+    all_gymes = md.storage.get_page(Gym, page)
+    for gym in all_gymes:
+        setattr(gym, "city_name", storage.get(City, gym.city_id).name)
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "cities": storage.all_list(City),
+            "amenities": storage.all_list(Amenity),
+            "data": all_gymes,
+            "count": storage.pages_count(Gym)
+        }
+    )
 
 @app.get("/profile")
 async def about(request: Request):
@@ -143,31 +143,6 @@ async def get_gym_info(gym_id: str, request: Request):
             "city_name": storage.get(City, gym.city_id).name
         }
     )
-
-# def token_required(func):
-#     @wraps(func)
-#     def decorated(request: Request, form_data: str = Form(...), *args, **kwargs):
-#         token = form_data.get("Authorization")
-#         print(token)
-#         if not token:
-#             print("no token here")
-#             return RedirectResponse(url="/signin")
-#         try:
-#             if token.startswith("Bearer "):
-#                 token = token[7:]
-#             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-#             # print("payload:", payload)
-#             email = payload.get("sub")
-#             exp = payload.get("exp")
-#             # print(datetime.utcfromtimestamp(exp), datetime.utcnow())
-#             if datetime.utcfromtimestamp(exp) <= datetime.utcnow():
-#             # if exp <= datetime.utcnow.timestamp():
-#                 raise HTTPException(status_code=401, detail="Token expired")
-#         except JWTError:
-#             raise HTTPException(status_code=401, detail="Invalid token")
-#     return decorated
-
-
 
 def check(token):
     if not token:
@@ -200,6 +175,17 @@ async def home(request: Request):
             "cities": storage.all_list(City),
             "amenities": storage.all_list(Amenity),
             "count": storage.pages_count(Gym)
-            # "data": all_gymes,
+        }
+    )
+
+@app.get("/tp")
+async def tp(request: Request):
+    return templates.TemplateResponse(
+        "login.html",
+        {
+            "request": request,
+            "cities": storage.all_list(City),
+            "amenities": storage.all_list(Amenity),
+            "count": storage.pages_count(Gym)
         }
     )

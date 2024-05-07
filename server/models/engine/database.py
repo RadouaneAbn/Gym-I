@@ -122,6 +122,7 @@ class DBStorage:
         """ This method checks if the user email is already in the database
             'checks for duplicates'
         """
+        print("email ==>", email)
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()

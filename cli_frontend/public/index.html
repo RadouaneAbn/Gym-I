@@ -247,11 +247,12 @@
   <div class="container mx-auto py-8 px-6">
       <div id="gym_container" class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 lg:pt-5">
         {% for gym in data %}
-        <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+        <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg" style="width: 300px; height: 500px;">
           <div
             class="relative mx-4 mt-4 h-44 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
             <img
-              class="h-[100%] w-full"
+              style="width: auto; height: auto;"
+              class=""
               src="{{ gym.profile_picture }}"
               alt="ui/ux review check" />
             <div

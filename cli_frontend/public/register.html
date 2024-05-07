@@ -20,69 +20,65 @@
     color: #ce0e00;
 }
     </style>
-    <title>Sign in</title>
+    <title>Sign up</title>
 </head>
 <body class="font-[Poppins] bg-gray-200">
+  <div id="register-form-container" style="display: block;">
+
     <header class="md:sticky top-0 z-20 bg-white bg-opacity-50 border-b-1 md:backdrop-blur-lg border-b-2 border-gray-500 border-opacity-10">
-        <nav class="flex justify-between items-center w-[92%] mx-auto">
+      <nav class="flex justify-between items-center w-[92%] mx-auto">
             <div class="flex py-2">
                 <a href="/"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
               </div>
-            <div
-                class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+              <div
+              class="nav-links z-20 duration-500 md:static absolute md:bg-transparent bg-gray-200 bg-opacity-90 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
                 <ul class="flex w-full md:flex-row flex-col md:items-center md:gap-[4vw] gap-5 justify-center">
                     <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/'">
-                        <a class="font-medium" href="/">Home</a>
+                      <a class="font-medium" href="/">Home</a>
                     </li>
                     <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/about'">
                         <a class="font-medium" href="/about">About</a>
-                    </li>
-                    <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/offers'">
+                      </li>
+                      <li class="duration-500 h-10 border-b-2 border-gray-500 hover:bg-gray-200 rounded-full text-center pt-2 hover:text-gray-500 md:border-0 md:hover:bg-transparent" onclick="window.location.href = '/offers'">
                         <a class="font-medium" href="/offers">offers</a>
-                    </li>
-                    <li class="duration-150 h-10 border-b-2 bg-[#333] hover:bg-[#222]  border-gray-500 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/signin'">
-                      <a  class="font-medium">sign in</a>
-                  </li>
-                </ul>
+                      </li>
+                      <li class="duration-150 h-10 border-b-2 bg-[#333] hover:bg-[#222]  border-gray-500 rounded-full text-center pt-2 text-gray-100 hover:text-gray-200 md:hidden" onclick="window.location.href = '/signin'">
+                        <a  class="font-medium">sign in</a>
+                      </li>
+                    </ul>
             </div>
             <div class="flex items-center gap-6">
-                <a href="/signin"><button type="button" class="hidden md:flex duration-500 bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700">Sign in</button></a>
-                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
+              <a href="/signin"><button type="button" class="hidden md:flex duration-500 bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700">Sign in</button></a>
+              <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
     </header>
     <main class="h-full w-auto bg-cover bg-center"  style="background-image: url('/cli_frontend/images/9213.jpg');">
-        <div class="max-w-4xl mx-auto font-[sans-serif] text-[#333] px-6 py-3 bg-gray-200 bg-opacity-90">
+      <div class="max-w-4xl mx-auto font-[sans-serif] text-[#333] px-6 py-3 bg-gray-200 bg-opacity-90">
         <div class="text-center mb-16">
           <a href="javascript:void(0)"><img
             src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="logo" class='w-52 inline-block' />
           </a>
           <h4 class="text-base font-semibold mt-3">Sign up into your account</h4>
         </div>
-          <div class="grid sm:grid-cols-2 gap-y-7 gap-x-12">
-            <div>
-              <b class="text-sm mb-2 block">First Name</b>
-              <input id="first_name" name="first name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter name" autocomplete="first name"/>
-            </div>
-            <div>
-              <b class="text-sm mb-2 block">Last Name</b>
-              <input id="last_name" name="last name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter last name" />
-            </div>
-            <div>
-              <b class="text-sm mb-2 block">Email</b>
-              <input id="email" name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 border-[2px] rounded-md outline-gray-900 field" placeholder="Enter email" autocomplete="email"/>
-              <p class="err-email">&nbsp;</p>
-            </div>
-            <div>
-              <b class="text-sm mb-2 block">Mobile No.</b>
-              <input id="phone-number" name="phone number" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter mobile number (optional)" />
-            </div>
-            <div class="cities">
-              <b>Choose a city:</b>
-              <select name="cities" id="cities-list" >
-                  <option id="None">No specific city</option>
-              </select>
+        <div class="grid sm:grid-cols-2 gap-y-7 gap-x-12">
+          <div>
+            <b class="text-sm mb-2 block">First Name</b>
+            <input id="first_name" name="first name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter name" autocomplete="first name"/>
           </div>
-            <div>
+          <div>
+            <b class="text-sm mb-2 block">Last Name</b>
+            <input id="last_name" name="last name" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter last name" />
+          </div>
+          <div>
+            <b class="text-sm mb-2 block">Email</b>
+            <input id="email" name="email" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 border-[2px] rounded-md outline-gray-900 field" placeholder="Enter email" autocomplete="email"/>
+            <p class="err-email">&nbsp;</p>
+          </div>
+          <div>
+            <b class="text-sm mb-2 block">Mobile No.</b>
+            <input id="phone-number" name="phone number" type="text" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter mobile number (optional)" />
+          </div>
+          <div>
               <b class="text-sm mb-2 block">Password</b>
               <input id="pwd" name="password" type="password" class="bg-gray-100 w-full text-sm px-4 py-3.5 rounded-md outline-gray-900 field" placeholder="Enter password"/>
             </div>
@@ -98,8 +94,35 @@
               Sign up
             </button>
           </div>
-      </div>
+        </div>
     </main>
+  </div>
+    
+    
+  <div id="profile_pic_container" style="display: none;"
+  class="bg-gray-900 bg-opacity-50 w-full h-screen flex justify-center items-center">
+  <!-- style="visibility: hidden;" -->
+      <div 
+      style="width: 500px; height: 600px;"
+      class="bg-gray-100 p-4 rounded-md text-center flex flex-col justify-center items-center">
+          <h2 class="text-xl font-medium">Upload Your Profile Picture</h2>
+          <img
+          src="https://i.ibb.co/QCynjmj/no-pic.png"
+          class="rounded-full mt-10 mb-8 border-2 border-gray-500"
+          alt="profile picture"
+          id="profile-pic" style="height: 300px; width: 300px;">
+          <div class="mt-10 flex justify-between px-8 w-full">
+              <label style="width: 160px; height: 50px;" for="input-file" class=" bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">Upload image</label>
+              <label id="next-btn" style="width: 160px; height: 50px;"  class="bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
+                  Next
+              </label>
+              
+          </div>
+          <input type="file" accept="image/*" id="input-file" style="display: none;">
+      </div>
+    </div>
+
+
     <script>
         const navLinks = document.querySelector('.nav-links')
         function onToggleMenu(e){

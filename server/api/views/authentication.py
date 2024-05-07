@@ -31,11 +31,6 @@ def check_token(authorization: str = Header(None)):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         # print("payload:", payload)
         email = payload.get("sub")
-        exp = payload.get("exp")
-        print(datetime.utcfromtimestamp(exp), datetime.utcnow())
-        if datetime.utcfromtimestamp(exp) <= datetime.utcnow():
-        # if exp <= datetime.utcnow.timestamp():
-            raise HTTPException(status_code=401, detail="Token expired")
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
 

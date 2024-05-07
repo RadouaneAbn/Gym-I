@@ -73,7 +73,6 @@ function requestLogin() {
             // console.log('/' + user.id)
             localStorage.setItem('access_token', token.access_token)
             localStorage.setItem('token_type', 'Bearer')
-            // redirectToMeOrLogin();
             window.location.href = '/user/gymes';
         },
         statusCode: {
@@ -94,7 +93,6 @@ function requestLogin() {
           },
     })
 }
-
 
 function redirectToMeOrLogin() {
     const token = localStorage.getItem('_token');

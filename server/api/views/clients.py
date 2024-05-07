@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile, Form, File
 from server.models.client import Client
 from server.models import storage
 from fastapi import FastAPI, HTTPException
@@ -16,9 +16,12 @@ from typing_extensions import Annotated
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
-
+import requests
+from server.models.engine.secure import verify_password
 
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+IMG_BB_TOKEN = "dfcbe0e16596fd0c2dbb83c94c90718b"
+IMG_BB_URL = "https://api.imgbb.com/1/upload"
 
 
 SECRET_KEY = "4f0e2935cdf27d24222357163158cb6d481bc67c5e15c2eaa1c5982ecf3e80b1"
@@ -39,11 +42,6 @@ async def get_user(client_id: str):
         raise HTTPException(status_code=404, detail="Not Found")
     return client.to_dict(True)
 
-@client_router.post("/clients/")
-async def create_client(client: ClientModel):
-    new_client = Client(**client.__dict__)
-    new_client.save()
-
 @client_router.put("/clients/{client_id}")
 async def update_user(client_id: str, client: ClientModelPUT):
     ignore = ["email", "id", "created_id", "updated_at"]
@@ -60,8 +58,7 @@ async def update_user(client_id: str, client: ClientModelPUT):
 @client_router.put("/clients/password/{client_id}")
 async def update_user_password(client_id: str, client: ClientModelPWD):
     target_client = storage.get(Client, client_id)
-    hashed_new_password = md5(client.old_password.encode()).hexdigest()
-    if target_client.password != hashed_new_password:
+    if verify_password(client.old_password, target_client.password):
         raise HTTPException(status_code=401, detail="Wrong password")
     
     target_client.password = client.new_password
@@ -97,14 +94,13 @@ def authenticate_user(email, password):
     if not user:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND,
                             detail="Email does not exist")
-    if not Hash.validate_pwd(password, user.password):
+    if not verify_password(password, user.password):
         raise HTTPException(status_code=HTTP_401_UNAUTHORIZED,
                             detail="Incorrect password")
     return user
 
 def create_access_token(info: dict, expires_delta: timedelta = timedelta(minutes=15)):
     data = info.copy()
-    # print("data = ", data)
     expire = datetime.utcnow() + timedelta(minutes=60)
     data.update({"exp": expire})
     # print(expire)
@@ -131,3 +127,45 @@ async def get_current_user(token: Annotated[str, Depends(oauth_2_scheme)]):
     except JWTError:
         raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
+
+# @client_router.post("upload_profile_picture")
+# async def upload_picture(img: UploadFile, token:str = Depends)
+
+@client_router.post("/uploadtest")
+async def testupload(file_upload: UploadFile):
+    file_upload = file_upload.file.read()
+    payload = {
+        "key": IMG_BB_TOKEN,
+        "image": file_upload
+    }
+    res = requests.post(IMG_BB_URL, files={"image": file_upload}, data=payload)
+    print(res.json()["data"]["display_url"])
+
+@client_router.post("/clients/")
+async def create_client(file_upload: UploadFile = None,
+                        first_name: str = Form(...),
+                        last_name: str = Form(...),
+                        email: str = Form(...),
+                        password: str = Form(...)):
+    
+    new_client = Client(**{
+        "first_name": first_name,
+        "last_name": last_name,
+        "email": email,
+        "password": password
+    })
+    # print("client created")
+    if file_upload:
+        # print("pic found")
+        img = file_upload.file.read()
+        # print("pic read")
+        payload = {
+            "key": IMG_BB_TOKEN,
+            "image": img
+        }
+        res = requests.post(IMG_BB_URL, files={"image": img}, data=payload)
+        # print("request made")
+        new_client.profile_picture = res.json()["data"]["display_url"]
+
+    # print(new_client)
+    new_client.save()
