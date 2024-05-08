@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <script src="/cli_frontend/src/scripts/auth.js"></script>
   <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
@@ -21,6 +22,7 @@
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
   <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
   <!-- <script src="frontend/scripts/swiper.js"></script> -->
+  <script src="/cli_frontend/src/scripts/gymPreview.js"></script>
   <title>{{ gym.name }}</title>
 </head>
 
@@ -32,10 +34,13 @@
               <a href="/user/gymes"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
           </div>
           <div class="group relative right-3">
-          <img alt="tania andrew"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-          class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
-          data-popover-target="profile-menu" />
+
+              <img alt="profile picture"
+              id="profile_picture"
+              src="https://i.ibb.co/whS5nPK/no-pic.png&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+              class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
+              data-popover-target="profile-menu" />
+
         <ul role="menu" data-popover="profile-menu" data-popover-placement="bottom"
           class="absolute hidden group-hover:flex right-1 z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
           <a href="/profile"><button role="menuitem"

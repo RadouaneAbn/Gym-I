@@ -99,24 +99,7 @@ function start() {
         }
 
         if (valid) {
-
             popForProfilePic(firsNname.value, lastName.value, email.value, pwd.value);
-            // $.ajax({
-            //     type: 'POST',
-            //     url: 'http://0.0.0.0:5002/clients/',
-            //     contentType: 'application/json',
-            //     data: JSON.stringify({
-            //         "first_name": firsNname.value,
-            //         "last_name": lastName.value,
-            //         "email": email.value,
-            //         "password": pwd.value
-            //     },),
-            //     success: function (status) {
-            //         if (status) { $('p.err').html('&nbsp;') }
-            //         else { $('p.err').text('email already exists') }
-            //     }
-            // })
-            // window.location.href = '/';
         }
     })
 
@@ -172,14 +155,6 @@ function popForProfilePic(firstName, lastName, email, passWord) {
         // console.log(firstName)
         const img = inputFile.files[0];
         const dataForm = new FormData();
-
-        // const data = {
-        //     'first_name': firstName,
-        //     'last_name': lastName,
-        //     'email': email,
-        //     'password': passWord
-        // }
-        // dataForm.append('client', data)
         dataForm.append('first_name', firstName);
         dataForm.append('last_name', lastName);
         dataForm.append('email', email);
@@ -196,13 +171,12 @@ function popForProfilePic(firstName, lastName, email, passWord) {
             body: dataForm,
         })
         .then(data => {
-            console.log(data);
-            // if (data.ok) {
-            //     window.location.href = '/user/gymes';
-            // }
+            // console.log(data);
+            if (data.ok) {
+                // console.log('ok');
+                window.location.href = '/signin';
+            }
         })
-        
-        
     }
 
 

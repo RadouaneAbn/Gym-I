@@ -11,6 +11,7 @@ from server.api.views.gym_filter import gym_filter
 from server.api.views.authentication import auth_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, JSONResponse
+from server.api.views.users import user_router
 
 
 app = FastAPI()
@@ -21,6 +22,7 @@ app.include_router(city_router)
 app.include_router(gym_router)
 app.include_router(gym_filter)
 app.include_router(auth_router)
+app.include_router(user_router)
 
 app.add_middleware(
     CORSMiddleware,

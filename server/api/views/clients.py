@@ -8,7 +8,7 @@ from server.api.schemas.client_schema import (
 from server.api.schemas.token_schema import *
 from hashlib import md5
 from server.models.hash import Hash
-from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED
+from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_201_CREATED
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 # from server.models.engine.secure import oauth_2_scheme
@@ -18,10 +18,12 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from server.models.engine.secure import verify_password
+from server.models.extra import resize_128
 
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 IMG_BB_TOKEN = "dfcbe0e16596fd0c2dbb83c94c90718b"
 IMG_BB_URL = "https://api.imgbb.com/1/upload"
+IMG_SIZE = (128, 128)
 
 
 SECRET_KEY = "4f0e2935cdf27d24222357163158cb6d481bc67c5e15c2eaa1c5982ecf3e80b1"
@@ -154,18 +156,21 @@ async def create_client(file_upload: UploadFile = None,
         "email": email,
         "password": password
     })
-    # print("client created")
     if file_upload:
-        # print("pic found")
         img = file_upload.file.read()
-        # print("pic read")
+        img_128 = resize_128(img)
         payload = {
-            "key": IMG_BB_TOKEN,
-            "image": img
+            "key": IMG_BB_TOKEN
+        }
+        payload_resized_img = {
+            "key": IMG_BB_TOKEN
         }
         res = requests.post(IMG_BB_URL, files={"image": img}, data=payload)
-        # print("request made")
-        new_client.profile_picture = res.json()["data"]["display_url"]
+        res_resize = requests.post(IMG_BB_URL, files={"image": img_128}, data=payload_resized_img)
+
+        new_client.profile_picture = res_resize.json()["data"]["display_url"]
+        new_client.profile_picture_original = res.json()["data"]["display_url"]
 
     # print(new_client)
     new_client.save()
+    return {"detail": "User created successfuly"}, HTTP_201_CREATED

@@ -3,17 +3,65 @@ const cityIds = [];
 let page, currentPage;
 const curIcon = 'relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md transition-all bg-gray-700';
 const autIcon = 'prev_vis relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none';
+// const token = localStorage.getItem('access_token');
+
 
 document.addEventListener("DOMContentLoaded", async function() {
   // const inputFields = document.querySelectorAll("[data-hs-input-number-input]");
   // const buttons = document.querySelectorAll('.btn-gym_id');
-  const cityBtns = document.querySelectorAll('.city_btn');
-  const amenityBtns = document.querySelectorAll('.amenity_btn');
+  // const cityBtns = document.querySelectorAll('.city_btn');
+  // const amenityBtns = document.querySelectorAll('.amenity_btn');
+  const profilePicture = document.getElementById('profile_picture')
+
+  getUserInfo(profilePicture);
   setPriceBtns();
   loadPage(1);
   paginationControl();
   filterDetector();
+  logout();
 })
+
+function logout() {
+  const logOutBtn = document.getElementById('logout-btn');
+
+  logOutBtn.onclick = function () {
+    localStorage.removeItem('access_token');
+    window.location.href = '/signin';
+  }
+}
+
+// async function getUserInfo(profilePicture) {
+//   const info = await getUser();
+//   const user = info.user_info;
+
+//   profilePicture.src = user.profile_picture
+// }
+
+// async function getUser() {
+//   const response = await fetch('http://0.0.0.0:5002/users/', {
+//     method: 'GET',
+//     headers: {
+//       'Authorization': `Bearer ${token}`,
+//     }
+//   })
+//   return await response.json();
+// };
+
+function getUserInfo(profilePicture) {
+  fetch('http://0.0.0.0:5002/users/', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    user = data.user_info;
+    profilePicture.src = user.profile_picture;
+  })
+}
+
+
 
 function filterDetector() {
   const cityBtns = document.querySelectorAll('.city_btn');

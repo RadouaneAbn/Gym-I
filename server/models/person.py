@@ -14,6 +14,7 @@ class Person(BaseModel):
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     profile_picture = Column(String(128), nullable=True)
+    profile_picture_original = Column(String(128), nullable=True)
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
