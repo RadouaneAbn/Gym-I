@@ -21,4 +21,4 @@ auth_router = APIRouter()
 
 @auth_router.get("/token_check/")
 async def client_login(user: Client = Depends(check_token)):
-    return {"user": user}
+    return {"user": user.to_dict()}

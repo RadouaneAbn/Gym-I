@@ -18,17 +18,17 @@ document.addEventListener("DOMContentLoaded", async function() {
   loadPage(1);
   paginationControl();
   filterDetector();
-  logout();
+  // logout();
 })
 
-function logout() {
-  const logOutBtn = document.getElementById('logout-btn');
+// function logout() {
+//   const logOutBtn = document.getElementById('logout-btn');
 
-  logOutBtn.onclick = function () {
-    localStorage.removeItem('access_token');
-    window.location.href = '/signin';
-  }
-}
+//   logOutBtn.onclick = function () {
+//     localStorage.removeItem('access_token');
+//     window.location.href = '/signin';
+//   }
+// }
 
 // async function getUserInfo(profilePicture) {
 //   const info = await getUser();

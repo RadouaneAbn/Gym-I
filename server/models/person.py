@@ -13,8 +13,8 @@ class Person(BaseModel):
     last_name = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
-    profile_picture = Column(String(128), nullable=True)
-    profile_picture_original = Column(String(128), nullable=True)
+    profile_picture = Column(String(128), nullable=True, default="https://i.ibb.co/bmSHH9j/no-profile-128.png")
+    profile_picture_original = Column(String(128), nullable=True, default="https://i.ibb.co/whS5nPK/no-pic.png")
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
