@@ -3,8 +3,8 @@
 
 from server.models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
 from hashlib import md5
+from server.models.engine.secure import hash_password
 
 
 class Person(BaseModel):
@@ -13,6 +13,8 @@ class Person(BaseModel):
     last_name = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
+    profile_picture = Column(String(128), nullable=True, default="https://i.ibb.co/bmSHH9j/no-profile-128.png")
+    profile_picture_original = Column(String(128), nullable=True, default="https://i.ibb.co/whS5nPK/no-pic.png")
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
@@ -21,5 +23,5 @@ class Person(BaseModel):
     def __setattr__(self, name, value):
         """sets a password with md5 encryption"""
         if name == "password":
-            value = md5(value.encode()).hexdigest()
+            value = hash_password(value)
         super().__setattr__(name, value)

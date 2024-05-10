@@ -20,6 +20,8 @@ class BaseModel:
     updated_at = Column(DateTime, default=datetime.now)
 
     def set_datetime(self, date_time):
+        """ This function sets the time if an attribute created_at/updated_at
+            is found or sets it to now """
         if date_time and isinstance(date_time, str):
             return datetime.strptime(date_time, time)
         return datetime.now()
@@ -49,19 +51,26 @@ class BaseModel:
         server.models.storage.new(self)
         server.models.storage.save()
 
-    def to_dict(self, show_password=False):
+    def to_dict(self, show_password=False, pop=[]):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
+        for item in pop:
+            new_dict.pop(item, None)
+
         if "created_at" in new_dict:
             new_dict["created_at"] = new_dict["created_at"].strftime(time)
         if "updated_at" in new_dict:
             new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
         new_dict["__class__"] = self.__class__.__name__
-        if "_sa_instance_state" in new_dict:
-            del new_dict["_sa_instance_state"]
-        if show_password == False:
-            if "password" in new_dict:
-                del new_dict["password"]
+        new_dict.pop("_sa_instance_state", None)
+        new_dict.pop("password", None)
+        # new_dict.pop("amenities", None)
+        
+        # if "_sa_instance_state" in new_dict:
+        #     del new_dict["_sa_instance_state"]
+        # if not show_password:
+        #     if "password" in new_dict:
+        #         del new_dict["password"]
         return new_dict
 
     def delete(self):

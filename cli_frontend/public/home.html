@@ -10,7 +10,7 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- ENDFONT -->
     <!-- SWIPER SCRIPTS -->
@@ -116,22 +116,37 @@
       <section id="about" class="mt-20">
         <h1 class="mx-auto my-20 flex-1 justify-center items-center text-center text-5xl font-bold">About Gym&I</h1>
         <div class="flex flex-col items-center z-10 md:flex-row">
-            <div class="relative">
-                <div class="container-mt-2 flex flex-col lg:flex-row items-center justify-center bg-cover bg-center py-10">
-                    <!-- Image -->
-                    <div class="flex justify-center items-center lg:w-[50%] lg:pr-3 relative">
-                        <img src="/cli_frontend/images/alx-logo.png" alt="Gym&I Gym" class="w-[50%] rounded-full shadow-lg shadow-dark-3">
-                    </div>
-                    <!-- Description -->
-                    <div class="lg:w-1/2 lg:pl-16 mt-8 lg:mt-0 text-center lg:text-left px-4 lg:border-l-2 lg:border-gray-400">
-                        <h2 class="text-3xl font-bold text-black mb-8 px-8">Gym&I - Redefining Fitness Engagement</h2>
-                        <p class="text-lg text-black font-semibold">
-                            We selected the Gym&I project as part of our fundamental studies in ALX Fullstack Software Engineering to gain practical experience in developing a web application that serves a real-world need. Gym&I's mission to redefine fitness engagement aligns with our interest in building user-centric applications that improve people's lives. Through this project, we aim to learn valuable skills in frontend and backend development, database management, and user experience design.
-                        </p>
-                        <p class="text-sm text-gray-900 mt-4">This project is the final project in our fundamental studies at ALX Fullstack Software Engineering.</p>
-                    </div>
-                </div>
+          <div class="relative">
+            <nav class="flex z-10 absolute rounded-full bg-white bg-opacity-60 mt-2 w-[35%] ml-[35%] mr-[30%]">
+              <section class="w-full md:h-10 h-5 flex items-center">
+                <!-- Search icon container -->
+                <span class="w-10 h-10 hidden md:flex items-center">
+                   <i class="uil uil-search-alt text-xl text-blue-800"></i>
+                </span>
+                <!-- Input -->
+                <input type="text" class="w-full bg-transparent h-full font-medium  ml-2 md:pl-2 focus:outline-none text-xs md:text-sm searchInput"
+                   placeholder="Search for your favorit Gym ...">
+                   <button
+                   class=" duration-500 w-28 h-full bg-gray-800 hover:bg-gray-700 flex justify-center items-center rounded-full text-white font-medium md:text-sm text-xs">Search</button>
+             </section>
+            </nav>
+            <img src="/cli_frontend/images/pexels-olly-3838389.jpg" alt="bg" class="max-w-full">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-white lg:-mt-20 bg-opacity-30 rounded-lg lg:mr-[50%] md:mr-[30%] text-center">
+                <h1 class="lg:text-5xl md:text-3xl font-bold md:py-2 text-2xl text-gray-950">Your Personal Gym Concierge</h1>
+                <p class="px-1 md:px-0 text-sm md:text-2xl text-gray-950">
+                  Redefining Fitness Engagement. <br>Discover, 
+                  choose, and access top-tier gyms effortlessly. <br>
+                  Whether you're an owner showcasing your 
+                  offerings or an enthusiast seeking the perfect 
+                  workout spot, Gym&I has you covered.
+                </p>
+                <button 
+                class="bg-gray-900 hover:bg-gray-700 duration-500 my-2 text-sm md:text-xl z-30 w-[25%] md:w-[50%] h-5 md:h-10 text-gray-200 text-center rounded-full">
+                <a href="/register">Register Now</a></button>
+              </div>
             </div>
+          </div>
         </div>
     </section>
     <!-- END OF ABOUT -->

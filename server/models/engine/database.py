@@ -16,6 +16,8 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
+from math import ceil
+
 
 load_dotenv()
 
@@ -40,13 +42,15 @@ class DBStorage:
                 GYMNI_POST_USER,
                 GYMNI_POST_PWD,
                 GYMNI_POST_HOST,
-                GYMNI_POST_DB
-    )
-)
+                GYMNI_POST_DB))
+
         if GYMNI_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def clean(self):
+        """ This funtion deletes all tables from the database and
+            then create them again
+        """
         Base.metadata.drop_all(self.__engine)
         self.reload()
 
@@ -60,6 +64,11 @@ class DBStorage:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
         return (new_dict)
+
+
+    def all_list(self, cls=None):
+        """query on the current database session"""
+        return (self.__session.query(cls).all())
 
     def new(self, obj):
         """add the object to the current database session"""
@@ -108,13 +117,38 @@ class DBStorage:
             cls.id == id
         ).first()
         return inst
-    
+
     def email_exists(self, cls, email):
+        """ This method checks if the user email is already in the database
+            'checks for duplicates'
+        """
+        print("email ==>", email)
+        inst = self.__session.query(cls).filter(
+            cls.email == email
+        ).first()
+        if inst:
+            return False
+        return True
+
+    def get_page(self, cls, page = 1):
+        offset = (page - 1) * 12
+        limit = 12
+        page_insts = self.__session.query(cls)\
+            .offset(offset).limit(limit).all()
+        return page_insts
+
+    def gymes_in_cities(self, city_ids):
+        all_gymes = self.__session.query(Gym).filter(
+            Gym.city_id.in_(city_ids)
+        ).all()
+        return all_gymes
+    
+    def get_user(self, cls, email):
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()
         return inst
-
-
-    def get_item_by_id(self, cls, id):
-        pass
+    
+    def pages_count(self, cls):
+        count = self.__session.query(cls).count()
+        return ceil(count / 12)

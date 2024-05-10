@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
+  <script src="/cli_frontend/src/scripts/auth.js"></script>
+  <script src="/cli_frontend/src/scripts/profilePicture.js"></script>
   <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
@@ -16,11 +18,12 @@
   
   <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="/cli_frontend/src/main.js"></script>
+  <!-- <script src="/cli_frontend/src/main.js"></script> -->
   <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
   <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
   <!-- <script src="frontend/scripts/swiper.js"></script> -->
+  <script src="/cli_frontend/src/scripts/gymPreview.js"></script>
   <title>{{ gym.name }}</title>
 </head>
 
@@ -32,10 +35,13 @@
               <a href="/user/gymes"><img class="w-28 cursor-pointer" src="/cli_frontend/images/gymi-high-resolution-logo-transparent.png" alt="..."></a>
           </div>
           <div class="group relative right-3">
-          <img alt="tania andrew"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-          class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
-          data-popover-target="profile-menu" />
+
+              <img alt="profile picture"
+              id="profile_picture"
+              src="https://i.ibb.co/whS5nPK/no-pic.png&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+              class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
+              data-popover-target="profile-menu" />
+
         <ul role="menu" data-popover="profile-menu" data-popover-placement="bottom"
           class="absolute hidden group-hover:flex right-1 z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
           <a href="/profile"><button role="menuitem"
@@ -83,17 +89,18 @@
             </p>
           </button></a>
           <hr class="my-2 border-blue-gray-50" role="menuitem" />
-          <a href="/"></a><button role="menuitem"
-            class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-            <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M1 0C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V13C0 13.2652 0.105357 13.5196 0.292893 13.7071C0.48043 13.8946 0.734784 14 1 14C1.26522 14 1.51957 13.8946 1.70711 13.7071C1.89464 13.5196 2 13.2652 2 13V1C2 0.734784 1.89464 0.48043 1.70711 0.292893C1.51957 0.105357 1.26522 0 1 0ZM11.293 9.293C11.1108 9.4816 11.01 9.7342 11.0123 9.9964C11.0146 10.2586 11.1198 10.5094 11.3052 10.6948C11.4906 10.8802 11.7414 10.9854 12.0036 10.9877C12.2658 10.99 12.5184 10.8892 12.707 10.707L15.707 7.707C15.8945 7.51947 15.9998 7.26516 15.9998 7C15.9998 6.73484 15.8945 6.48053 15.707 6.293L12.707 3.293C12.6148 3.19749 12.5044 3.12131 12.3824 3.0689C12.2604 3.01649 12.1292 2.9889 11.9964 2.98775C11.8636 2.9866 11.7319 3.0119 11.609 3.06218C11.4861 3.11246 11.3745 3.18671 11.2806 3.2806C11.1867 3.3745 11.1125 3.48615 11.0622 3.60905C11.0119 3.73194 10.9866 3.86362 10.9877 3.9964C10.9889 4.12918 11.0165 4.2604 11.0689 4.3824C11.1213 4.50441 11.1975 4.61475 11.293 4.707L12.586 6H5C4.73478 6 4.48043 6.10536 4.29289 6.29289C4.10536 6.48043 4 6.73478 4 7C4 7.26522 4.10536 7.51957 4.29289 7.70711C4.48043 7.89464 4.73478 8 5 8H12.586L11.293 9.293Z"
-                fill="#90A4AE"></path>
-            </svg>
-            <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
-              Sign Out
-            </p>
-          </button></a>
+          <button role="menuitem"
+          id="logout-btn"
+          class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+          <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M1 0C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V13C0 13.2652 0.105357 13.5196 0.292893 13.7071C0.48043 13.8946 0.734784 14 1 14C1.26522 14 1.51957 13.8946 1.70711 13.7071C1.89464 13.5196 2 13.2652 2 13V1C2 0.734784 1.89464 0.48043 1.70711 0.292893C1.51957 0.105357 1.26522 0 1 0ZM11.293 9.293C11.1108 9.4816 11.01 9.7342 11.0123 9.9964C11.0146 10.2586 11.1198 10.5094 11.3052 10.6948C11.4906 10.8802 11.7414 10.9854 12.0036 10.9877C12.2658 10.99 12.5184 10.8892 12.707 10.707L15.707 7.707C15.8945 7.51947 15.9998 7.26516 15.9998 7C15.9998 6.73484 15.8945 6.48053 15.707 6.293L12.707 3.293C12.6148 3.19749 12.5044 3.12131 12.3824 3.0689C12.2604 3.01649 12.1292 2.9889 11.9964 2.98775C11.8636 2.9866 11.7319 3.0119 11.609 3.06218C11.4861 3.11246 11.3745 3.18671 11.2806 3.2806C11.1867 3.3745 11.1125 3.48615 11.0622 3.60905C11.0119 3.73194 10.9866 3.86362 10.9877 3.9964C10.9889 4.12918 11.0165 4.2604 11.0689 4.3824C11.1213 4.50441 11.1975 4.61475 11.293 4.707L12.586 6H5C4.73478 6 4.48043 6.10536 4.29289 6.29289C4.10536 6.48043 4 6.73478 4 7C4 7.26522 4.10536 7.51957 4.29289 7.70711C4.48043 7.89464 4.73478 8 5 8H12.586L11.293 9.293Z"
+              fill="#90A4AE"></path>
+          </svg>
+          <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+            Sign Out
+          </p>
+        </button>
         </ul>
       </div>
       </nav>
@@ -112,18 +119,9 @@
                 <p class="text-gray-700 mt-2">{{gym.description}}</p>
                 <div class="mt-4">
                     <p class="text-gray-700">Price:</p>
-                    <!-- For Monthly Price -->
-                    <div class="flex items-center">
-                      <input type="checkbox" class="rounded-full h-3 w-3 border-gray-400 mr-2 cursor-pointer">
-                      <p class="text-base font-medium text-red-600">${{gym.price_by_month}}$/month</p>
-                    </div>
-
+                    <p class="text-base font-medium text-red-600">{{gym.price_by_month}}$/month</p>
                     {% if gym.price_by_year != 0 %}
-                      <!-- For Yearly Price -->
-                      <div class="flex items-center mt-2">
-                          <input type="checkbox" class="rounded-full h-3 w-3 border-gray-400 mr-2 cursor-pointer">
-                          <p class="text-base font-medium text-red-600">${{gym.price_by_year}}$/year</p>
-                      </div>
+                    <p class="text-base font-medium text-red-600">{{gym.price_by_year}}$/year</p>
                     {% endif %}
                 </div>
                 <p class=" flex mt-4 text-gray-700 lg:justify-normal justify-center">{{gym.rate}}
@@ -135,9 +133,9 @@
                 </svg>
                 5.0
                 </p>
-                <p class="text-gray-700">City:<p class="text-base text-blue-950">{{gym.city}}</p></p>
-                <p class="text-gray-700">Location:<p class="text-base text-blue-950">{{gym.location}}</p></p>
-                <button class="mt-4 md:w-40  bg-gray-950 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-full">
+                <p class="text-gray-700 text-2xl">City: <span class="text-xl text-blue-950">{{city_name}}</span></p>
+                <p class="text-gray-700 text-2xl">Location: <span class="text-xl text-blue-950">{{gym.location}}</span></p>
+                <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
                     Book Now
                 </button>
             </div>
@@ -146,10 +144,10 @@
         <div class="mx-auto text-center md:max-w-1/2 py-10 mt-5">
           <h3 class="mb-6 text-3xl font-bold">Amenities</h3>
         </div>
-        <div class="flex flex-wrap h-auto w-full justify-center items-center">
+        <div class="flex flex-wrap w-full h-24 justify-center items-center">
           {% for amenity in amenities %}
-          <div class="w-auto h-auto my-2 flex-wrap rounded-xl bg-gray-400 bg-opacity-10 border-2 border-gray-300 mx-1 p-2">
-            <p class="text-xs md:text-nowrap">{{ amenity }}</p>
+          <div class="w-auto h-auto flex-wrap rounded-xl bg-gray-400 bg-opacity-10 border-2 border-gray-300 mx-1 p-2">
+            <p class="text-xs text-nowrap">{{ amenity }}</p>
           </div>
           {% endfor %}
         </div>
@@ -187,7 +185,7 @@
     </main>
 
     <!-- Your additional scripts -->
-    <script src="/cli_frontend/src/main.js"></script>
+    <!-- <script src="/cli_frontend/src/main.js"></script> -->
 </body>
 
 </html>
