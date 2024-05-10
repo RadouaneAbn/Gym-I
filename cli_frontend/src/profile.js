@@ -149,7 +149,9 @@ let helpMain = ``;
 let proMain = ``;
 function changeMainContent(content) {
     // console.log("Changing main content...");
-    document.getElementById('dynamicMain').innerHTML = content;
+    $('#dynamicMain').empty()
+    $('#dynamicMain').append(content)
+    // document.getElementById('dynamicMain').innerHTML = content;
 }
 
 async function builtProfileInfoPage() {

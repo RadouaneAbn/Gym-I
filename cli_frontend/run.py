@@ -95,21 +95,21 @@ async def client_login(info: ClientLogin):
     })
     return {"access_token": token, "token_type": "bearer"}
 
-@app.get("/user/gymes_test")
-async def home_test(request: Request, page: int = Query(1, description="Page number", gt=0)):
-    all_gymes = md.storage.get_page(Gym, page)
-    for gym in all_gymes:
-        setattr(gym, "city_name", storage.get(City, gym.city_id).name)
-    return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
-            "cities": storage.all_list(City),
-            "amenities": storage.all_list(Amenity),
-            "data": all_gymes,
-            "count": storage.pages_count(Gym)
-        }
-    )
+# @app.get("/user/gymes_test")
+# async def home_test(request: Request, page: int = Query(1, description="Page number", gt=0)):
+#     all_gymes = md.storage.get_page(Gym, page)
+#     for gym in all_gymes:
+#         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
+#     return templates.TemplateResponse(
+#         "index.html",
+#         {
+#             "request": request,
+#             "cities": storage.all_list(City),
+#             "amenities": storage.all_list(Amenity),
+#             "data": all_gymes,
+#             "count": storage.pages_count(Gym)
+#         }
+#     )
 
 @app.get("/profile")
 async def about(request: Request):
@@ -123,15 +123,32 @@ async def about(request: Request):
 @app.get("/user/gymes/{gym_id}")
 async def get_gym_info(gym_id: str, request: Request):
     gym = storage.get(Gym, gym_id)
+    reviews = md.storage.all(Review).values()
+    rv = []
     if gym is None:
         raise HTTPException(status_code=404, detail="Not Found")
+    
+    setattr(gym, "city", storage.get(City, gym.city_id).name)
+    
+    count = 0
+    for review in reviews:
+        if review.gym_id == gym_id and count < 3:
+            count += 1
+            review_data = {
+                "user_name": md.storage.get(Client, review.client_id).first_name,
+                "review_text": review.text,
+                "review_date": review.updated_at.strftime("%Y-%m-%d")
+            }
+            rv.append(review_data)
+    
     return templates.TemplateResponse(
         "gym.html",
         {
             "request": request,
-            "amenities": [am.name for am in gym.amenities],
-            "gym": gym.to_dict(pop=["amenities"]),
-            "city_name": storage.get(City, gym.city_id).name
+            "gym": gym.to_dict(),
+            "reviews": rv,
+            "amenities": [am.name for am in gym.amenities]
+
         }
     )
 
