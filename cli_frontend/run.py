@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import paypalrestsdk
 import server.models as md
 from server.models.city import City
 from server.models.amenity import Amenity
@@ -24,6 +25,13 @@ from functools import wraps
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
+
+
+paypalrestsdk.configure({
+    "mode": "sandbox",
+    "client_id": "AZayQjAkNZ16ay9AFN493sktMZ3XzvetMLicJ6iqbBSIBpftvxxvJKdkUf4ajKQQeUKHi76vdRV6V89i",
+    "client_secret": "EI7JuHKT_SPlA26J0zTMfJxPpn39Q22uwst2J7WB4mGqaTARn7PH55dnUhs_sVus8f7ToJG1ehA05UxO"
+})
 
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
@@ -197,3 +205,36 @@ async def tp(request: Request):
             "count": storage.pages_count(Gym)
         }
     )
+
+@app.post("/paypal_payment")
+async def process_paypal_payment(price: float = Form(...), duration: str = Form(...)):
+    payment = paypalrestsdk.Payment({
+        "intent": "sale",
+        "payer": {"payment_method": "paypal"},
+        "transactions": [{
+            "amount": {"total": price, "currency": "USD"},
+            "description": "Gym subscription payment"
+        }],
+        "redirect_urls": {
+            "return_url": "http://0.0.0.0:5000/paypal_success",
+            "cancel_url": "https://www.youtube.com"
+        }
+    })
+    if payment.create():
+        return RedirectResponse(url=payment.links[1].href)
+    else:
+        raise HTTPException(status_code=400, detail="Payment creation failed")
+    
+@app.get("/paypal_success")
+async def paypal_success(request: Request):
+    payment_id = request.query_params.get('paymentId')
+    payer_id = request.query_params.get('PayerID')
+
+    payment = paypalrestsdk.Payment.find(payment_id)
+    if payment.execute({"payer_id": payer_id}):
+        # Payment successful, store payment details in the database
+        # Update user's subscription details
+        return {"message": "Payment successful! Thank you for subscribing."}
+    else:
+        raise HTTPException(status_code=400, detail="Payment execution failed")
+
