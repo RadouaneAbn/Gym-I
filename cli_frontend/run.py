@@ -217,7 +217,7 @@ async def process_paypal_payment(price: float = Form(...), duration: str = Form(
         }],
         "redirect_urls": {
             "return_url": "http://0.0.0.0:5000/paypal_success",
-            "cancel_url": "https://www.youtube.com"
+            "cancel_url": "https://0.0.0.0:5000/user/gymes"
         }
     })
     if payment.create():
@@ -234,7 +234,12 @@ async def paypal_success(request: Request):
     if payment.execute({"payer_id": payer_id}):
         # Payment successful, store payment details in the database
         # Update user's subscription details
-        return {"message": "Payment successful! Thank you for subscribing."}
+        return templates.TemplateResponse(
+            "success.html",
+            {
+                "request": request,
+            }
+        )
     else:
         raise HTTPException(status_code=400, detail="Payment execution failed")
-
+    
