@@ -22,9 +22,13 @@ class GymModelPUT(BM):
     links: Optional[list]
 
 class GymAmenity(BM):
+    search_text: str = ""
     city_ids: list = []
     amenity_ids: list = []
     page: int = 1
+
+class GymSearch(BM):
+    name: str = None
 
 # for future use if the onwer wanted to change the ownership of teh gym
 # class GymModelUserPUT(BM):

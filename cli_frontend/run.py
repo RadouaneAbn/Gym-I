@@ -181,16 +181,16 @@ def check(token):
 
 @app.get("/user/gymes")
 async def home(request: Request):
-    all_gymes = md.storage.get_page(Gym, 1)
-    for gym in all_gymes:
-        setattr(gym, "city_name", storage.get(City, gym.city_id).name)
+    all_gymes = md.storage.get_page(Gym, 1)[:10]
+    
     return templates.TemplateResponse(
         "userhome.html",
         {
             "request": request,
             "cities": storage.all_list(City),
             "amenities": storage.all_list(Amenity),
-            "count": storage.pages_count(Gym)
+            "count": storage.pages_count(Gym),
+            "gyms": [gym.name for gym in all_gymes]
         }
     )
 

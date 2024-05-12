@@ -18,34 +18,7 @@ document.addEventListener("DOMContentLoaded", async function() {
   loadPage(1);
   paginationControl();
   filterDetector();
-  // logout();
 })
-
-// function logout() {
-//   const logOutBtn = document.getElementById('logout-btn');
-
-//   logOutBtn.onclick = function () {
-//     localStorage.removeItem('access_token');
-//     window.location.href = '/signin';
-//   }
-// }
-
-// async function getUserInfo(profilePicture) {
-//   const info = await getUser();
-//   const user = info.user_info;
-
-//   profilePicture.src = user.profile_picture
-// }
-
-// async function getUser() {
-//   const response = await fetch('http://0.0.0.0:5002/users/', {
-//     method: 'GET',
-//     headers: {
-//       'Authorization': `Bearer ${token}`,
-//     }
-//   })
-//   return await response.json();
-// };
 
 function getUserInfo(profilePicture) {
   fetch('http://0.0.0.0:5002/users/', {
@@ -104,13 +77,17 @@ function filterDetector() {
   })
 }
 
+let nextBtn;
+let prevBtn;
+let curPage;
+
 function paginationControl() {
   const filterBtn = document.getElementById('filter_btn');
   const prevPage = document.getElementById('prev_holder');
   const nextPage = document.getElementById('next_holder');
-  const curPage = document.getElementById('cur_holder');
-  const nextBtn = document.getElementById('next_btn');
-  const prevBtn = document.getElementById('prev_btn');
+  curPage = document.getElementById('cur_holder');
+  nextBtn = document.getElementById('next_btn');
+  prevBtn = document.getElementById('prev_btn');
 
   prevPage.addEventListener('click', goPrevPage)
   prevBtn.addEventListener('click', goPrevPage)
@@ -198,6 +175,7 @@ async function loadData(page) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        "search_text": searchText,
         "amenity_ids": amenityIds,
         "city_ids": cityIds,
         "page": page

@@ -17,6 +17,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
 from math import ceil
+from sqlalchemy import and_
 
 
 load_dotenv()
@@ -66,8 +67,12 @@ class DBStorage:
         return (new_dict)
 
 
-    def all_list(self, cls=None):
+    def all_list(self, cls=None, search_text = ""):
         """query on the current database session"""
+        if search_text:
+            print(search_text)
+            search_text += "%"
+            return self.__session.query(Gym).filter(Gym.name.ilike(search_text)).all()
         return (self.__session.query(cls).all())
 
     def new(self, obj):
@@ -137,10 +142,17 @@ class DBStorage:
             .offset(offset).limit(limit).all()
         return page_insts
 
-    def gymes_in_cities(self, city_ids):
-        all_gymes = self.__session.query(Gym).filter(
-            Gym.city_id.in_(city_ids)
-        ).all()
+    def gymes_in_cities(self, city_ids, search_text):
+        if search_text:
+            print(search_text)
+            search_text += "%"
+            all_gymes = self.__session.query(Gym).filter(
+                and_(Gym.city_id.in_(city_ids), Gym.name.ilike(search_text))
+            ).all()
+        else:
+            all_gymes = self.__session.query(Gym).filter(
+                Gym.city_id.in_(city_ids)
+            ).all()
         return all_gymes
     
     def get_user(self, cls, email):
@@ -152,3 +164,16 @@ class DBStorage:
     def pages_count(self, cls):
         count = self.__session.query(cls).count()
         return ceil(count / 12)
+
+    def search(self, name):
+        print(name)
+        gyms = self.__session.query(Gym.name, Gym.id)\
+        .filter(Gym.name.ilike(name + "%"))\
+            .offset(0).limit(10).all()
+        gyms = [{"name": gym.name, "id": gym.id} for gym in gyms]
+        return gyms
+    
+    def search_all(self, name):
+        gyms = self.__session.query(Gym.name, Gym.id)\
+        .filter(Gym.name.ilike(name + "%")).all()
+        return gyms

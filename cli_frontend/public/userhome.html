@@ -17,7 +17,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <!-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> -->
-        <script src="/cli_frontend/src/scripts/userHome.js"></script>
+    <script src="/cli_frontend/src/scripts/userHome.js"></script>
+    <script src="/cli_frontend/src/scripts/search.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
     <title>Gym&I</title>
 
@@ -116,7 +117,7 @@
           <div class="relative w-[50%]">
             <input
               type="text"
-              id="search"
+              id="search_bar"
               class="bg-gray-700 rounded-full p-2 pl-10 transition w-full"
               placeholder="Gym Name..."/>
             <svg
@@ -126,7 +127,7 @@
               height="20"
               viewBox="0 0 24 24"
               stroke-width="2"
-              stroke="currentColor"
+              stroke="white"
               fill="none"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -135,7 +136,40 @@
               <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
               <path d="M21 21l-6 -6" />
             </svg>
+
+            <div style="visibility: hidden;" id="search_container" class="overflow-hidden mt-1 py-1 absolute top-full left-0 w-full h-auto  text-red shadow-md rounded-xl dark:bg-neutral-800 dark:border dark:border-neutral-700">
+              <!-- {% for gym in gyms %}
+              <div class="amenity_btn" id="">
+              <div class="relative flex items-start py-1.5 px-3 dark:hover:bg-neutral-700 ">
+                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
+                    <span class="mx-2  block text-sm text-left font-medium text-white">{{ gym }}</span>
+                  </label>
+
+                  <svg
+              class="mx-2 absolute left-0 top-1/2 -translate-y-1/2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="white"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+              <path d="M21 21l-6 -6" />
+              </svg>
+
+                </div>
+              </div>
+              {% endfor %} -->
+            </div>
+            
+            
           </div>
+
 
           <div class="flex items-center justify-center">
             <div class="flex relative items-center justify-center mx-2 sm:mt-1 sm:inline-flex z-20">
@@ -146,7 +180,7 @@
                 </svg>
                 <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
                 {% for amenity in amenities %}
-                <div onclick="toggleCheckbox(this)" class="amenity_btn" id="{{ amenity.id }}">
+                <div onclick="toggleCheckbox(this)" class="amenity_btn" id="">
                 <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
 
                     <div class="flex items-center h-5 mt-1">
