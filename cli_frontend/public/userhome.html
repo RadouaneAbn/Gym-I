@@ -30,6 +30,8 @@
         }
       }
     </script>
+  
+ <link rel="stylesheet" href="/cli_frontend/src/styles/homeuser.css">
 
 </head>
 
@@ -138,33 +140,7 @@
             </svg>
 
             <div style="visibility: hidden;" id="search_container" class="overflow-hidden mt-1 py-1 absolute top-full left-0 w-full h-auto  text-red shadow-md rounded-xl dark:bg-neutral-800 dark:border dark:border-neutral-700">
-              <!-- {% for gym in gyms %}
-              <div class="amenity_btn" id="">
-              <div class="relative flex items-start py-1.5 px-3 dark:hover:bg-neutral-700 ">
-                  <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
-                    <span class="mx-2  block text-sm text-left font-medium text-white">{{ gym }}</span>
-                  </label>
-
-                  <svg
-              class="mx-2 absolute left-0 top-1/2 -translate-y-1/2"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              stroke-width="1"
-              stroke="white"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-              <path d="M21 21l-6 -6" />
-              </svg>
-
-                </div>
-              </div>
-              {% endfor %} -->
+                <!-- search result -->
             </div>
             
             
@@ -180,7 +156,7 @@
                 </svg>
                 <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
                 {% for amenity in amenities %}
-                <div onclick="toggleCheckbox(this)" class="amenity_btn" id="">
+                <div onclick="toggleCheckbox(this)" class="amenity_btn" id="{{ amenity.id }}">
                 <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
 
                     <div class="flex items-center h-5 mt-1">
@@ -236,13 +212,13 @@
               </span>
             </div>
             <div class="flex items-center gap-x-1.5">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+              <button type="button" class="decrement size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                 </svg>
               </button>
-              <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="20" data-hs-input-number-input="">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+              <input id="min-price" class="price-input hide-spin p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="number" value="{{ price_range.min }}" data-hs-input-number-input="" min="{{ price_range.min }}" max="{{ price_range.max }}" readonly>
+              <button type="button" class="increment min-inc size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                   <path d="M12 5v14"></path>
@@ -253,13 +229,13 @@
           <div class="w-30 h-full pl-1 flex justify-between items-center gap-x-3">
             
             <div class="flex items-center gap-x-1.5">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+              <button type="button" class="decrement size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                 </svg>
               </button>
-              <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="150" data-hs-input-number-input="">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+              <input id="max-price" class="price-input hide-spin p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="number" value="{{ price_range.max }}" data-hs-input-number-input=""  min="{{ price_range.min }}" max="{{ price_range.max }}" readonly>
+              <button type="button" class="increment size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                   <path d="M12 5v14"></path>

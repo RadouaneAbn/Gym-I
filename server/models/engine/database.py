@@ -17,7 +17,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
 from math import ceil
-from sqlalchemy import and_
+from sqlalchemy import and_, desc
 
 
 load_dotenv()
@@ -177,3 +177,9 @@ class DBStorage:
         gyms = self.__session.query(Gym.name, Gym.id)\
         .filter(Gym.name.ilike(name + "%")).all()
         return gyms
+    
+    def get_min_max_price(self):
+        min = self.__session.query(Gym.price_by_month).order_by(Gym.price_by_month).first()
+        max = self.__session.query(Gym.price_by_month).order_by(desc(Gym.price_by_month)).first()
+        # print(min[0], max[0])
+        return {"min": min[0], "max": max[0]}

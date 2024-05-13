@@ -181,8 +181,6 @@ def check(token):
 
 @app.get("/user/gymes")
 async def home(request: Request):
-    all_gymes = md.storage.get_page(Gym, 1)[:10]
-    
     return templates.TemplateResponse(
         "userhome.html",
         {
@@ -190,7 +188,7 @@ async def home(request: Request):
             "cities": storage.all_list(City),
             "amenities": storage.all_list(Amenity),
             "count": storage.pages_count(Gym),
-            "gyms": [gym.name for gym in all_gymes]
+            "price_range": storage.get_min_max_price()
         }
     )
 

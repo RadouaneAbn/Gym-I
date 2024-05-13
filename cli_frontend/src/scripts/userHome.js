@@ -1,21 +1,18 @@
 const amenityIds = [];
 const cityIds = [];
+let minPrice;
+let maxPrice;
 let page, currentPage;
 const curIcon = 'relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md transition-all bg-gray-700';
 const autIcon = 'prev_vis relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none';
-// const token = localStorage.getItem('access_token');
 
 
 document.addEventListener("DOMContentLoaded", async function() {
-  // const inputFields = document.querySelectorAll("[data-hs-input-number-input]");
-  // const buttons = document.querySelectorAll('.btn-gym_id');
-  // const cityBtns = document.querySelectorAll('.city_btn');
-  // const amenityBtns = document.querySelectorAll('.amenity_btn');
   const profilePicture = document.getElementById('profile_picture')
 
   getUserInfo(profilePicture);
-  setPriceBtns();
   loadPage(1);
+  getPrice();
   paginationControl();
   filterDetector();
 })
@@ -33,8 +30,6 @@ function getUserInfo(profilePicture) {
     profilePicture.src = user.profile_picture;
   })
 }
-
-
 
 function filterDetector() {
   const cityBtns = document.querySelectorAll('.city_btn');
@@ -60,14 +55,14 @@ function filterDetector() {
 
   amenityBtns.forEach(btn => {
     btn.addEventListener('click', function () {
-      // console.log(btn.id)
+      console.log(btn.id)
       const bx = btn.querySelector('input[type="checkbox"]')
       
       if (bx.checked) {
-        // console.log('check')
+        console.log('check')
         amenityIds.push(btn.id);
       } else {
-        // console.log('uncheck')
+        console.log('uncheck')
         const idx = amenityIds.indexOf(btn.id);
         if (idx !== -1) {
           amenityIds.splice(idx, 1)
@@ -169,17 +164,32 @@ function buildPage(gymes) {
 }
 
 async function loadData(page) {
+    const minPrice = $('#min-price').val();
+    const maxPrice = $('#max-price').val();
+  
+    let bodyData = {
+        "search_text": searchText,
+        "amenity_ids": amenityIds,
+        "city_ids": cityIds,
+        "page": page
+    }
+
+    if (minPrice !== $('input#max-price').attr('min') || maxPrice !== $('input#max-price').attr('max')) {
+      bodyData.price_range = {
+        'min': parseInt($('#min-price').val()),
+        'max': parseInt($('#max-price').val())
+      }
+    } else {
+      delete bodyData.price_range;
+    }
+
+    console.log(bodyData)
     const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        "search_text": searchText,
-        "amenity_ids": amenityIds,
-        "city_ids": cityIds,
-        "page": page
-      })
+      body: JSON.stringify(bodyData)
     })
     return await response.json();
 };
@@ -243,34 +253,6 @@ function appendGym(gym) {
     `;
 }
 
-function setPriceBtns() {
-  const decrementButtons = document.querySelectorAll("[data-hs-input-number-decrement]");
-  const incrementButtons = document.querySelectorAll("[data-hs-input-number-increment]");
-  decrementButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const input = this.parentElement.querySelector("[data-hs-input-number-input]");
-      let value = parseInt(input.value);
-      if (!isNaN(value) && value > 20 && value < 150) {
-        input.value = value - 10;
-      } else {
-        input.value = 20; // Set to 0 if value is already 0 or NaN
-      }
-    });
-  });
-  
-  incrementButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const input = this.parentElement.querySelector("[data-hs-input-number-input]");
-      let value = parseInt(input.value);
-      if (!isNaN(value) && value < 150 && value > 20) {
-        input.value = value + 20;
-      } else {
-        input.value = 150; // Set to 1 if value is NaN
-      }
-    });
-  });
-}
-
 
 function pageIcon (n, cls = autIcon, disabled = false) {
   return `
@@ -288,7 +270,34 @@ function pageIcon (n, cls = autIcon, disabled = false) {
 
 function scrollUp() {
   window.scrollTo({
-    top: 0, // Scroll to the top of the page
-    behavior: 'smooth' // Smooth scrolling
-});
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function getPrice() {
+  const decrementButtons = document.querySelectorAll('button.decrement');
+  const incrementButtons = document.querySelectorAll('button.increment');
+  const maxValue = parseInt($('input#max-price').attr('max'));
+  const minValue = parseInt($('input#max-price').attr('min'));
+
+  decrementButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const input = this.parentElement.querySelector('.price-input');
+      let value = parseInt(input.value);
+      if (value > minValue) {
+        input.value = value - 10;
+      }
+    })
+  })
+
+  incrementButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const input = this.parentElement.querySelector('.price-input');
+      let value = parseInt(input.value);
+      if (value < maxValue) {
+        input.value = value + 10;
+      }
+    })
+  })
 }

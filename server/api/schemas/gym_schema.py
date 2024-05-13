@@ -22,6 +22,7 @@ class GymModelPUT(BM):
     links: Optional[list]
 
 class GymAmenity(BM):
+    price_range: dict = {}
     search_text: str = ""
     city_ids: list = []
     amenity_ids: list = []

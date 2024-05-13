@@ -10,7 +10,14 @@ from sqlalchemy import union
 
 gym_filter = APIRouter()
 
-def get_gym_filter(search_text, amenity_ids, city_ids, page):
+def filter_by_amenity(gyms, amenity_list):
+    filtered_gyms = []
+    for gym in gyms:
+        if amenity_list.issubset(gym.amenities):
+            filtered_gyms.append(gym)
+    return filtered_gyms
+
+def get_gym_filter(search_text, amenity_ids, city_ids, page, price_range):
     amenity_list = set(storage.get(Amenity, am_id) for am_id in amenity_ids)
     offset = (page - 1) * 12
     limit = offset + 12
@@ -19,14 +26,20 @@ def get_gym_filter(search_text, amenity_ids, city_ids, page):
     else:
         all_gymes = storage.all_list(Gym, search_text)
 
-    filtered_gymes = []
-    if amenity_list:
-        for gym in all_gymes:
-            if amenity_list.issubset(gym.amenities):
-                filtered_gymes.append(gym)
+    # filtered_gymes = []
+    # if amenity_list:
+    #     for gym in all_gymes:
+    #         if amenity_list.issubset(gym.amenities):
+    #             filtered_gymes.append(gym)
 
-    if filtered_gymes:
-        all_gymes = filtered_gymes
+    # if filtered_gymes:
+    #     all_gymes = filtered_gymes
+    
+    if amenity_list:
+        all_gymes = filter_by_amenity(all_gymes, amenity_list)
+
+    if price_range:
+        all_gymes = filter_by_price(all_gymes, price_range)
 
     count = ceil(len(all_gymes) / 12)
 
@@ -36,16 +49,28 @@ def get_gym_filter(search_text, amenity_ids, city_ids, page):
 def get_gymes(page):
     return storage.pages_count(Gym), storage.get_page(Gym, page)
 
+def filter_by_price(gyms, price_range):
+    new_gyms = []
+    for gym in gyms:
+        if gym.price_by_month >= price_range["min"] and\
+            gym.price_by_month <= price_range["max"]:
+            new_gyms.append(gym)
+    return new_gyms
+
 
 @gym_filter.post("/gym_filter/")
 async def get_gym_amenity(data: GymAmenity):
     # st = time()
-    if data.amenity_ids or data.city_ids or data.search_text:
-        count, all_gymes = get_gym_filter(data.search_text, data.amenity_ids,
-                                          data.city_ids, data.page)
-    else:
-        count, all_gymes = get_gymes(data.page)
+    # if data.amenity_ids or data.city_ids or data.search_text:
+    count, all_gymes = get_gym_filter(data.search_text, data.amenity_ids,
+                                        data.city_ids, data.page, data.price_range)
+    # else:
+    #     count, all_gymes = get_gymes(data.page)
     # print(all_gymes)
+    # if data.price_range:
+    #     all_gymes = filter_by_price(all_gymes, data.price_range)
+             
+
     for gym in all_gymes:
         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
 
