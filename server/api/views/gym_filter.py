@@ -5,8 +5,6 @@ from server.models.city import City
 from server.models import storage
 from server.api.schemas.gym_schema import GymAmenity, GymSearch
 from math import ceil
-from time import time
-from sqlalchemy import union
 
 gym_filter = APIRouter()
 
@@ -25,15 +23,6 @@ def get_gym_filter(search_text, amenity_ids, city_ids, page, price_range):
         all_gymes = storage.gymes_in_cities(city_ids, search_text)
     else:
         all_gymes = storage.all_list(Gym, search_text)
-
-    # filtered_gymes = []
-    # if amenity_list:
-    #     for gym in all_gymes:
-    #         if amenity_list.issubset(gym.amenities):
-    #             filtered_gymes.append(gym)
-
-    # if filtered_gymes:
-    #     all_gymes = filtered_gymes
     
     if amenity_list:
         all_gymes = filter_by_amenity(all_gymes, amenity_list)
@@ -60,16 +49,8 @@ def filter_by_price(gyms, price_range):
 
 @gym_filter.post("/gym_filter/")
 async def get_gym_amenity(data: GymAmenity):
-    # st = time()
-    # if data.amenity_ids or data.city_ids or data.search_text:
     count, all_gymes = get_gym_filter(data.search_text, data.amenity_ids,
                                         data.city_ids, data.page, data.price_range)
-    # else:
-    #     count, all_gymes = get_gymes(data.page)
-    # print(all_gymes)
-    # if data.price_range:
-    #     all_gymes = filter_by_price(all_gymes, data.price_range)
-             
 
     for gym in all_gymes:
         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
