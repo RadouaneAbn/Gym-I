@@ -2,7 +2,8 @@
 """ holds class Gym"""
 from server.models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
-from server.models.amenity import Amenity
+# from server.models.amenity import Amenity
+from server.models.membership import EnrolClient
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import ARRAY
 
@@ -32,6 +33,8 @@ class Gym(BaseModel, Base):
                              secondary=gym_amenity,
                              viewonly=False)
     links = Column(ARRAY(String), nullable=True)
+
+    enrolments = relationship("EnrolClient", backref="gym")
 
     def __init__(self, *args, **kwargs):
         """initializes Gym"""
