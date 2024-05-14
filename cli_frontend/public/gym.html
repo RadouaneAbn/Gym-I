@@ -24,6 +24,7 @@
   <!-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> -->
   <!-- <script src="frontend/scripts/swiper.js"></script> -->
   <script src="/cli_frontend/src/scripts/gymPreview.js"></script>
+  <script src="/cli_frontend/src/scripts/purchase.js"></script>
   <title>{{ gym.name }}</title>
 </head>
 
@@ -107,7 +108,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto my-10">
+    <main class="container mx-auto my-10" id="{{gym.id}}">
       <h1 class="text-3xl font-bold flex items-center justify-center text-center">{{gym.name}}</h1>
         <div class="lg:flex flex-1 w-full h-2/3 items-center justify-cente p-6">
             <!-- Gym Image -->
@@ -142,6 +143,17 @@
                       Book Now (Monthly)
                   </button>
               </form>
+              <div id="purchase-container" class="flex flex-col">
+                <input type="date" name="" id="purchase-date" value="{{ date }}" class="mx-10 mt-10 text-center">
+                <div class="flex flex-row p-10 mx-10">
+                  <h3 class="px-5">Number of months</h3>
+                  <input id="month-number" type="number" value="1" style="width: 70px; text-align: center;">
+                </div>
+                <button id="purchase" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
+                  purchase
+                </button>
+
+              </div>
               <!-- {% if gym.price_by_year != 0 %}
               <form action="/paypal_payment" method="post">
                   <input type="hidden" name="price" value="{{gym.price_by_year}}">

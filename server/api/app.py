@@ -12,6 +12,7 @@ from server.api.views.authentication import auth_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, JSONResponse
 from server.api.views.users import user_router
+from server.api.views.enrolments import enrolment_router
 
 
 app = FastAPI()
@@ -23,6 +24,7 @@ app.include_router(gym_router)
 app.include_router(gym_filter)
 app.include_router(auth_router)
 app.include_router(user_router)
+app.include_router(enrolment_router)
 
 app.add_middleware(
     CORSMiddleware,

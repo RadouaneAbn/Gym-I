@@ -155,8 +155,8 @@ async def get_gym_info(gym_id: str, request: Request):
             "request": request,
             "gym": gym.to_dict(),
             "reviews": rv,
-            "amenities": [am.name for am in gym.amenities]
-
+            "amenities": [am.name for am in gym.amenities],
+            "date": datetime.now().strftime('%Y-%m-%d')
         }
     )
 
