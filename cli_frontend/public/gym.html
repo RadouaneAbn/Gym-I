@@ -137,6 +137,13 @@
               </p>
               <p class="text-gray-700 text-2xl">City: <span class="text-xl text-blue-950">{{gym.city}}</span></p>
               <p class="text-gray-700 text-2xl">Location: <span class="text-xl text-blue-950">{{gym.location}}</span></p>
+              <div id="purchase-container" class="flex items-center justify-center">
+                <input type="date" name="" id="purchase-date" value="{{ date }}" class="justify-center items-center flex text-center">
+                <div class="flex flex-row p-10 mx-10">
+                  <h3 class="px-5 text-sm inline-block">Number of months</h3>
+                  <input id="month-number" type="number" value="1" class="w-8 h-1/2 rounded-lg">
+                </div>
+              </div>
               <form action="/paypal_payment" method="post">
                   <input type="hidden" name="price" value="{{gym.price_by_month}}">
                   <input type="hidden" name="duration" value="monthly">
@@ -147,15 +154,9 @@
                   </button>
               </form>
 
-              <div id="purchase-container" class="flex flex-col">
-                <input type="date" name="" id="purchase-date" value="{{ date }}" class="mx-10 mt-10 text-center">
-                <div class="flex flex-row p-10 mx-10">
-                  <h3 class="px-5">Number of months</h3>
-                  <input id="month-number" type="number" value="1" style="width: 70px; text-align: center;">
-                </div>
-                <button id="purchase" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
+                <!-- <button id="purchase" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
                   purchase
-              </button>
+              </button> -->
 
               </div>
               <!-- {% if gym.price_by_year != 0 %}

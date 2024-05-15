@@ -245,7 +245,12 @@ async def paypal_success(request: Request, client_id: str = Query(...), gym_id: 
         }
         new_enroll = EnrolClient(**enrolment_details)
         new_enroll.save()
-        return enrolment_details
+        return templates.TemplateResponse(
+            "success.html",
+            {
+                "request": request,
+            }
+        )
     else:
         raise HTTPException(status_code=400, detail="Payment execution failed")
 
