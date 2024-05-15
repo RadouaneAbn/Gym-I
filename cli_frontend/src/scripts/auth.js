@@ -13,6 +13,15 @@ if (!token) {
         if (data.status === 401) {
             window.location.href = '/signin';
         }
+        return data.json()
     })
+    // .then(data => {
+    //     console.log(data)
+    //     clientId = data.user.id
+    //     console.log(clientId)
+    // })
 }
+
+
+
 

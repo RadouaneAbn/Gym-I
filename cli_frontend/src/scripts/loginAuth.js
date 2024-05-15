@@ -11,7 +11,7 @@ if (token) {
     .then(data => {
         if (data.ok) {
             window.location.href = '/user/gymes';
-        } else if (data.status === 401) {
+        } else {
             localStorage.removeItem('access_token');
             $('body').css('display', 'block');
         }

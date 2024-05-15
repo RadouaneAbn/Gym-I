@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <script src="/cli_frontend/src/scripts/auth.js"></script>
+  <script src="/cli_frontend/src/scripts/client_id.js"></script>
   <script src="/cli_frontend/src/scripts/profilePicture.js"></script>
   <link rel="shortcut icon" href="/cli_frontend/images/gymi-favicon-white.png" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,6 +140,8 @@
               <form action="/paypal_payment" method="post">
                   <input type="hidden" name="price" value="{{gym.price_by_month}}">
                   <input type="hidden" name="duration" value="monthly">
+                  <input type="hidden" name="gym_id" value="{{gym.id}}">
+                  <input type="hidden" name="client_id" id="clientId">
                   <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
                       Book Now (Monthly)
                   </button>
