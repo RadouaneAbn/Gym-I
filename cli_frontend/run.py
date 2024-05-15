@@ -236,3 +236,12 @@ async def paypal_success(request: Request):
     else:
         raise HTTPException(status_code=400, detail="Payment execution failed")
 
+
+@app.get("/user/history")
+async def history(request: Request):
+    return templates.TemplateResponse(
+        "history.html",
+        {
+            "request": request,
+        }
+    )
