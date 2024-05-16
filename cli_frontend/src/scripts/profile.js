@@ -15,7 +15,7 @@ function popUpPicture(user) {
             <div style="height: 300px; width: 300px; overflow: hidden;"
             class="rounded-full mt-10 mb-8 border-2 border-gray-500">            
                 <img src="${user.profile_picture_original}"
-                class=""
+                class="object-cover object-center"
                 alt="profile picture"
                 id="profile-pic" width="300px" height="300px">
             </div>
@@ -28,6 +28,31 @@ function popUpPicture(user) {
 
             <input type="file" accept="image/jpeg" id="input-file" style="display: none;">
 
+        </div>
+    </div>
+    `
+}
+
+function popUpDelete() {
+    return `
+    <div id="profile_pic_container"
+    class="bg-gray-900 bg-opacity-50  w-full h-screen flex justify-center items-center">
+
+        <div style="width: 500px; height: 600px;"
+        class="bg-gray-100 p-4 border border-gray-900 rounded-md text-center relative flex flex-col justify-center items-center">
+
+        <img class="border-2 border-red-500 absolute top-0 right-0 m-4 cursor-pointer" id="cancel-picture"
+        src="/cli_frontend//images/exit.png" alt="exit" width="25px" height="25px">
+
+            <div class="mt-10 flex justify-between px-8 w-full">
+                <button id="ignore-btn" style="width: 160px; height: 50px;" class=" bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
+                    Ignore
+                </button>
+
+                <button id="confirm-btn" style="width: 160px; height: 50px;" class="bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
+                    Delete
+                </button>
+            </div>
         </div>
     </div>
     `
@@ -110,7 +135,7 @@ function ProfilePage(user) {
                         class="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
                         Change picture
                     </button>
-                    <button type="button"
+                    <button type="button" id="delete-btn"
                         class="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
                         Delete picture
                     </button>
@@ -190,7 +215,7 @@ function onceCall(callback) {
         return callback(...args);
       }
     };
-  }
+}
   
 
 let helpMain = ``;
@@ -222,6 +247,22 @@ function appendToDiv(content) {
     $('#dynamicMain').empty()
     $('#dynamicMain').append(content)
     $('button#change-picture').on('click', changePicture)
+    $('button#delete-btn').on('click', deletPicture)
+}
+
+function deletPicture() {
+    console.log('del')
+    $('div#popups').append(popUpDelete())
+    $('#ignore').on('click', () => {
+        $('div#popups').empty();
+    })
+
+    const ignore = document.getElementById('ignore-btn');
+    const confirm = document.getElementById('confirm-btn');
+
+    const deletePicAdv = onceCall(uploadPicture);
+    
+    
 }
 
 function uploadPicture(img) {
