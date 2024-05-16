@@ -21,6 +21,4 @@ auth_router = APIRouter()
 
 @auth_router.get("/token_check/")
 async def client_login(user: Client = Depends(check_token)):
-    if not user:
-        raise HTTPException(status_code=404, detail="User is not found")
     return {"user": user.to_dict()}

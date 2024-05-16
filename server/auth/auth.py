@@ -17,5 +17,9 @@ def check_token(authorization: str = Header(None)):
         email = payload.get("sub")
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
+    
+    user = storage.get_user(Client, email)
+    if not user:
+        raise HTTPException(status_code=404, detail="User is not found")
 
-    return storage.get_user(Client, email)
+    return user
