@@ -228,7 +228,10 @@ async def tp(request: Request):
 #         raise HTTPException(status_code=400, detail="Payment creation failed")
     
 @app.post("/paypal_payment")
-async def process_paypal_payment(client_id: str = Form(...), gym_id: str = Form(...), price: float = Form(...), duration: str = Form(...)):
+async def process_paypal_payment(client_id: str = Form(...),
+                                 gym_id: str = Form(...),
+                                 price: float = Form(...),
+                                 duration: str = Form(...)):
     payment = paypalrestsdk.Payment({
         "intent": "sale",
         "payer": {"payment_method": "paypal"},
