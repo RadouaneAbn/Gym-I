@@ -225,6 +225,7 @@ function appendToDiv(content) {
 }
 
 function uploadPicture(img) {
+        console.log('update')
         const dataForm = new FormData();
         dataForm.append('file_upload', img)
         fetch('http://0.0.0.0:5002/update_picture/', {
@@ -254,9 +255,11 @@ function changePicture() {
     inputFile.onchange = function () {
         profilePicture.src = URL.createObjectURL(inputFile.files[0])
     }
+
+    const uploadPictureAdv = onceCall(uploadPicture);
     
     $('label#save-btn').on('click', () => {
-        uploadPicture(inputFile.files[0])
+        uploadPictureAdv(inputFile.files[0])
     })
 }
 
