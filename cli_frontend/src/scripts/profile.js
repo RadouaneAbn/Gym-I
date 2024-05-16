@@ -260,9 +260,32 @@ function deletPicture() {
     const ignore = document.getElementById('ignore-btn');
     const confirm = document.getElementById('confirm-btn');
 
-    const deletePicAdv = onceCall(uploadPicture);
+    const deletePicAdv = onceCall(deletPictureRequest);
     
-    
+    ignore.addEventListener('click', () => {
+        $('div#popups').empty();
+    })
+
+    confirm.addEventListener('click', () => {
+        deletePicAdv();
+    })
+}
+
+function deletPictureRequest(img) {
+    console.log('update')
+    const dataForm = new FormData();
+    dataForm.append('file_upload', img)
+    fetch('http://0.0.0.0:5002/clients/profile_picture', {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+    .then(data => {
+        if (data.ok) {
+            window.location.href = '/profile';
+        }
+    })
 }
 
 function uploadPicture(img) {
