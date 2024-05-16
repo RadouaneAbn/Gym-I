@@ -15,8 +15,13 @@ if (!token) {
         }
         return data.json()
     })
-    .then(data => {
-        console.log(data)
-    })
+    // .then(data => {
+    //     console.log(data)
+    //     clientId = data.user.id
+    //     console.log(clientId)
+    // })
 }
+
+
+
 

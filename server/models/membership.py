@@ -12,7 +12,7 @@ import uuid
 class EnrolClient(Base):
     """ Representation of the enrolement of a client  """
     __tablename__ = 'enrolments'
-    payment_id = Column(String(19), primary_key=True)
+    payment_id = Column(String(60), primary_key=True)
     client_id = Column(String(60), ForeignKey("clients.id"), nullable=False)
     gym_id = Column(String(60), ForeignKey("gymes.id"), nullable=False)
     from_date = Column(DateTime, default=datetime.utcnow())

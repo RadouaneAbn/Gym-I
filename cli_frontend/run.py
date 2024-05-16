@@ -25,6 +25,9 @@ from functools import wraps
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+from server.models.membership import EnrolClient
+
 
 
 paypalrestsdk.configure({
@@ -225,7 +228,7 @@ async def tp(request: Request):
 #         raise HTTPException(status_code=400, detail="Payment creation failed")
     
 @app.post("/paypal_payment")
-async def process_paypal_payment(price: float = Form(...), duration: str = Form(...)):
+async def process_paypal_payment(client_id: str = Form(...), gym_id: str = Form(...), price: float = Form(...), duration: str = Form(...)):
     payment = paypalrestsdk.Payment({
         "intent": "sale",
         "payer": {"payment_method": "paypal"},
@@ -234,9 +237,9 @@ async def process_paypal_payment(price: float = Form(...), duration: str = Form(
             "description": "Gym subscription payment"
         }],
         "redirect_urls": {
-            "return_url": "http://0.0.0.0:5000/paypal_success",
+            "return_url": "http://0.0.0.0:5000/paypal_success"+f"?client_id={client_id}&gym_id={gym_id}",
             "cancel_url": "https://www.youtube.com"
-        }
+        },
     })
     if payment.create():
         print("pay", payment)
@@ -245,8 +248,7 @@ async def process_paypal_payment(price: float = Form(...), duration: str = Form(
         raise HTTPException(status_code=400, detail="Payment creation failed")
 
 @app.get("/paypal_success")
-async def paypal_success(request: Request):
-    print("suc", request.query_params)
+async def paypal_success(request: Request, client_id: str = Query(...), gym_id: str = Query(...)):
     payment_id = request.query_params.get('paymentId')
     payer_id = request.query_params.get('PayerID')
 
@@ -255,9 +257,25 @@ async def paypal_success(request: Request):
     if payment.execute({"payer_id": payer_id}):
         # Payment successful, store payment details in the database
         # Update user's subscription details
-        return {"message": "Payment successful! Thank you for subscribing."}
+        enrolment_details = {
+            "payment_id": payment_id,
+            "client_id": client_id,
+            "gym_id": gym_id,
+            # "price": payment.transactions[0].amount.total,
+            "from_date": datetime.utcnow(),
+            "to_date": datetime.utcnow()+relativedelta(months=1)
+        }
+        new_enroll = EnrolClient(**enrolment_details)
+        new_enroll.save()
+        return templates.TemplateResponse(
+            "success.html",
+            {
+                "request": request,
+            }
+        )
     else:
         raise HTTPException(status_code=400, detail="Payment execution failed")
+
 
 
 @app.get("/user/history")

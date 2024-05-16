@@ -168,8 +168,10 @@ async function builtProfileInfoPage() {
     })
 }
 
-function appendToDiv (content) {
-    document.getElementById('dynamicMain').innerHTML = content;
+function appendToDiv(content) {
+    // document.getElementById('dynamicMain').innerHTML = content;
+    $('#dynamicMain').empty()
+    $('#dynamicMain').append(content)
 }
 
 // Add event listener to the 'payment' button after DOM is loaded
