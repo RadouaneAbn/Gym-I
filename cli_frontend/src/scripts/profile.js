@@ -15,7 +15,7 @@ function popUpPicture(user) {
             <div style="height: 300px; width: 300px; overflow: hidden;"
             class="rounded-full mt-10 mb-8 border-2 border-gray-500">            
                 <img src="${user.profile_picture_original}"
-                class="object-cover object-center"
+                class=""
                 alt="profile picture"
                 id="profile-pic" width="300px" height="300px">
             </div>
@@ -339,7 +339,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let proButton = document.getElementById('Pro');
     let proMenu = document.getElementById('pro_menu');
     // const changePicBtn = document.getElementById('change-picture');
-    builtProfileInfoPage();
 
     // console.log(paymentButton);
     paymentButton.addEventListener('click', function(event) {
@@ -353,12 +352,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     profileButton.addEventListener('click', function(event) {
     //   console.log("Button clicked");
-      changeMainContent(profileMain); // Call the function to change the content
+    builtProfileInfoPage();
+    // Call the function to change the content
     });
     profileMenu.addEventListener('click', function(event) {
         // console.log("Button clicked");
-        changeMainContent(profileMain); // Call the function to change the content
-
+        builtProfileInfoPage();
+         // Call the function to change the content
+    });
     helpButton.addEventListener('click', function(event) {
       console.log("Button clicked");
       changeMainContent(helpMain); // Call the function to change the content
@@ -377,5 +378,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("Button clicked");
         changeMainContent(proMain); // Call the function to change the content
       });
-  })
-})
+  });
