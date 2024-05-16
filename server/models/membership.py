@@ -17,6 +17,7 @@ class EnrolClient(Base):
     gym_id = Column(String(60), ForeignKey("gymes.id"), nullable=False)
     from_date = Column(DateTime, default=datetime.utcnow())
     to_date = Column(DateTime, nullable=False)
+    # price = Column(Int)
     
 
     def __init__(self, *args, **kwargs):

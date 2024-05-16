@@ -13,6 +13,10 @@ if (!token) {
         if (data.status === 401) {
             window.location.href = '/signin';
         }
+        return data.json()
+    })
+    .then(data => {
+        console.log(data)
     })
 }
 

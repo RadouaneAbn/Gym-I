@@ -24,6 +24,7 @@ async def get_client_gyms(user: Client = Depends(check_token)):
 async def enrole_client_gym(data: EnrolData, user: Client = Depends(check_token)):
     start_date = datetime.strptime(data.date, '%Y-%m-%d')
     new_sub = EnrolClient(
+        payment_id=data.payment_id,
         client_id=user.id,
         gym_id=data.gym_id,
         from_date=start_date,

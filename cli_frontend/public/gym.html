@@ -136,13 +136,18 @@
               </p>
               <p class="text-gray-700 text-2xl">City: <span class="text-xl text-blue-950">{{gym.city}}</span></p>
               <p class="text-gray-700 text-2xl">Location: <span class="text-xl text-blue-950">{{gym.location}}</span></p>
-              <form action="/paypal_payment" method="post">
+
+              <!-- payment HERE -->
+              <!-- <form action="/paypal_payment" method="post">
                   <input type="hidden" name="price" value="{{gym.price_by_month}}">
                   <input type="hidden" name="duration" value="monthly">
+                  <input type="hidden" name="token" value=`${token}`>
+                  <input type="hidden" name="gym_id" value="{{gym.id}}">
                   <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
                       Book Now (Monthly)
+                      
                   </button>
-              </form>
+              </form> -->
 
               <div id="purchase-container" class="flex flex-col">
                 <input type="date" name="" id="purchase-date" value="{{ date }}" class="mx-10 mt-10 text-center">
