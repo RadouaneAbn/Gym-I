@@ -19,6 +19,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 from server.models.engine.secure import verify_password
 from server.models.extra import resize_128
+from server.auth.auth import check_token
+
 
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 IMG_BB_TOKEN = "dfcbe0e16596fd0c2dbb83c94c90718b"
@@ -174,3 +176,26 @@ async def create_client(file_upload: UploadFile = None,
     # print(new_client)
     new_client.save()
     return {"detail": "User created successfuly"}, HTTP_201_CREATED
+
+@client_router.post("/update_picture/")
+def update_profile_picture(file_upload: UploadFile = None,
+                           user: Client = Depends(check_token)):
+    img = file_upload.file.read()
+    img_128 = resize_128(img)
+    payload = {
+            "key": IMG_BB_TOKEN
+        }
+    payload_resized_img = {
+            "key": IMG_BB_TOKEN
+    }
+
+    res = requests.post(IMG_BB_URL, files={"image": img}, data=payload)
+    res_resize = requests.post(IMG_BB_URL, files={"image": img_128}, data=payload_resized_img)
+
+    user.profile_picture = res_resize.json()["data"]["display_url"]
+    user.profile_picture_original = res.json()["data"]["display_url"]
+
+    user.save()
+
+    return {"detail": "profile picture updated successfuly"}, 200
+
