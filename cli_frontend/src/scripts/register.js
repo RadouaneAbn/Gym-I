@@ -2,6 +2,17 @@ $(document).ready(function () {
     start();
 });
 
+function onceCall(callback) {
+    let called = false;
+  
+    return (...args) => {
+      if (!called) {
+        called = true;
+        return callback(...args);
+      }
+    };
+  }
+
 let valid = 1;
 let validEmail = 1;
 
@@ -151,33 +162,36 @@ function popForProfilePic(firstName, lastName, email, passWord) {
         profilePicture.src = URL.createObjectURL(inputFile.files[0])
     }
 
-    nextBtn.onclick = function() {
-        // console.log(firstName)
-        const img = inputFile.files[0];
-        const dataForm = new FormData();
-        dataForm.append('first_name', firstName);
-        dataForm.append('last_name', lastName);
-        dataForm.append('email', email);
-        dataForm.append('password', passWord);
-        if (img) {
-            // console.log('img')
-            dataForm.append('file_upload', img)
-        }
+    const createClientOnce = onceCall(createClient);
 
-        // console.log(dataForm);
+    nextBtn.addEventListener('click', () => {
+        createClientOnce(inputFile.files[0], firstName, lastName, email, passWord)
+    })
+}
 
-        fetch('http://0.0.0.0:5002/clients/', {
-            method: 'POST',
-            body: dataForm,
-        })
-        .then(data => {
-            // console.log(data);
-            if (data.ok) {
-                // console.log('ok');
-                window.location.href = '/signin';
-            }
-        })
+function createClient(img, firstName, lastName, email, passWord) {
+    console.log(firstName)
+    const dataForm = new FormData();
+    dataForm.append('first_name', firstName);
+    dataForm.append('last_name', lastName);
+    dataForm.append('email', email);
+    dataForm.append('password', passWord);
+    if (img) {
+        // console.log('img')
+        dataForm.append('file_upload', img)
     }
 
+    // console.log(dataForm);
 
+    fetch('http://0.0.0.0:5002/clients/', {
+        method: 'POST',
+        body: dataForm,
+    })
+    .then(data => {
+        // console.log(data);
+        if (data.ok) {
+            // console.log('ok');
+            window.location.href = '/signin';
+        }
+    })
 }

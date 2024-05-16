@@ -18,6 +18,18 @@ function start() {
     pwdMsg = document.getElementById('err-pwd')
 
     submit.addEventListener("click", login)
+
+    email.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13) {
+            login();
+        }
+    })
+
+    pwd.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13) {
+            login();
+        }
+    })
 }
 
 function emailSyntax() {

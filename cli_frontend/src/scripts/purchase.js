@@ -7,21 +7,27 @@ document.addEventListener("DOMContentLoaded",  function() {
     purchaseBtn.addEventListener('click', () => { enrole(purchaseDate.value, purchaseMonthNumber.value, gymId, token) })
 })
 
-async function enrole (date, n, gymId, token) {
-    // console.log(n.value)
-    const response = await fetch('http://0.0.0.0:5002/client/gyms/enrol', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            'gym_id': gymId,
-            'date': date,
-            'months': n
-        })
-    })
-    const result = await response.json();
-    console.log(result)
+// async function enrole (date, n, gymId, token) {
+//     // console.log(n.value)
+//     const form = FormData();
+//     form.a
 
-}
+// }
+
+// async function enrole (date, n, gymId, token) {
+//     const response = await fetch('http://0.0.0.0:5002/client/gyms/enrol', {
+//         method: 'POST',
+//         headers: {
+//             'Authorization': `Bearer ${token}`,
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             'gym_id': gymId,
+//             'date': date,
+//             'months': n
+//         })
+//     })
+//     const result = await response.json();
+//     console.log(result)
+
+// }

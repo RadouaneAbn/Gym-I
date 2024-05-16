@@ -7,9 +7,9 @@ IMG_SIZE = (128, 128)
 
 def resize_128(img_data):
     img = Image.open(BytesIO(img_data))
-    resized_img = img.resize(IMG_SIZE, Image.Resampling.LANCZOS)
+    img.thumbnail(IMG_SIZE, Image.Resampling.LANCZOS)
 
     resized_buffer = BytesIO()
-    resized_img.save(resized_buffer, format=img.format)
+    img.save(resized_buffer, format=img.format)
     resized_buffer.seek(0)
     return resized_buffer.getvalue()

@@ -13,9 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet">  
-    <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', path='/src/styles/output.css')}}">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="/cli_frontend/src/profile.js"></script>
+    <script src="/cli_frontend/src/scripts/profile.js"></script>
 
     <style>
         body {
@@ -36,7 +36,7 @@
         <img alt="profile picture"
         id="profile_picture"
         src="https://i.ibb.co/whS5nPK/no-pic.png&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-        class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer"
+        class="relative inline-block object-cover group object-center w-12 h-12 rounded-full cursor-pointer "
         data-popover-target="profile-menu" />
       <ul role="menu" data-popover="profile-menu" data-popover-placement="bottom"
         class="absolute hidden group-hover:flex right-1 z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
@@ -127,92 +127,16 @@
     </aside>
     <main id="dynamicMain" class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
         <!-- dynamic profile page -->
-        <!-- <div class="p-2 md:p-4">
-          <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-              <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
-          
-              <div class="grid max-w-2xl mx-auto mt-8">
-                  <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
-          
-                      <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                          src="${user.profile_picture}&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-                          alt="Bordered avatar">
-          
-                      <div class="flex flex-col space-y-5 sm:ml-8">
-                          <button type="button"
-                              class="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
-                              Change picture
-                          </button>
-                          <button type="button"
-                              class="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
-                              Delete picture
-                          </button>
-                      </div>
-                  </div>
-          
-                  <div class="items-center mt-8 sm:mt-14 text-[#202142]">
-          
-                      <div
-                          class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                          <div class="w-full">
-                              <label for="first_name"
-                                  class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                                  first name</label>
-                              <input type="text" id="first_name"
-                                  class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Your first name" value="${user.first_name}" required>
-                          </div>
-          
-                          <div class="w-full">
-                              <label for="last_name"
-                                  class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                                  last name</label>
-                              <input type="text" id="last_name"
-                                  class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Your last name" value="${user.last_name}" required>
-                          </div>
-          
-                      </div>
-                      <div
-                          class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                          <div class="w-full">
-                              <label for="city"
-                                  class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                                  City</label>
-                              <input type="text" id="city"
-                                  class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Entre your City" value="Marrakech" required>
-                          </div>
-          
-                          <div class="w-full">
-                              <label for="Mobile"
-                                  class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                                  phone</label>
-                              <input type="number" id="phone"
-                                  class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="+212 ..." value="06000000" required>
-                          </div>
-          
-                      </div>
-          
-                      <div class="mb-2 sm:mb-6">
-                          <label for="addresse"
-                              class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Addresse</label>
-                          <input type="text" id="addresse"
-                              class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                              placeholder="Enter your addresse" required>
-                      </div>
-                      
-                      <div class="flex justify-end">
-                          <button type="submit"
-                              class="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Save</button>
-                      </div>
-          
-                  </div>
-              </div>
-          </div>
-          </div> -->
+
     </main>
 </div>
+
+<div id="popups" class="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-50">
+  <!-- this div is for popup windows -->
+
+</div>
+
+
+
 </body>
 </html>

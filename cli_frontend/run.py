@@ -207,8 +207,31 @@ async def tp(request: Request):
         }
     )
 
+# @app.post("/paypal_payment")
+# async def process_paypal_payment(price: float = Form(...), duration: str = Form(...)):
+#     payment = paypalrestsdk.Payment({
+#         "intent": "sale",
+#         "payer": {"payment_method": "paypal"},
+#         "transactions": [{
+#             "amount": {"total": price, "currency": "USD"},
+#             "description": "Gym subscription payment"
+#         }],
+#         "redirect_urls": {
+#             "return_url": "http://0.0.0.0:5000/paypal_success",
+#             "cancel_url": "https://www.youtube.com"
+#         }
+#     })
+#     if payment.create():
+#         print("pay", payment)
+#         return RedirectResponse(url=payment.links[1].href)
+#     else:
+#         raise HTTPException(status_code=400, detail="Payment creation failed")
+    
 @app.post("/paypal_payment")
-async def process_paypal_payment(client_id: str = Form(...), gym_id: str = Form(...), price: float = Form(...), duration: str = Form(...)):
+async def process_paypal_payment(client_id: str = Form(...),
+                                 gym_id: str = Form(...),
+                                 price: float = Form(...),
+                                 duration: str = Form(...)):
     payment = paypalrestsdk.Payment({
         "intent": "sale",
         "payer": {"payment_method": "paypal"},
@@ -222,16 +245,18 @@ async def process_paypal_payment(client_id: str = Form(...), gym_id: str = Form(
         },
     })
     if payment.create():
+        print("pay", payment)
         return RedirectResponse(url=payment.links[1].href)
     else:
         raise HTTPException(status_code=400, detail="Payment creation failed")
-    
+
 @app.get("/paypal_success")
 async def paypal_success(request: Request, client_id: str = Query(...), gym_id: str = Query(...)):
     payment_id = request.query_params.get('paymentId')
     payer_id = request.query_params.get('PayerID')
 
     payment = paypalrestsdk.Payment.find(payment_id)
+    print("pay2", payment)
     if payment.execute({"payer_id": payer_id}):
         # Payment successful, store payment details in the database
         # Update user's subscription details
