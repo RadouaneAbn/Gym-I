@@ -178,6 +178,7 @@ function createClient(img, firstName, lastName, email, passWord) {
     dataForm.append('password', passWord);
     if (img) {
         // console.log('img')
+        $('label#next-btn').text('Uploading ...') 
         dataForm.append('file_upload', img)
     }
 
