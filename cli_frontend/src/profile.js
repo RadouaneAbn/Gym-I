@@ -1,61 +1,44 @@
-function PaymentPage() {
-    return `
-    <div class="items-center mt-8 sm:mt-14 text-[#202142]">
-    <h1 class="text-4xl flex items-center justify-center underline text-indigo-900 mx-auto text-semibold mb-4">Payment</h1>
-    
-    <div class="mb-2 sm:mb-6">
-    <label for="name"
-    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Youy full name</label>
-    <input type="text" id="name"
-    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-    placeholder="enter your full name" value="" required>
-    </div>
-    
-    <div class="mb-2 sm:mb-6">
-    <label for="account_number"
-    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Account Number</label>
-    <input type="text" id="account_number"
-    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-    placeholder="0000 0000 0000 0000" value="" required>
-    </div>
-    
-    <div
-        class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-        <div class="w-full">
-            <label for="expiry"
-                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Expiry</label>
-            <input type="text" id="expiry"
-                class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                placeholder="MM/YY" value="" required>
+const historicPage = `
+    <div class="flex-1 mx-auto w-full h-1/4">
+          you can find all your historic gym subsctiption here.
+          <p>all suscribtion still active are shown in the table with active status</p>
         </div>
-    
-        <div class="w-full">
-            <label for="cvv"
-                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">CVV</label>
-            <input type="text" id="cvv"
-                class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                placeholder="000" value="" required>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                <table
+                  class="min-w-full text-center text-sm font-light text-surface dark:text-white">
+                  <thead
+                    class="border-b border-zinc-200 bg-[#332D2D] font-medium text-white dark:border-white/10">
+                    <tr>
+                      <th scope="col" class=" px-6 py-4">Gym Name</th>
+                      <th scope="col" class=" px-6 py-4">Start at</th>
+                      <th scope="col" class=" px-6 py-4">End at</th>
+                      <th scope="col" class=" px-6 py-4">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-gray-50">
+                    <tr class="border-b border-neutral-600 dark:border-white/10">
+                      <td class="whitespace-nowrap  px-6 py-4 font-medium">1</td>
+                      <td class="whitespace-nowrap  px-6 py-4">Mark</td>
+                      <td class="whitespace-nowrap  px-6 py-4">Otto</td>
+                      <td class="whitespace-nowrap  px-6 py-4">@mdo</td>
+                    </tr>
+                    <tr class="border-b border-neutral-600 dark:border-white/10">
+                      <td class="whitespace-nowrap  px-6 py-4 font-medium">2</td>
+                      <td class="whitespace-nowrap  px-6 py-4 ">Jacob</td>
+                      <td class="whitespace-nowrap  px-6 py-4">Thornton</td>
+                      <td class="whitespace-nowrap  px-6 py-4">@fat</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-    
-    </div>
-    
-    <div class="mb-2 sm:mb-6">
-        <label for="password"
-            class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Password</label>
-        <input type="password" id="passwor"d
-            class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-            placeholder="Enter old password" required>
-    </div>
-    
-    
-    <div class="flex justify-end">
-        <button type="submit"
-            class="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Save</button>
-    </div>
-    
-    </div>
     `;
-}
+
 
 function ProfilePage(user) {
     return `<div class="p-2 md:p-4">
@@ -177,8 +160,8 @@ function appendToDiv(content) {
 // Add event listener to the 'payment' button after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // console.log("DOM Loaded");
-    let paymentButton = document.getElementById('payment');
-    let paymentMenu = document.getElementById('payment_menu');
+    let historicButton = document.getElementById('historic');
+    let historicMenu = document.getElementById('historic_menu');
     let profileButton = document.getElementById('Profile');
     let profileMenu = document.getElementById('Profile_menu');
     let helpButton = document.getElementById('Help');
@@ -191,13 +174,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // console.log(paymentButton);
-    paymentButton.addEventListener('click', function(event) {
+    historicButton.addEventListener('click', function(event) {
     //   console.log("Button clicked");
-      changeMainContent(payementMain); // Call the function to change the content
+        changeMainContent(historicPage); // Call the function to change the content
     });
-    paymentMenu.addEventListener('click', function(event) {
+    historicMenu.addEventListener('click', function(event) {
         // console.log("Button clicked");
-        changeMainContent(payementMain); // Call the function to change the content
+        changeMainContent(historicPage); // Call the function to change the content
       });
 
     // console.log("DOM Loaded");
