@@ -58,7 +58,7 @@ function popUpDelete() {
     `
 }
 
-function PaymentPage() {
+function historyPage() {
     return `
     <div class="items-center mt-8 sm:mt-14 text-[#202142]">
     <h1 class="text-4xl flex items-center justify-center underline text-indigo-900 mx-auto text-semibold mb-4">Payment</h1>
@@ -327,55 +327,3 @@ function changePicture() {
     })
 }
 
-// Add event listener to the 'payment' button after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // console.log("DOM Loaded");
-    let paymentButton = document.getElementById('payment');
-    let paymentMenu = document.getElementById('payment_menu');
-    let profileButton = document.getElementById('Profile');
-    let profileMenu = document.getElementById('Profile_menu');
-    let helpButton = document.getElementById('Help');
-    let helpMenu = document.getElementById('help_menu');
-    let proButton = document.getElementById('Pro');
-    let proMenu = document.getElementById('pro_menu');
-    // const changePicBtn = document.getElementById('change-picture');
-
-    // console.log(paymentButton);
-    paymentButton.addEventListener('click', function(event) {
-    //   console.log("Button clicked");
-      changeMainContent(payementMain); // Call the function to change the content
-    });
-    paymentMenu.addEventListener('click', function(event) {
-        // console.log("Button clicked");
-        changeMainContent(payementMain); // Call the function to change the content
-      });
-
-    profileButton.addEventListener('click', function(event) {
-    //   console.log("Button clicked");
-    builtProfileInfoPage();
-    // Call the function to change the content
-    });
-    profileMenu.addEventListener('click', function(event) {
-        // console.log("Button clicked");
-        builtProfileInfoPage();
-         // Call the function to change the content
-    });
-    helpButton.addEventListener('click', function(event) {
-      console.log("Button clicked");
-      changeMainContent(helpMain); // Call the function to change the content
-    });
-    helpMenu.addEventListener('click', function(event) {
-        console.log("Button clicked");
-        changeMainContent(helpMain); // Call the function to change the content
-      });
-
-
-    proButton.addEventListener('click', function(event) {
-      console.log("Button clicked");
-      changeMainContent(proMain); // Call the function to change the content
-    });
-    proMenu.addEventListener('click', function(event) {
-        console.log("Button clicked");
-        changeMainContent(proMain); // Call the function to change the content
-      });
-  });

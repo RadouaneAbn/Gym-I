@@ -27,6 +27,7 @@ from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from server.models.membership import EnrolClient
+from server.auth.auth import check_token
 
 
 
@@ -128,6 +129,33 @@ async def about(request: Request):
         "profile.html",
         {
             "request": request,
+        }
+    )
+
+# @app.get("/history")
+# async def about(request: Request, user: Client = Depends(check_token)):
+    enrolls = user.enrolments
+    enrolls = [enroll.to_dict() for enroll in enrolls]
+    for gym in enrolls:
+        setattr(gym, "gym_name", md.storage.get(Gym, enrolls.gym_id).name)
+        gym["gym_name"] = md.storage.get(Gym, enrolls.gym_id).name
+    
+    print(enrolls)
+    return templates.TemplateResponse(
+        "history.html",
+        {
+            "enrolls": enrolls,
+            "request": request
+        }
+    )
+
+@app.get("/history")
+async def about(request: Request):
+    
+    return templates.TemplateResponse(
+        "history.html",
+        {
+            "request": request
         }
     )
 
