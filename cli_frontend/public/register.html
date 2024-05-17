@@ -98,13 +98,14 @@
     </main>
   </div>
     
-    
+<div class="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-50">
+
   <div id="profile_pic_container" style="display: none;"
-  class="bg-gray-900 bg-opacity-50 w-full h-screen flex justify-center items-center">
+  class="bg-gray-900 bg-opacity-50  w-full h-screen flex justify-center items-center">
   <!-- style="visibility: hidden;" -->
       <div 
       style="width: 500px; height: 600px;"
-      class="bg-gray-100 p-4 rounded-md text-center flex flex-col justify-center items-center">
+      class="bg-gray-100 p-4 border border-gray-900 rounded-md text-center relative flex flex-col justify-center items-center">
           <h2 class="text-xl font-medium">Upload Your Profile Picture</h2>
           <img
           src="https://i.ibb.co/whS5nPK/no-pic.png"
@@ -112,8 +113,8 @@
           alt="profile picture"
           id="profile-pic" style="height: 300px; width: 300px;">
           <div class="mt-10 flex justify-between px-8 w-full">
-              <label style="width: 160px; height: 50px;" for="input-file" class=" bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">Upload image</label>
-              <label id="next-btn" style="width: 160px; height: 50px;"  class="bg-blue-500 text-white font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
+              <label style="width: 160px; height: 50px;" for="input-file" class=" bg-blue-500 text-white text-sm font-bold py-3 px-4 rounded cursor-pointer hover:bg-blue-600 transition">Upload image</label>
+              <label id="next-btn" style="width: 160px; height: 50px;"  class="bg-blue-500 text-white text-sm font-bold py-3 px-5 rounded cursor-pointer hover:bg-blue-600 transition">
                   Next
               </label>
               
@@ -121,6 +122,8 @@
           <input type="file" accept="image/*" id="input-file" style="display: none;">
       </div>
     </div>
+</div>
+
 
 
     <script>
