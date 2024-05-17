@@ -1,3 +1,6 @@
+let valid = 1;
+let validEmail = 1;
+
 $(document).ready(function () {
     start();
 });
@@ -11,19 +14,6 @@ function onceCall(callback) {
         return callback(...args);
       }
     };
-}
-
-let valid = 1;
-let validEmail = 1;
-
-function loadProfilePicture() {
-    const registerCon = document.getElementById('register-form-container');
-    const profilePicture = document.getElementById('profile-pic');
-    const profilePictureCon = document.getElementById('profile_pic_container');
-    const inputFile = document.getElementById('input-file');
-    const nextBtn = document.getElementById('next-btn');
-
-
 }
 
 function start() {

@@ -28,7 +28,7 @@ input_msg = {
         "email": "    -> [email]      = ",
         "password": "    -> [password]   = ",
         },
-    "Gym" : {
+    "Gym": {
         "name": "    -> [name]           = ",
         "city_id": "    -> [city_id]        = ",
         "owner_id": "    -> [owner_id]        = ",
@@ -52,9 +52,9 @@ input_msg = {
         }
 }
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = "gym -> "
-
     class_missing = "** class name missing **"
     class_nexist = "** class doesn't exist **"
     id_missing = "** instance id missing **"
@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
-    
+
     def do_all(self, line):
         class_name = None
         if line:
@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(line)
         if not self.class_check(args):
             return
-        
+
         if len(args) < 2:
             print(self.id_missing)
             return
@@ -123,7 +123,6 @@ class HBNBCommand(cmd.Cmd):
         """"""
         server.models.storage.clean()
 
-    
     def do_create(self, line):
         """create <classname>
         Create a new instance from the <classname>"""
@@ -154,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
             for am_id in new_dict.pop("amenities").split(", "):
                 amenity = all_amenities.get(f"Amenity.{am_id}", None)
                 if not amenity:
-                    print("\nmissing amenity id: [" + am_id + "]\n") 
+                    print("\nmissing amenity id: [" + am_id + "]\n")
                     return
                 amenity_object_list.append(amenity)
             new_dict["amenities"] = amenity_object_list
@@ -178,22 +177,22 @@ class HBNBCommand(cmd.Cmd):
         if not inst:
             print(self.inst_missing)
             return
-        
+
         print(inst)
 
     def do_destroy(self, line):
         args = shlex.split(line)
         if not self.class_check(args):
             return
-        
+
         if len(args) < 2:
             print(self.id_missing)
-        
+
         inst = server.models.storage.get(classes[args[0]], args[1])
         if not inst:
             print(self.inst_missing)
             return
-        
+
         server.models.storage.delete(inst)
         server.models.storage.save()
 
@@ -211,6 +210,6 @@ class HBNBCommand(cmd.Cmd):
 
         return True
 
-    
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
