@@ -7,7 +7,6 @@ from server.api.schemas.all_schemas import EnrolData
 from server.auth.auth import check_token
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from starlette.status import HTTP_200_OK
 
 
 enrolment_router = APIRouter()
@@ -18,7 +17,7 @@ async def get_client_gyms(user: Client = Depends(check_token)):
     """ This end point returns all purchases made by client """
     return {
         "gyms": [purchase.to_dict() for purchase in user.enrolments]
-        }, HTTP_200_OK
+        }
 
 
 @enrolment_router.post("/client/gyms/enrol")
@@ -34,4 +33,4 @@ async def enrole_client_gym(data: EnrolData,
         to_date=start_date + relativedelta(months=int(data.months))
     )
     new_sub.save()
-    return new_sub.to_dict(), HTTP_200_OK
+    return new_sub.to_dict()

@@ -7,7 +7,6 @@ from fastapi import HTTPException
 from server.auth.auth import *
 from server.api.schemas.all_schemas import (
     OwnerModel, OwnerModelPUT, OwnerModelPWD)
-from starlette.status import HTTP_201_CREATED, HTTP_200_OK
 
 owner_router = APIRouter()
 
@@ -34,7 +33,7 @@ async def create_owner(owner: OwnerModel):
         raise HTTPException(status_code=409, detail="Email already exists.")
     new_owner = Owner(**owner.__dict__)
     new_owner.save()
-    return {"detail": "Owner created successfully"}, HTTP_201_CREATED
+    return {"detail": "Owner created successfully"}
 
 
 @owner_router.put("/owners/{owner_id}")
@@ -59,7 +58,7 @@ async def update_user_password(owner_id: str, owner: OwnerModelPWD):
         raise HTTPException(status_code=401, detail="Wrong password")
     target_owner.password = owner.new_password
     target_owner.save()
-    return {"detail": "Password changed successfully"}, HTTP_200_OK
+    return {"detail": "Password changed successfully"}
 
 
 @owner_router.delete("/owners/{owner_id}/")
@@ -70,4 +69,4 @@ async def delete_owner(owner_id: str):
         raise HTTPException(status_code=404, detail="Not Found")
     storage.delete(owner)
     storage.save()
-    return {"detail": "Owner deleted successfully"}, HTTP_200_OK
+    return {"detail": "Owner deleted successfully"}

@@ -6,7 +6,6 @@ from server.models.city import City
 from server.models import storage
 from server.api.schemas.all_schemas import GymAmenity, GymSearch
 from math import ceil
-from starlette.status import HTTP_200_OK
 
 
 gym_filter = APIRouter()
@@ -19,7 +18,7 @@ def filter_by_amenity(gyms, amenity_list):
     for gym in gyms:
         if amenity_list.issubset(gym.amenities):
             filtered_gyms.append(gym)
-    return filtered_gyms, HTTP_200_OK
+    return filtered_gyms
 
 
 def get_gym_filter(search_text, amenity_ids, city_ids, page, price_range):
@@ -78,7 +77,7 @@ async def get_gym_amenity(data: GymAmenity):
         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
     return {
         count: [gym.to_dict(pop=["amenities"]) for gym in all_gymes]
-        }, HTTP_200_OK
+        }
 
 
 @gym_filter.post("/gym_search/")
@@ -86,4 +85,4 @@ async def gym_search(data: GymSearch):
     """ This end point is responsible for the seatch results """
     if not data.name:
         return []
-    return storage.search(data.name), HTTP_200_OK
+    return storage.search(data.name)

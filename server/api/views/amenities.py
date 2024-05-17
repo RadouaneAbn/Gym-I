@@ -5,7 +5,6 @@ from server.models.amenity import Amenity
 from server.models import storage
 from fastapi import HTTPException
 from server.api.schemas.all_schemas import AmenityModel
-from starlette.status import HTTP_201_CREATED, HTTP_200_OK
 amenity_router = APIRouter()
 
 
@@ -13,7 +12,7 @@ amenity_router = APIRouter()
 async def get_amenities():
     """ Return all amenities """
     return [amenity.to_dict() for amenity in storage.all(
-        Amenity).values()], HTTP_200_OK
+        Amenity).values()]
 
 
 @amenity_router.get("/amenities/{amenity_id}")
@@ -22,7 +21,7 @@ async def get_amenity(amenity_id: str):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         raise HTTPException(status_code=404, detail="Not Found")
-    return amenity.to_dict(), HTTP_200_OK
+    return amenity.to_dict()
 
 
 @amenity_router.post("/amenities/")
@@ -30,7 +29,7 @@ async def create_amenity(amenity: AmenityModel):
     """ POST request to create an Amenity """
     new_amenity = Amenity(**amenity.__dict__)
     new_amenity.save()
-    return {"detail": "amenity created successfully"}, HTTP_201_CREATED
+    return {"detail": "amenity created successfully"}
 
 
 @amenity_router.put("/amenities/{amenity_id}")
@@ -46,7 +45,7 @@ async def update_amenity(amenity_id: str, amenity: AmenityModel):
             continue
         setattr(inst, key, value)
     inst.save()
-    return {"detail": "amenity updated successfully"}, HTTP_200_OK
+    return {"detail": "amenity updated successfully"}
 
 
 @amenity_router.delete("/amenities/{amenity_id}/")
@@ -56,4 +55,4 @@ async def delete_amenity(amenity_id: str):
         raise HTTPException(status_code=404, detail="Not Found")
     storage.delete(amenity)
     storage.save()
-    return {"detail": "amenity deleted successfully"}, HTTP_200_OK
+    return {"detail": "amenity deleted successfully"}

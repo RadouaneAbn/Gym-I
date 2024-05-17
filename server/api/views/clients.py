@@ -6,7 +6,6 @@ from fastapi import HTTPException
 from server.api.schemas.all_schemas import (
     ClientModelPUT, ClientModelPWD, EmailCheck, ClientLogin)
 from server.api.schemas.all_schemas import *
-from starlette.status import HTTP_201_CREATED, HTTP_200_OK
 from server.models.engine.secure import verify_password
 from server.models.extra import resize_128, upload_picture
 from server.auth.auth import *
@@ -23,7 +22,7 @@ client_router = APIRouter()
 async def get_users():
     """ Return all clients """
     return [client.to_dict() for client in storage.all(
-        Client).values()], HTTP_200_OK
+        Client).values()]
 
 
 @client_router.get("/clients/{client_id}")
@@ -32,7 +31,7 @@ async def get_user(client_id: str):
     client = storage.get(Client, client_id)
     if client is None:
         raise HTTPException(status_code=404, detail="Not Found")
-    return client.to_dict(True), HTTP_200_OK
+    return client.to_dict(True)
 
 
 @client_router.put("/clients/{client_id}")
@@ -48,7 +47,7 @@ async def update_user(client_id: str, client: ClientModelPUT):
             continue
         setattr(inst, key, value)
     inst.save()
-    return {"detail": "Client created successfully"}, HTTP_200_OK
+    return {"detail": "Client created successfully"}
 
 
 @client_router.put("/clients/password/{client_id}")
@@ -60,7 +59,7 @@ async def update_user_password(client_id: str, client: ClientModelPWD):
 
     target_client.password = client.new_password
     target_client.save()
-    return {"detail": "Password changed successfully"}, HTTP_200_OK
+    return {"detail": "Password changed successfully"}
 
 
 @client_router.delete("/clients/")
@@ -68,13 +67,13 @@ async def delete_client(user: Client = Depends(check_token)):
     """ Delete a client """
     storage.delete(user)
     storage.save()
-    return {"detail": "Client deleted successfully"}, HTTP_200_OK
+    return {"detail": "Client deleted successfully"}
 
 
 @client_router.post("/emailcheck/")
 async def email_check(data: EmailCheck):
     """ return true if the given email is not already in the database """
-    return storage.email_exists(Client, data.email), HTTP_200_OK
+    return storage.email_exists(Client, data.email)
 
 
 @client_router.post("/clients/login", response_model=Token)
@@ -85,7 +84,7 @@ async def client_login(info: ClientLogin):
     token = create_access_token({
         "sub": user.email
     })
-    return {"access_token": token, "token_type": "bearer"}, HTTP_200_OK
+    return {"access_token": token, "token_type": "bearer"}
 
 
 @client_router.post("/clients/")
@@ -111,7 +110,7 @@ async def create_client(file_upload: UploadFile = None,
         new_client.profile_picture_original = upload_picture(img)
 
     new_client.save()
-    return {"detail": "User created successfuly"}, HTTP_201_CREATED
+    return {"detail": "User created successfuly"}
 
 
 @client_router.put("/profile_picture/")
@@ -125,7 +124,7 @@ def update_profile_picture(file_upload: UploadFile = None,
     user.profile_picture_original = upload_picture(img)
     user.save()
 
-    return {"detail": "profile picture updated successfuly"}, HTTP_200_OK
+    return {"detail": "profile picture updated successfuly"}
 
 
 @client_router.delete("/profile_picture/{user_id}")
@@ -137,4 +136,4 @@ def delete_client_profile_picture(user_id: str):
     user.profile_picture = None
     user.profile_picture_original = None
     user.save()
-    return {"details": "Picture deleted successfuly"}, HTTP_200_OK
+    return {"details": "Picture deleted successfuly"}
