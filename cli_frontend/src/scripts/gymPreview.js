@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", async function() {
-    const profilePicture = document.getElementById('profile_picture');
+document.addEventListener('DOMContentLoaded', async function () {
+  const profilePicture = document.getElementById('profile_picture');
 
-    // getUserInfo(profilePicture);
-})
+  // getUserInfo(profilePicture);
+});
 
 // function getUserInfo(profilePicture) {
 

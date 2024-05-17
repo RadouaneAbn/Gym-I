@@ -1,9 +1,9 @@
-const amenityIds = []
-const cityIds = []
+const amenityIds = [];
+const cityIds = [];
 
-document.addEventListener("DOMContentLoaded", function() {
-  const decrementButtons = document.querySelectorAll("[data-hs-input-number-decrement]");
-  const incrementButtons = document.querySelectorAll("[data-hs-input-number-increment]");
+document.addEventListener('DOMContentLoaded', function () {
+  const decrementButtons = document.querySelectorAll('[data-hs-input-number-decrement]');
+  const incrementButtons = document.querySelectorAll('[data-hs-input-number-increment]');
   // const inputFields = document.querySelectorAll("[data-hs-input-number-input]");
   // const buttons = document.querySelectorAll('.btn-gym_id');
   const filterBtn = document.getElementById('filter_btn');
@@ -12,34 +12,34 @@ document.addEventListener("DOMContentLoaded", function() {
   const prevPage = document.getElementById('prev_holder');
   const nextPage = document.getElementById('next_holder');
   const curPage = document.getElementById('cur_holder');
-  const nextBtn = document.getElementById('next_btn')
-  const prevBtn = document.getElementById('prev_btn')
+  const nextBtn = document.getElementById('next_btn');
+  const prevBtn = document.getElementById('prev_btn');
 
-  prevPage.addEventListener('click', goPrevPage)
-  prevBtn.addEventListener('click', goPrevPage)
+  prevPage.addEventListener('click', goPrevPage);
+  prevBtn.addEventListener('click', goPrevPage);
 
-  nextPage.addEventListener('click', goNextPage)
-  nextBtn.addEventListener('click', goNextPage)
+  nextPage.addEventListener('click', goNextPage);
+  nextBtn.addEventListener('click', goNextPage);
 
-  function goNextPage() {
-    const pageNumber = parseInt(nextPage.outerText, 10)
+  function goNextPage () {
+    const pageNumber = parseInt(nextPage.outerText, 10);
     fetchData(pageNumber);
     if (nextBtn.dataset.count === nextPage.outerText) {
       // console.log('hide');
       $('.next_vis').css('visibility', 'hidden');
     }
-    if (curPage.outerText === "1") {
+    if (curPage.outerText === '1') {
       // console.log('unhide');
       $('.prev_vis').css('visibility', 'visible');
     }
     prevPage.querySelector('span').textContent = curPage.outerText;
     curPage.querySelector('span').textContent = nextPage.outerText;
-    nextPage.querySelector('span').textContent = pageNumber + 1
+    nextPage.querySelector('span').textContent = pageNumber + 1;
     // console.log(pageNumber)
   }
 
-  function goPrevPage() {
-    const pageNumber = parseInt(prevPage.outerText, 10)
+  function goPrevPage () {
+    const pageNumber = parseInt(prevPage.outerText, 10);
     fetchData(pageNumber);
     if (pageNumber === 1) {
       $('.prev_vis').css('visibility', 'hidden');
@@ -55,21 +55,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
   filterBtn.addEventListener('click', () => {
     fetchData(1)
-    .then(() => {
+      .then(() => {
       // console.log(nextBtn.dataset.count);
-      if (nextBtn.dataset.count === '1') {
-        $('.next_vis').css('visibility', 'hidden');
-      } else {
-        $('.next_vis').css('visibility', 'visible');
-      }
-    });
+        if (nextBtn.dataset.count === '1') {
+          $('.next_vis').css('visibility', 'hidden');
+        } else {
+          $('.next_vis').css('visibility', 'visible');
+        }
+      });
   });
 
   cityBtns.forEach(btn => {
     btn.addEventListener('click', function () {
       // console.log(btn.id)
-      const bx = btn.querySelector('input[type="checkbox"]')
-      
+      const bx = btn.querySelector('input[type="checkbox"]');
+
       if (bx.checked) {
         // console.log('check')
         cityIds.push(btn.id);
@@ -77,17 +77,17 @@ document.addEventListener("DOMContentLoaded", function() {
         // console.log('uncheck')
         const idx = cityIds.indexOf(btn.id);
         if (idx !== -1) {
-          cityIds.splice(idx, 1)
+          cityIds.splice(idx, 1);
         }
       }
-    })
-  })
+    });
+  });
 
   amenityBtns.forEach(btn => {
     btn.addEventListener('click', function () {
       // console.log(btn.id)
-      const bx = btn.querySelector('input[type="checkbox"]')
-      
+      const bx = btn.querySelector('input[type="checkbox"]');
+
       if (bx.checked) {
         // console.log('check')
         amenityIds.push(btn.id);
@@ -95,12 +95,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // console.log('uncheck')
         const idx = amenityIds.indexOf(btn.id);
         if (idx !== -1) {
-          amenityIds.splice(idx, 1)
+          amenityIds.splice(idx, 1);
         }
       }
-    })
-  })
-
+    });
+  });
 
   // buttons.forEach(btn => {
   //   btn.addEventListener('click', function() {
@@ -108,15 +107,15 @@ document.addEventListener("DOMContentLoaded", function() {
   //     window.location.href = urlItem
   //   })
   // })
-  
+
   $(document).on('click', 'button.btn-gym_id', function () {
-    window.location.href = '/user/gymes/' + $(this).attr('id')
-  })
-// decrement price filter
+    window.location.href = '/user/gymes/' + $(this).attr('id');
+  });
+  // decrement price filter
   decrementButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const input = this.parentElement.querySelector("[data-hs-input-number-input]");
-      let value = parseInt(input.value);
+    button.addEventListener('click', function () {
+      const input = this.parentElement.querySelector('[data-hs-input-number-input]');
+      const value = parseInt(input.value);
       if (!isNaN(value) && value > 20) {
         input.value = value - 1;
       } else {
@@ -124,11 +123,11 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
-// increment the price filter
+  // increment the price filter
   incrementButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const input = this.parentElement.querySelector("[data-hs-input-number-input]");
-      let value = parseInt(input.value);
+    button.addEventListener('click', function () {
+      const input = this.parentElement.querySelector('[data-hs-input-number-input]');
+      const value = parseInt(input.value);
       if (!isNaN(value) && value < 150) {
         input.value = value + 1;
       } else {
@@ -138,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-function appendGym(gym) {
+function appendGym (gym) {
   const block = `
   <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
           <div
@@ -196,54 +195,54 @@ function appendGym(gym) {
         </div> 
   `;
 
-  $('div#gym_container').append(block)
+  $('div#gym_container').append(block);
 
   // data.forEach(gym => {
   //   $('div#gym_container').append(block)
   // })
 }
 
-async function filter(page) {
+async function filter (page) {
   const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "amenity_ids": amenityIds,
-      "city_ids": cityIds,
-      "page": page
+      amenity_ids: amenityIds,
+      city_ids: cityIds,
+      page
     })
   });
 
-  const newData = await response.json()
+  const newData = await response.json();
   return newData;
 }
 
 async function fetchData (page) {
   const newData = await filter(page);
   // console.log(newData)
-  const count = Object.keys(newData)[0]
-  const gymes = Object.values(newData)[0]
+  const count = Object.keys(newData)[0];
+  const gymes = Object.values(newData)[0];
 
-  $('#next_btn').attr('data-count', String(count))
+  $('#next_btn').attr('data-count', String(count));
 
-  $('div#gym_container').empty()
+  $('div#gym_container').empty();
   for (gym of gymes) {
     appendGym(gym);
   }
 }
 
-async function pageCount() {
+async function pageCount () {
   const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "amenity_ids": amenityIds,
-      "city_ids": cityIds,
-      "page": page
+      amenity_ids: amenityIds,
+      city_ids: cityIds,
+      page
     })
   });
 }

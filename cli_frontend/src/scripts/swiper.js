@@ -9,18 +9,18 @@ $(document).ready(function () {
       rotate: 0,
       stretch: -50,
       depth: 700,
-      modifier: 1.5,
+      modifier: 1.5
     },
     pagination: {
       el: '.swiper-pagination',
-      clickable: true,
+      clickable: true
     },
     navigation: {
       nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      prevEl: '.swiper-button-prev'
     },
     autoplay: {
-      delay: 3000,
+      delay: 3000
     }
   });
 });

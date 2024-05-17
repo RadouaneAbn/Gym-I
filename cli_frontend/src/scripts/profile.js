@@ -1,7 +1,7 @@
 let userInfo;
 
-function popUpPicture(user) {
-    return `
+function popUpPicture (user) {
+  return `
     <div id="profile_pic_container"
     class="bg-gray-900 bg-opacity-50  w-full h-screen flex justify-center items-center">
 
@@ -30,11 +30,11 @@ function popUpPicture(user) {
 
         </div>
     </div>
-    `
+    `;
 }
 
-function popUpDelete() {
-    return `
+function popUpDelete () {
+  return `
     <div id="profile_pic_container"
     class="bg-gray-900 bg-opacity-50  w-full h-screen flex justify-center items-center">
 
@@ -55,11 +55,11 @@ function popUpDelete() {
             </div>
         </div>
     </div>
-    `
+    `;
 }
 
-function PaymentPage() {
-    return `
+function PaymentPage () {
+  return `
     <div class="items-center mt-8 sm:mt-14 text-[#202142]">
     <h1 class="text-4xl flex items-center justify-center underline text-indigo-900 mx-auto text-semibold mb-4">Payment</h1>
     
@@ -117,8 +117,8 @@ function PaymentPage() {
     `;
 }
 
-function ProfilePage(user) {
-    return `
+function ProfilePage (user) {
+  return `
 <div class="p-2 md:p-4">
     <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
         <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
@@ -206,123 +206,120 @@ function ProfilePage(user) {
     </div>`;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    builtProfileInfoPage();
-})
+document.addEventListener('DOMContentLoaded', function () {
+  builtProfileInfoPage();
+});
 
-function onceCall(callback) {
-    let called = false;
-  
-    return (...args) => {
-      if (!called) {
-        called = true;
-        return callback(...args);
-      }
-    };
+function onceCall (callback) {
+  let called = false;
+
+  return (...args) => {
+    if (!called) {
+      called = true;
+      return callback(...args);
+    }
+  };
 }
-  
 
-let helpMain = ``;
-let proMain = ``;
+const helpMain = '';
+const proMain = '';
 
-async function builtProfileInfoPage() {
-    const result = await fetch('http://0.0.0.0:5002/token_check', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        }
-    })
+async function builtProfileInfoPage () {
+  const result = await fetch('http://0.0.0.0:5002/token_check', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
     .then(res => res.json())
     .then(data => {
-        userInfo = data.user;
-        const pageContent = ProfilePage(data.user);
-        updateProfile(data.user)
-    })
+      userInfo = data.user;
+      const pageContent = ProfilePage(data.user);
+      updateProfile(data.user);
+    });
 }
 
-function updateProfile(user) {
-    document.getElementById('profile_main_picture').src = user.profile_picture_original
-    document.getElementById('first_name').value = user.first_name
-    document.getElementById('last_name').value = user.last_name
+function updateProfile (user) {
+  document.getElementById('profile_main_picture').src = user.profile_picture_original;
+  document.getElementById('first_name').value = user.first_name;
+  document.getElementById('last_name').value = user.last_name;
 
-    $('button#change-picture').on('click', changePicture)
-    $('button#delete-btn').on('click', deletPicture)
+  $('button#change-picture').on('click', changePicture);
+  $('button#delete-btn').on('click', deletPicture);
 }
 
-function deletPicture() {
-    console.log('del')
-    $('div#popups').append(popUpDelete())
-    $('#cancel-btn').on('click', () => {
-        $('div#popups').empty();
-    })
+function deletPicture () {
+  console.log('del');
+  $('div#popups').append(popUpDelete());
+  $('#cancel-btn').on('click', () => {
+    $('div#popups').empty();
+  });
 
-    const ignore = document.getElementById('ignore-btn');
-    const confirm = document.getElementById('confirm-btn');
+  const ignore = document.getElementById('ignore-btn');
+  const confirm = document.getElementById('confirm-btn');
 
-    const deletePicAdv = onceCall(deletPictureRequest);
-    
-    ignore.addEventListener('click', () => {
-        $('div#popups').empty();
-    })
+  const deletePicAdv = onceCall(deletPictureRequest);
 
-    confirm.addEventListener('click', () => {
-        deletePicAdv();
-    })
+  ignore.addEventListener('click', () => {
+    $('div#popups').empty();
+  });
+
+  confirm.addEventListener('click', () => {
+    deletePicAdv();
+  });
 }
 
-function deletPictureRequest() {
-    console.log('delete')
-    fetch(`http://0.0.0.0:5002/profile_picture/${userInfo.id}`, {
-        method: 'DELETE'
-})
+function deletPictureRequest () {
+  console.log('delete');
+  fetch(`http://0.0.0.0:5002/profile_picture/${userInfo.id}`, {
+    method: 'DELETE'
+  })
     .then(data => {
-        if (data.ok) {
-            window.location.href = '/profile';
-        }
-    })
+      if (data.ok) {
+        window.location.href = '/profile';
+      }
+    });
 }
 
-function uploadPicture(img) {
-        // console.log('update')
-        $('label#save-btn').text('Uploading ...')
-        const dataForm = new FormData();
-        dataForm.append('file_upload', img)
-        fetch('http://0.0.0.0:5002/profile_picture/', {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            body: dataForm,
-        })
-        .then(data => {
-            if (data.ok) {
-                window.location.href = '/profile';
-            }
-        })
+function uploadPicture (img) {
+  // console.log('update')
+  $('label#save-btn').text('Uploading ...');
+  const dataForm = new FormData();
+  dataForm.append('file_upload', img);
+  fetch('http://0.0.0.0:5002/profile_picture/', {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: dataForm
+  })
+    .then(data => {
+      if (data.ok) {
+        window.location.href = '/profile';
+      }
+    });
 }
 
-function changePicture() {
-    console.log('change')
-    $('div#popups').append(popUpPicture(userInfo))
-    $('#cancel-btn').on('click', () => {
-        $('div#popups').empty();
-    })
+function changePicture () {
+  console.log('change');
+  $('div#popups').append(popUpPicture(userInfo));
+  $('#cancel-btn').on('click', () => {
+    $('div#popups').empty();
+  });
 
-    const inputFile = document.getElementById('input-file');
-    const profilePicture = document.getElementById('profile-pic');
-    let changed = false;
-    inputFile.onchange = function () {
-        changed = true
-        profilePicture.src = URL.createObjectURL(inputFile.files[0])
+  const inputFile = document.getElementById('input-file');
+  const profilePicture = document.getElementById('profile-pic');
+  let changed = false;
+  inputFile.onchange = function () {
+    changed = true;
+    profilePicture.src = URL.createObjectURL(inputFile.files[0]);
+  };
+
+  const uploadPictureAdv = onceCall(uploadPicture);
+
+  $('label#save-btn').on('click', () => {
+    if (changed) {
+      uploadPictureAdv(inputFile.files[0]);
     }
-
-    const uploadPictureAdv = onceCall(uploadPicture);
-    
-    $('label#save-btn').on('click', () => {
-        if (changed) {
-            uploadPictureAdv(inputFile.files[0])
-        }
-    })
+  });
 }
-
-

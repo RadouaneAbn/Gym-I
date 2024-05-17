@@ -1,5 +1,5 @@
 function gymItem (gym) {
-    return `
+  return `
     <div class="search_item" id="${gym.id}">
               <div class="relative flex items-start py-1.5 px-3 dark:hover:bg-neutral-700 ">
                   <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
@@ -28,91 +28,88 @@ function gymItem (gym) {
     `;
 }
 
-
-function debounce(callback, delay = 1000) {
+function debounce (callback, delay = 1000) {
   let timeout;
-  
+
   return (...args) => {
-    clearTimeout(timeout)
+    clearTimeout(timeout);
     timeout = setTimeout(() => {
-      callback(...args)
-    }, delay)
-  }
+      callback(...args);
+    }, delay);
+  };
 }
 
 let searchContainer;
 let searchBar;
-let searchText = "";
+let searchText = '';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   searchContainer = $('div#search_container');
   searchBar = $('input#search_bar');
 
-  searchBar.on('keydown', function(event) {
+  searchBar.on('keydown', function (event) {
     if (event.keyCode === 13) {
       console.log(searchText);
       searchContainer.css('visibility', 'hidden');
       scrollUp();
       loadPage(1)
-      .then(() => {
-        console.log(nextBtn.dataset.count);
-        if (nextBtn.dataset.count === '1') {
-          $('.next_vis').css('visibility', 'hidden');
-          $('.prev_vis').css('visibility', 'hidden');
-          curPage.querySelector('span').textContent = '1';
-        } else {
-          $('.next_vis').css('visibility', 'visible');
-        }
-      });
+        .then(() => {
+          console.log(nextBtn.dataset.count);
+          if (nextBtn.dataset.count === '1') {
+            $('.next_vis').css('visibility', 'hidden');
+            $('.prev_vis').css('visibility', 'hidden');
+            curPage.querySelector('span').textContent = '1';
+          } else {
+            $('.next_vis').css('visibility', 'visible');
+          }
+        });
     }
   });
-  
 
   const delayedFetchData = debounce(fetchData, 250);
 
   searchBar.on('blur', function () {
-    setTimeout(function() {
+    setTimeout(function () {
       searchContainer.css('visibility', 'hidden');
     }, 200);
-  })
+  });
 
   searchBar.on('focus', function () {
     if (searchBar.val()) {
       searchContainer.css('visibility', 'visible');
     }
-  })
+  });
 
-  searchBar.on('input', function() {
+  searchBar.on('input', function () {
     searchText = searchBar.val();
     if (!searchText) {
-        searchContainer.empty();
-        searchContainer.css('visibility', 'hidden');
+      searchContainer.empty();
+      searchContainer.css('visibility', 'hidden');
     } else {
       delayedFetchData(searchText);
       choiceGym();
     }
-    })
-})
-
+  });
+});
 
 function choiceGym () {
-  $('body').on('click', 'div.search_item', function() {
+  $('body').on('click', 'div.search_item', function () {
     window.location.href = '/user/gymes/' + $(this).attr('id');
   });
 }
 
 // style="visibility: hidden;
-async function fetchData(name) {
-  let searchResult = "";
+async function fetchData (name) {
+  let searchResult = '';
   const response = await fetch('http://0.0.0.0:5002/gym_search/', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "name": name
+      name
     })
-  })
+  });
   const result = await response.json();
   for (gym of result) {
     searchResult += gymItem(gym);
@@ -120,6 +117,6 @@ async function fetchData(name) {
   if (searchResult) {
     searchContainer.empty();
     searchContainer.css('visibility', 'visible');
-    searchContainer.append(searchResult)
+    searchContainer.append(searchResult);
   }
-};
+}
