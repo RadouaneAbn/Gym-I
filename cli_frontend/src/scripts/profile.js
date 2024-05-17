@@ -8,7 +8,7 @@ function popUpPicture(user) {
         <div style="width: 500px; height: 600px;"
         class="bg-gray-100 p-4 border border-gray-900 rounded-md text-center relative flex flex-col justify-center items-center">
 
-            <img class="border-2 border-red-500 absolute top-0 right-0 m-4 cursor-pointer" id="cancel-picture"
+            <img class="border-2 border-red-500 absolute top-0 right-0 m-4 cursor-pointer" id="cancel-btn"
             src="/cli_frontend//images/exit.png" alt="exit" width="25px" height="25px">
 
             <h2 class="text-xl font-medium">Upload Your Profile Picture</h2>
@@ -38,10 +38,10 @@ function popUpDelete() {
     <div id="profile_pic_container"
     class="bg-gray-900 bg-opacity-50  w-full h-screen flex justify-center items-center">
 
-        <div style="width: 500px; height: 600px;"
+        <div style="width: 500px; height: 300px;"
         class="bg-gray-100 p-4 border border-gray-900 rounded-md text-center relative flex flex-col justify-center items-center">
-
-        <img class="border-2 border-red-500 absolute top-0 right-0 m-4 cursor-pointer" id="cancel-picture"
+        <h2 class="mt-5 text-xl font-medium">Are you sure you want to delete the profile picture ?</h2>
+        <img class="border-2 border-red-500 absolute top-0 right-0 m-4 cursor-pointer" id="cancel-btn"
         src="/cli_frontend//images/exit.png" alt="exit" width="25px" height="25px">
 
             <div class="mt-10 flex justify-between px-8 w-full">
@@ -220,12 +220,6 @@ function onceCall(callback) {
 
 let helpMain = ``;
 let proMain = ``;
-function changeMainContent(content) {
-    // console.log("Changing main content...");
-    $('#dynamicMain').empty()
-    $('#dynamicMain').append(content)
-    // document.getElementById('dynamicMain').innerHTML = content;
-}
 
 async function builtProfileInfoPage() {
     const result = await fetch('http://0.0.0.0:5002/token_check', {
@@ -253,7 +247,7 @@ function appendToDiv(content) {
 function deletPicture() {
     console.log('del')
     $('div#popups').append(popUpDelete())
-    $('#ignore').on('click', () => {
+    $('#cancel-btn').on('click', () => {
         $('div#popups').empty();
     })
 
@@ -271,16 +265,11 @@ function deletPicture() {
     })
 }
 
-function deletPictureRequest(img) {
-    console.log('update')
-    const dataForm = new FormData();
-    dataForm.append('file_upload', img)
-    fetch('http://0.0.0.0:5002/clients/profile_picture', {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        }
-    })
+function deletPictureRequest() {
+    console.log('delete')
+    fetch(`http://0.0.0.0:5002/profile_picture/${userInfo.id}`, {
+        method: 'DELETE'
+})
     .then(data => {
         if (data.ok) {
             window.location.href = '/profile';
@@ -290,10 +279,11 @@ function deletPictureRequest(img) {
 
 function uploadPicture(img) {
         console.log('update')
+        $('label#save-btn').text('Uploading ...')
         const dataForm = new FormData();
         dataForm.append('file_upload', img)
-        fetch('http://0.0.0.0:5002/update_picture/', {
-            method: 'POST',
+        fetch('http://0.0.0.0:5002/profile_picture/', {
+            method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -309,21 +299,24 @@ function uploadPicture(img) {
 function changePicture() {
     console.log('change')
     $('div#popups').append(popUpPicture(userInfo))
-    $('#cancel-picture').on('click', () => {
+    $('#cancel-btn').on('click', () => {
         $('div#popups').empty();
     })
 
     const inputFile = document.getElementById('input-file');
     const profilePicture = document.getElementById('profile-pic');
-
+    let changed = false;
     inputFile.onchange = function () {
+        changed = true
         profilePicture.src = URL.createObjectURL(inputFile.files[0])
     }
 
     const uploadPictureAdv = onceCall(uploadPicture);
     
     $('label#save-btn').on('click', () => {
-        uploadPictureAdv(inputFile.files[0])
+        if (changed) {
+            uploadPictureAdv(inputFile.files[0])
+        }
     })
 }
 
@@ -341,41 +334,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // const changePicBtn = document.getElementById('change-picture');
     builtProfileInfoPage();
 
-    // console.log(paymentButton);
-    paymentButton.addEventListener('click', function(event) {
-    //   console.log("Button clicked");
-      changeMainContent(payementMain); // Call the function to change the content
-    });
-    paymentMenu.addEventListener('click', function(event) {
-        // console.log("Button clicked");
-        changeMainContent(payementMain); // Call the function to change the content
-      });
+//     // console.log(paymentButton);
+//     paymentButton.addEventListener('click', function(event) {
+//     //   console.log("Button clicked");
+//       changeMainContent(payementMain); // Call the function to change the content
+//     });
+//     paymentMenu.addEventListener('click', function(event) {
+//         // console.log("Button clicked");
+//         changeMainContent(payementMain); // Call the function to change the content
+//       });
 
-    profileButton.addEventListener('click', function(event) {
-    //   console.log("Button clicked");
-      changeMainContent(profileMain); // Call the function to change the content
-    });
-    profileMenu.addEventListener('click', function(event) {
-        // console.log("Button clicked");
-        changeMainContent(profileMain); // Call the function to change the content
+//     profileButton.addEventListener('click', function(event) {
+//     //   console.log("Button clicked");
+//       changeMainContent(profileMain); // Call the function to change the content
+//     });
+//     profileMenu.addEventListener('click', function(event) {
+//         // console.log("Button clicked");
+//         changeMainContent(profileMain); // Call the function to change the content
 
-    helpButton.addEventListener('click', function(event) {
-      console.log("Button clicked");
-      changeMainContent(helpMain); // Call the function to change the content
-    });
-    helpMenu.addEventListener('click', function(event) {
-        console.log("Button clicked");
-        changeMainContent(helpMain); // Call the function to change the content
-      });
+//     helpButton.addEventListener('click', function(event) {
+//       console.log("Button clicked");
+//       changeMainContent(helpMain); // Call the function to change the content
+//     });
+//     helpMenu.addEventListener('click', function(event) {
+//         console.log("Button clicked");
+//         changeMainContent(helpMain); // Call the function to change the content
+//       });
 
 
-    proButton.addEventListener('click', function(event) {
-      console.log("Button clicked");
-      changeMainContent(proMain); // Call the function to change the content
-    });
-    proMenu.addEventListener('click', function(event) {
-        console.log("Button clicked");
-        changeMainContent(proMain); // Call the function to change the content
-      });
-  })
+//     proButton.addEventListener('click', function(event) {
+//       console.log("Button clicked");
+//       changeMainContent(proMain); // Call the function to change the content
+//     });
+//     proMenu.addEventListener('click', function(event) {
+//         console.log("Button clicked");
+//         changeMainContent(proMain); // Call the function to change the content
+//       });
+//   })
 })

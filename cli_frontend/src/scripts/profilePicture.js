@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     })
     .then(res => res.json())
     .then(data => {
-      user = data.user_info;
-      profilePicture.src = user.profile_picture;
+      const profilePic = data.profile_pic;
+      profilePicture.src = profilePic;
     })
 })
