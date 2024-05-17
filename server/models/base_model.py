@@ -2,7 +2,6 @@
 """
 Contains class BaseModel
 """
-
 from datetime import datetime
 import server.models
 from sqlalchemy import Column, String, DateTime
@@ -65,12 +64,13 @@ class BaseModel:
         # print(self)
         if new_dict["__class__"] in ["Client", "Owner"]:
             new_dict["profile_picture"] = self.get_profile_picture
-            new_dict["profile_picture_original"] = self.get_profile_picture_original
+            new_dict["profile_picture_original"] = self.\
+                get_profile_picture_original
 
         new_dict.pop("_sa_instance_state", None)
         new_dict.pop("password", None)
         return new_dict
 
     def delete(self):
-        """delete the current instance from the storage"""
+        """ delete the current instance from the database """
         server.models.storage.delete(self)

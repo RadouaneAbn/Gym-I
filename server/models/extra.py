@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 from PIL import Image
 from io import BytesIO
-IMG_BB_TOKEN = "dfcbe0e16596fd0c2dbb83c94c90718b"
-IMG_BB_URL = "https://api.imgbb.com/1/upload"
-IMG_SIZE = (128, 128)
+from os import getenv
+
+
+
 
 def resize_128(img_data):
     img = Image.open(BytesIO(img_data))

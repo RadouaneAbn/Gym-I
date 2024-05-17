@@ -1,5 +1,5 @@
 #!/usr/bin/python
-""" City class """
+""" City module """
 from server.models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship

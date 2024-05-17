@@ -1,5 +1,5 @@
 #!/usr/bin/python
-""" holds class Amenity"""
+""" Amenity module """
 from server.models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 
