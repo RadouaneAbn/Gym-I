@@ -27,4 +27,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from server.models import storage
 
+cl =storage.get(Client, "1dfb7f15-5249-458b-9391-accd2c1d2598")
+cc = cl.to_dict()
+cc
+
+
 abd4ebbf-c6c1-47a3-8b5a-fd1303bc32fe
