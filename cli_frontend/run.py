@@ -5,43 +5,34 @@ from server.models.city import City
 from server.models.amenity import Amenity
 from server.models.client import Client
 from server.models.gym import Gym
-from server.models.owner import Owner
 from server.models.review import Review
-from fastapi import FastAPI, HTTPException, Query, Form, Depends
+from fastapi import FastAPI, HTTPException, Query, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 from fastapi.requests import Request
 from server.models import storage
-from typing import Optional, List
 from server.api.views.clients import authenticate_user, create_access_token
-
 from server.api.schemas.client_schema import ClientLogin
-
 from jose import JWTError, jwt
-from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-from functools import wraps
-from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.security import OAuth2PasswordBearer
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from server.models.membership import EnrolClient
-
-
+from os import getenv
 
 paypalrestsdk.configure({
     "mode": "sandbox",
-    "client_id": "AZayQjAkNZ16ay9AFN493sktMZ3XzvetMLicJ6iqbBSIBpftvxxvJKdkUf4ajKQQeUKHi76vdRV6V89i",
-    "client_secret": "EI7JuHKT_SPlA26J0zTMfJxPpn39Q22uwst2J7WB4mGqaTARn7PH55dnUhs_sVus8f7ToJG1ehA05UxO"
+    "client_id": getenv("PAYPAL_CLIENT_ID"),
+    "client_secret": getenv("PAYPAL_CLIENT_SECRET")
 })
 
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
 
-SECRET_KEY = "4f0e2935cdf27d24222357163158cb6d481bc67c5e15c2eaa1c5982ecf3e80b1"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY = getenv("SECRET_KEY")
+ALGORITHM = getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES = getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
 
 
 app = FastAPI()
@@ -105,22 +96,6 @@ async def client_login(info: ClientLogin):
         "id": user.id
     })
     return {"access_token": token, "token_type": "bearer"}
-
-# @app.get("/user/gymes_test")
-# async def home_test(request: Request, page: int = Query(1, description="Page number", gt=0)):
-#     all_gymes = md.storage.get_page(Gym, page)
-#     for gym in all_gymes:
-#         setattr(gym, "city_name", storage.get(City, gym.city_id).name)
-#     return templates.TemplateResponse(
-#         "index.html",
-#         {
-#             "request": request,
-#             "cities": storage.all_list(City),
-#             "amenities": storage.all_list(Amenity),
-#             "data": all_gymes,
-#             "count": storage.pages_count(Gym)
-#         }
-#     )
 
 @app.get("/profile/")
 async def about(request: Request):

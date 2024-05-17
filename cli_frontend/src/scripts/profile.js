@@ -9,7 +9,7 @@ function popUpPicture(user) {
         class="bg-gray-100 p-4 border border-gray-900 rounded-md text-center relative flex flex-col justify-center items-center">
 
             <img class="border-2 border-red-500 absolute top-0 right-0 m-4 cursor-pointer" id="cancel-btn"
-            src="/cli_frontend//images/exit.png" alt="exit" width="25px" height="25px">
+            src="/cli_frontend/images/exit.png" alt="exit" width="25px" height="25px">
 
             <h2 class="text-xl font-medium">Upload Your Profile Picture</h2>
             <div style="height: 300px; width: 300px; overflow: hidden;"

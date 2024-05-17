@@ -186,11 +186,10 @@ def upload_picture(img, img_128, payload):
     res = requests.post(IMG_BB_URL, files={"image": img}, data=payload)
     res_resize = requests.post(IMG_BB_URL, files={"image": img_128}, data=payload)
 
-    return {
-        "normal_p": res.json()["data"]["display_url"],
-        "resized_p": res_resize.json()["data"]["display_url"],
-        "delete": [res.json()["data"]["delete_url"], res_resize.json()["data"]["delete_url"]]
-    }
+    return (
+        res.json()["data"]["display_url"],
+        res_resize.json()["data"]["display_url"],
+        )
 
 @client_router.put("/profile_picture/")
 def update_profile_picture(file_upload: UploadFile = None,
@@ -198,26 +197,19 @@ def update_profile_picture(file_upload: UploadFile = None,
     img = file_upload.file.read()
     img_128 = resize_128(img)
     payload = {
-            "key": IMG_BB_TOKEN
-    }
+        "key": IMG_BB_TOKEN
+        }
 
-    upload_info = upload_picture(img, img_128, payload)
+    pic_original, pic_resized = upload_picture(img, img_128, payload)
 
-    user.profile_picture = upload_info["resized_p"]
-    user.profile_picture_original = upload_info["normal_p"]
-    user.delete_urls = upload_info["delete"]
+    user.profile_picture = pic_resized
+    user.profile_picture_original = pic_original
 
     print(user)
 
     user.save()
 
     return {"detail": "profile picture updated successfuly"}, 200
-
-def delete_picture(user):
-    print(user)
-    response = requests.delete(user.delete_urls[0], params={"url": user.profile_picture_original})
-    response_2 = requests.delete(user.delete_urls[1], params={"url": user.profile_picture})
-    return response.status_code, response_2.status_code
 
 @client_router.delete("/profile_picture/{user_id}")
 def delete_client_profile_picture(user_id: str):

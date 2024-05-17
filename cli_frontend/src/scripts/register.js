@@ -11,7 +11,7 @@ function onceCall(callback) {
         return callback(...args);
       }
     };
-  }
+}
 
 let valid = 1;
 let validEmail = 1;
@@ -177,21 +177,16 @@ function createClient(img, firstName, lastName, email, passWord) {
     dataForm.append('email', email);
     dataForm.append('password', passWord);
     if (img) {
-        // console.log('img')
         $('label#next-btn').text('Uploading ...') 
         dataForm.append('file_upload', img)
     }
-
-    // console.log(dataForm);
 
     fetch('http://0.0.0.0:5002/clients/', {
         method: 'POST',
         body: dataForm,
     })
     .then(data => {
-        // console.log(data);
         if (data.ok) {
-            // console.log('ok');
             window.location.href = '/signin';
         }
     })
