@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 from PIL import Image
 from io import BytesIO
-from os import getenv
 
 
-
+IMG_SIZE = (128, 128)
 
 def resize_128(img_data):
     img = Image.open(BytesIO(img_data))

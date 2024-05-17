@@ -106,6 +106,16 @@ async def about(request: Request):
         }
     )
 
+@app.get("/history")
+async def about(request: Request):
+    
+    return templates.TemplateResponse(
+        "history.html",
+        {
+            "request": request
+        }
+    )
+
 @app.get("/user/gymes/{gym_id}")
 async def get_gym_info(gym_id: str, request: Request):
     gym = storage.get(Gym, gym_id)
@@ -182,26 +192,6 @@ async def tp(request: Request):
         }
     )
 
-# @app.post("/paypal_payment")
-# async def process_paypal_payment(price: float = Form(...), duration: str = Form(...)):
-#     payment = paypalrestsdk.Payment({
-#         "intent": "sale",
-#         "payer": {"payment_method": "paypal"},
-#         "transactions": [{
-#             "amount": {"total": price, "currency": "USD"},
-#             "description": "Gym subscription payment"
-#         }],
-#         "redirect_urls": {
-#             "return_url": "http://0.0.0.0:5000/paypal_success",
-#             "cancel_url": "https://www.youtube.com"
-#         }
-#     })
-#     if payment.create():
-#         print("pay", payment)
-#         return RedirectResponse(url=payment.links[1].href)
-#     else:
-#         raise HTTPException(status_code=400, detail="Payment creation failed")
-    
 @app.post("/paypal_payment")
 async def process_paypal_payment(client_id: str = Form(...),
                                  gym_id: str = Form(...),

@@ -15,7 +15,7 @@ function popUpPicture(user) {
             <div style="height: 300px; width: 300px; overflow: hidden;"
             class="rounded-full mt-10 mb-8 border-2 border-gray-500">
                 <img src="${user.profile_picture_original}"
-                class="object-cover object-center"
+                class=""
                 alt="profile picture"
                 id="profile-pic" width="300px" height="300px">
             </div>
@@ -58,7 +58,7 @@ function popUpDelete() {
     `
 }
 
-function PaymentPage() {
+function historyPage() {
     return `
     <div class="items-center mt-8 sm:mt-14 text-[#202142]">
     <h1 class="text-4xl flex items-center justify-center underline text-indigo-900 mx-auto text-semibold mb-4">Payment</h1>
@@ -324,5 +324,3 @@ function changePicture() {
         }
     })
 }
-
-

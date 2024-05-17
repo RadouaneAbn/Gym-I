@@ -1,12 +1,5 @@
-// document.addEventListener("DOMContentLoaded", async function(){
-//     document.getElementById("clientId").value = clientId;
-//     console.log(clientId)
-// })
-// Set the value of the duration input field
 document.addEventListener("DOMContentLoaded", function() {
-    const clientId = document.getElementById('clientId');
-    
-    fetch('http://0.0.0.0:5002/users/', {
+    fetch('http://0.0.0.0:5002/token_check/', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -14,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(res => res.json())
     .then(data => {
-      user = data.user_info.id;
-      console.log(user)
+      const user = data.user.id;
+      // console.log(user)
       document.getElementById("clientId").value = user;
     })
 })
