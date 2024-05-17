@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Person module """
+from collections.abc import Iterable
 from server.models.base_model import BaseModel
 from sqlalchemy import Column, String
 from server.models.engine.secure import hash_password

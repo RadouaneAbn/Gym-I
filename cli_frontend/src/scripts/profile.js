@@ -91,6 +91,7 @@ async function builtProfileInfoPage () {
 }
 
 function updateProfile (user) {
+  // console.log(user)
   document.getElementById('profile_main_picture').src = user.profile_picture_original;
   document.getElementById('first_name').value = user.first_name;
   document.getElementById('last_name').value = user.last_name;
@@ -100,7 +101,7 @@ function updateProfile (user) {
 }
 
 function deletPicture () {
-  console.log('del');
+  // console.log('del');
   $('div#popups').append(popUpDelete());
   $('#cancel-btn').on('click', () => {
     $('div#popups').empty();
@@ -121,7 +122,7 @@ function deletPicture () {
 }
 
 function deletPictureRequest () {
-  console.log('delete');
+  // console.log('delete');
   fetch(`http://0.0.0.0:5002/profile_picture/${userInfo.id}`, {
     method: 'DELETE'
   })
@@ -152,7 +153,7 @@ function uploadPicture (img) {
 }
 
 function changePicture () {
-  console.log('change');
+  // console.log('change');
   $('div#popups').append(popUpPicture(userInfo));
   $('#cancel-btn').on('click', () => {
     $('div#popups').empty();

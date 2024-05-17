@@ -49,10 +49,10 @@ function login () {
   emailValid = 1;
   validate();
   if (valid) {
-    console.log('valid');
+    // console.log('valid');
     requestLogin();
   } else {
-    console.log('fail');
+    // console.log('fail');
   }
 }
 
@@ -69,7 +69,7 @@ function validate () {
 }
 
 function requestLogin () {
-  console.log('req');
+  // console.log('req');
   $('#err-signin').html('&nbsp;');
   $.ajax({
     type: 'post',
@@ -95,73 +95,10 @@ function requestLogin () {
       }
     },
     error: function (xhr, status, error) {
-      console.log('Error:', xhr.responseText); // Handle unauthorized access or other errors
+      console.error('Error:', xhr.responseText); // Handle unauthorized access or other errors
       if (xhr.status === 401) {
-        console.log('Unauthorized - Token might be invalid or expired');
-        // Redirect to login or show an error message
-        //   window.location.href = '/login';
+        console.error('Unauthorized - Token might be invalid or expired');
       }
     }
   });
-}
-
-function redirectToMeOrLogin () {
-  const token = localStorage.getItem('_token');
-  // console.log('tok:', token)
-  if (token) {
-    // function submitToken() {
-    //     const form = document.createElement('form');
-    //     form.method = 'GET';
-    //     form.action = '/user/gymes';
-
-    //     const hiddenField = document.createElement('input');
-    //     hiddenField.type = 'hidden';
-    //     hiddenField.name = 'authorization';
-    //     hiddenField.value = `Bearer ${token}`
-    //     form.append(hiddenField);
-
-    //     document.body.appendChild(form);
-    //     // console.log(form)
-    //     form.submit();
-    // }
-    // submitToken()
-
-    // fetch('/user/gymes', {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': `Bearer ${token}`,
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data)
-    //     const blobUrl = URL.createObjectURL(new Blob([data], { type: "text/html" }));
-    //     const newWindow = window.location(blobUrl, "_blank");
-
-    //   })
-
-    // $.ajax({
-    //     url: '/user/gymes',
-    //     type: 'GET',
-    //     Headers: {
-    //         'Authorization': 'Bearer ' + token
-    //     },
-    //     success: function (data) {
-    //         // window.location.href = '/me';
-    //         // console.log('data:', data)
-    //     },
-    //     error: function (xhr, status, error) {
-    //         console.log('Error:', xhr.responseText);  // Handle unauthorized access or other errors
-    //         if (xhr.status === 401) {
-    //           console.log('Unauthorized - Token might be invalid or expired');
-    //           // Redirect to login or show an error message
-    //         window.location.href = '/signin';
-    //         }
-    //       },
-    // })
-  } else {
-    console.log('token not found');
-    window.location.href = '/signin';
-  }
 }

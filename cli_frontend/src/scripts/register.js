@@ -151,7 +151,7 @@ function popForProfilePic (firstName, lastName, email, passWord) {
 }
 
 function createClient (img, firstName, lastName, email, passWord) {
-  console.log(firstName);
+  // console.log(firstName);
   const dataForm = new FormData();
   dataForm.append('first_name', firstName);
   dataForm.append('last_name', lastName);

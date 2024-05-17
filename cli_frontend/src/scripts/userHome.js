@@ -37,14 +37,14 @@ function filterDetector () {
 
   amenityBtns.forEach(btn => {
     btn.addEventListener('click', function () {
-      console.log(btn.id);
+      // console.log(btn.id);
       const bx = btn.querySelector('input[type="checkbox"]');
 
       if (bx.checked) {
-        console.log('check');
+        // console.log('check');
         amenityIds.push(btn.id);
       } else {
-        console.log('uncheck');
+        // console.log('uncheck');
         const idx = amenityIds.indexOf(btn.id);
         if (idx !== -1) {
           amenityIds.splice(idx, 1);
@@ -114,7 +114,7 @@ function paginationControl () {
     scrollUp();
     loadPage(1)
       .then(() => {
-        console.log(nextBtn.dataset.count);
+        // console.log(nextBtn.dataset.count);
         if (nextBtn.dataset.count === '1') {
           $('.next_vis').css('visibility', 'hidden');
           $('.prev_vis').css('visibility', 'hidden');
@@ -164,7 +164,7 @@ async function loadData (page) {
     delete bodyData.price_range;
   }
 
-  console.log(bodyData);
+  // console.log(bodyData);
   const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
     method: 'POST',
     headers: {

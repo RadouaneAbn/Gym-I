@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   searchBar.on('keydown', function (event) {
     if (event.keyCode === 13) {
-      console.log(searchText);
+      // console.log(searchText);
       searchContainer.css('visibility', 'hidden');
       scrollUp();
       loadPage(1)
         .then(() => {
-          console.log(nextBtn.dataset.count);
+          // console.log(nextBtn.dataset.count);
           if (nextBtn.dataset.count === '1') {
             $('.next_vis').css('visibility', 'hidden');
             $('.prev_vis').css('visibility', 'hidden');
