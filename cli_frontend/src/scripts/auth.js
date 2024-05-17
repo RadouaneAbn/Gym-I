@@ -1,4 +1,5 @@
 const token = localStorage.getItem('access_token');
+let user;
 if (!token) {
     window.location.href = '/signin';
 } else {
@@ -13,13 +14,8 @@ if (!token) {
         if (data.status === 401) {
             window.location.href = '/signin';
         }
-        return data.json()
+        user = data.json();
     })
-    // .then(data => {
-    //     console.log(data)
-    //     clientId = data.user.id
-    //     console.log(clientId)
-    // })
 }
 
 

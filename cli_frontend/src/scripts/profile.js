@@ -13,7 +13,7 @@ function popUpPicture(user) {
 
             <h2 class="text-xl font-medium">Upload Your Profile Picture</h2>
             <div style="height: 300px; width: 300px; overflow: hidden;"
-            class="rounded-full mt-10 mb-8 border-2 border-gray-500">            
+            class="rounded-full mt-10 mb-8 border-2 border-gray-500">
                 <img src="${user.profile_picture_original}"
                 class="object-cover object-center"
                 alt="profile picture"
@@ -206,6 +206,10 @@ function ProfilePage(user) {
     </div>`;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    builtProfileInfoPage();
+})
+
 function onceCall(callback) {
     let called = false;
   
@@ -232,14 +236,15 @@ async function builtProfileInfoPage() {
     .then(data => {
         userInfo = data.user;
         const pageContent = ProfilePage(data.user);
-        appendToDiv(pageContent)
+        updateProfile(data.user)
     })
 }
 
-function appendToDiv(content) {
-    // document.getElementById('dynamicMain').innerHTML = content;
-    $('#dynamicMain').empty()
-    $('#dynamicMain').append(content)
+function updateProfile(user) {
+    document.getElementById('profile_main_picture').src = user.profile_picture_original
+    document.getElementById('first_name').value = user.first_name
+    document.getElementById('last_name').value = user.last_name
+
     $('button#change-picture').on('click', changePicture)
     $('button#delete-btn').on('click', deletPicture)
 }
@@ -278,7 +283,7 @@ function deletPictureRequest() {
 }
 
 function uploadPicture(img) {
-        console.log('update')
+        // console.log('update')
         $('label#save-btn').text('Uploading ...')
         const dataForm = new FormData();
         dataForm.append('file_upload', img)
@@ -320,55 +325,4 @@ function changePicture() {
     })
 }
 
-// Add event listener to the 'payment' button after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // console.log("DOM Loaded");
-    let paymentButton = document.getElementById('payment');
-    let paymentMenu = document.getElementById('payment_menu');
-    let profileButton = document.getElementById('Profile');
-    let profileMenu = document.getElementById('Profile_menu');
-    let helpButton = document.getElementById('Help');
-    let helpMenu = document.getElementById('help_menu');
-    let proButton = document.getElementById('Pro');
-    let proMenu = document.getElementById('pro_menu');
-    // const changePicBtn = document.getElementById('change-picture');
-    builtProfileInfoPage();
 
-//     // console.log(paymentButton);
-//     paymentButton.addEventListener('click', function(event) {
-//     //   console.log("Button clicked");
-//       changeMainContent(payementMain); // Call the function to change the content
-//     });
-//     paymentMenu.addEventListener('click', function(event) {
-//         // console.log("Button clicked");
-//         changeMainContent(payementMain); // Call the function to change the content
-//       });
-
-//     profileButton.addEventListener('click', function(event) {
-//     //   console.log("Button clicked");
-//       changeMainContent(profileMain); // Call the function to change the content
-//     });
-//     profileMenu.addEventListener('click', function(event) {
-//         // console.log("Button clicked");
-//         changeMainContent(profileMain); // Call the function to change the content
-
-//     helpButton.addEventListener('click', function(event) {
-//       console.log("Button clicked");
-//       changeMainContent(helpMain); // Call the function to change the content
-//     });
-//     helpMenu.addEventListener('click', function(event) {
-//         console.log("Button clicked");
-//         changeMainContent(helpMain); // Call the function to change the content
-//       });
-
-
-//     proButton.addEventListener('click', function(event) {
-//       console.log("Button clicked");
-//       changeMainContent(proMain); // Call the function to change the content
-//     });
-//     proMenu.addEventListener('click', function(event) {
-//         console.log("Button clicked");
-//         changeMainContent(proMain); // Call the function to change the content
-//       });
-//   })
-})

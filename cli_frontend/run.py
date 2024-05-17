@@ -122,7 +122,7 @@ async def client_login(info: ClientLogin):
 #         }
 #     )
 
-@app.get("/profile")
+@app.get("/profile/")
 async def about(request: Request):
     return templates.TemplateResponse(
         "profile.html",
