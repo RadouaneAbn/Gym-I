@@ -7,6 +7,8 @@ from server.api.schemas.all_schemas import EnrolData
 from server.auth.auth import check_token
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from server.models import storage
+from server.models.gym import Gym
 
 
 enrolment_router = APIRouter()
@@ -34,3 +36,13 @@ async def enrole_client_gym(data: EnrolData,
     )
     new_sub.save()
     return new_sub.to_dict()
+
+# API enpoint to retrieve all history of payement for client
+@enrolment_router.get("/clients/history/")
+async def get_client_history(user: Client = Depends(check_token)):
+    """ Return the purchase history of a Client """
+    history = [enroll.to_dict() for enroll in user.enrolments]
+    for payment in history:
+        payment['gym_name'] = storage.get(Gym, payment["gym_id"]).name
+    return history
+

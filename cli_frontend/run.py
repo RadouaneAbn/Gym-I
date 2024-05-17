@@ -96,6 +96,15 @@ async def about(request: Request):
         }
     )
 
+@app.get("/history")
+async def about(request: Request):
+    """ Client history url """
+    return templates.TemplateResponse(
+        "history.html",
+        {
+            "request": request
+        }
+    )
 
 @app.get("/user/gymes/{gym_id}")
 async def get_gym_info(gym_id: str, request: Request):

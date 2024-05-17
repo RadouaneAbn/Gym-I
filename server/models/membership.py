@@ -31,9 +31,11 @@ class EnrolClient(Base):
     def to_dict(self):
         """ Returns a dictionary representation of the instance """
         return {
-            "id": self.id,
-            "from_date": self.from_date,
-            "to_date": self.to_date
+            "id": self.payment_id,
+            "from_date": self.from_date.strftime("%Y-%m-%d"),
+            "to_date": self.to_date.strftime("%Y-%m-%d"),
+            "isactive": self.is_active,
+            "gym_id": self.gym_id
         }
 
     def __str__(self):
