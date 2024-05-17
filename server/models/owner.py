@@ -1,17 +1,15 @@
 #!/usr/bin/python3
-""" holds class User"""
-
+""" Owner module """
 from server.models.person import Person
 from server.models.base_model import Base
 from sqlalchemy.orm import relationship
-from hashlib import md5
 
 
 class Owner(Person, Base):
-    """Representation of a user """
+    """Representation of a Owner """
     __tablename__ = 'owners'
     gym = relationship("Gym", backref="owner")
 
     def __init__(self, *args, **kwargs):
-        """initializes user"""
+        """initializes Owner """
         super().__init__(*args, **kwargs)

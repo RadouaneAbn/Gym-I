@@ -1,5 +1,5 @@
-#!/usr/bin/python
-""" holds class Review"""
+#!/usr/bin/python3
+""" Review module """
 from server.models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 

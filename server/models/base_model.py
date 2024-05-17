@@ -62,10 +62,6 @@ class BaseModel:
             new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
         new_dict["__class__"] = self.__class__.__name__
         # print(self)
-        if new_dict["__class__"] in ["Client", "Owner"]:
-            new_dict["profile_picture"] = self.get_profile_picture
-            new_dict["profile_picture_original"] = self.\
-                get_profile_picture_original
 
         new_dict.pop("_sa_instance_state", None)
         new_dict.pop("password", None)

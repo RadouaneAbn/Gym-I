@@ -1,11 +1,11 @@
 #!/usr/bin/python
-""" holds class Gym"""
+""" Gym module """
 from server.models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
-# from server.models.amenity import Amenity
-from server.models.membership import EnrolClient
 from sqlalchemy.orm import relationship
+from server.models.membership import EnrolClient
 from sqlalchemy.dialects.postgresql import ARRAY
+
 
 gym_amenity = Table('gym_amenity', Base.metadata,
                     Column('gym_id', String(60),
