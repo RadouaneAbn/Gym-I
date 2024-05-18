@@ -165,7 +165,7 @@ async function loadData (page) {
   }
 
   // console.log(bodyData);
-  const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
+  const response = await fetch('http://0.0.0.0:5002/api/v1/gym_filter/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

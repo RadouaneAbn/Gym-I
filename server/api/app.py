@@ -16,17 +16,19 @@ from server.api.views.authentication import auth_router
 from server.api.views.users import user_router
 from server.api.views.enrolments import enrolment_router
 
+PREFIX = "/api/v1"
+
 
 app = FastAPI()
-app.include_router(client_router)
-app.include_router(owner_router)
-app.include_router(amenity_router)
-app.include_router(city_router)
-app.include_router(gym_router)
-app.include_router(gym_filter)
-app.include_router(auth_router)
-app.include_router(user_router)
-app.include_router(enrolment_router)
+app.include_router(client_router, prefix=PREFIX)
+app.include_router(owner_router, prefix=PREFIX)
+app.include_router(amenity_router, prefix=PREFIX)
+app.include_router(city_router, prefix=PREFIX)
+app.include_router(gym_router, prefix=PREFIX)
+app.include_router(gym_filter, prefix=PREFIX)
+app.include_router(auth_router, prefix=PREFIX)
+app.include_router(user_router, prefix=PREFIX)
+app.include_router(enrolment_router, prefix=PREFIX)
 
 app.add_middleware(
     CORSMiddleware,

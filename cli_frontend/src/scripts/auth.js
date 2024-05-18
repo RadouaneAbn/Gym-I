@@ -3,7 +3,7 @@ let user;
 if (!token) {
   window.location.href = '/signin';
 } else {
-  fetch('http://0.0.0.0:5002/token_check', {
+  fetch('http://0.0.0.0:5002/api/v1/token_check', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`

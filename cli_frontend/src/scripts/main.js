@@ -203,7 +203,7 @@ function appendGym (gym) {
 }
 
 async function filter (page) {
-  const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
+  const response = await fetch('http://0.0.0.0:5002/api/v1/gym_filter/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -234,7 +234,7 @@ async function fetchData (page) {
 }
 
 async function pageCount () {
-  const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
+  const response = await fetch('http://0.0.0.0:5002/api/v1/gym_filter/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

@@ -47,7 +47,7 @@ function start () {
     } else if (email.value) {
       $.ajax({
         type: 'POST',
-        url: 'http://0.0.0.0:5002/emailcheck/',
+        url: 'http://0.0.0.0:5002/api/v1/emailcheck/',
         contentType: 'application/json',
         data: JSON.stringify({ email: email.value }),
         success: function (status) {
@@ -61,7 +61,9 @@ function start () {
           }
         }
       });
-    } else { { $('p.err-email').html('&nbsp;'); } }
+    } else {
+        $('p.err-email').html('&nbsp;');
+    }
   });
 
   submit.addEventListener('click', function () {
@@ -100,7 +102,7 @@ function start () {
   function validatPassword (pwd) {
     const lowerCase = /[a-z]/;
     const upperCase = /[A-Z]/;
-    const number = /[0-9]/;
+    const number = /\d/;
     const symbol = /[!@#$%^&*]/;
     valid = 0;
 
@@ -162,7 +164,7 @@ function createClient (img, firstName, lastName, email, passWord) {
     dataForm.append('file_upload', img);
   }
 
-  fetch('http://0.0.0.0:5002/clients/', {
+  fetch('http://0.0.0.0:5002/api/v1/clients/', {
     method: 'POST',
     body: dataForm
   })

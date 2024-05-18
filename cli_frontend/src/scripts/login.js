@@ -73,7 +73,7 @@ function requestLogin () {
   $('#err-signin').html('&nbsp;');
   $.ajax({
     type: 'post',
-    url: 'http://0.0.0.0:5002/clients/login',
+    url: 'http://0.0.0.0:5002/api/v1/clients/login',
     // url: '/token',
     contentType: 'application/json',
     data: JSON.stringify({

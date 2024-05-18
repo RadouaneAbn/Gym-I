@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function getHistory() {
-    fetch("http://0.0.0.0:5002/clients/history/", {
+    fetch("http://0.0.0.0:5002/api/v1/clients/history/", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

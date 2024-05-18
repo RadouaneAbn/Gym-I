@@ -101,7 +101,7 @@ function choiceGym () {
 // style="visibility: hidden;
 async function fetchData (name) {
   let searchResult = '';
-  const response = await fetch('http://0.0.0.0:5002/gym_search/', {
+  const response = await fetch('http://0.0.0.0:5002/api/v1/gym_search/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

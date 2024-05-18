@@ -77,7 +77,7 @@ const helpMain = '';
 const proMain = '';
 
 async function builtProfileInfoPage () {
-  const result = await fetch('http://0.0.0.0:5002/token_check', {
+  const result = await fetch('http://0.0.0.0:5002/api/v1/token_check', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`
@@ -123,7 +123,7 @@ function deletPicture () {
 
 function deletPictureRequest () {
   // console.log('delete');
-  fetch(`http://0.0.0.0:5002/profile_picture/${userInfo.id}`, {
+  fetch(`http://0.0.0.0:5002/api/v1/profile_picture/${userInfo.id}`, {
     method: 'DELETE'
   })
     .then(data => {
@@ -139,7 +139,7 @@ function uploadPicture (img) {
   const dataForm = new FormData();
   dataForm.append('file_upload', img);
   console.log('img', img)
-  fetch('http://0.0.0.0:5002/profile_picture/', {
+  fetch('http://0.0.0.0:5002/api/v1/profile_picture/', {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`

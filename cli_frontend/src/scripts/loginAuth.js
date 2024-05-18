@@ -2,7 +2,7 @@ const token = localStorage.getItem('access_token');
 
 document.addEventListener('DOMContentLoaded', function () {
   if (token) {
-    fetch('http://0.0.0.0:5002/token_check', {
+    fetch('http://0.0.0.0:5002/api/v1/token_check', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`
