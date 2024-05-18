@@ -138,6 +138,7 @@ function uploadPicture (img) {
   $('label#save-btn').text('Uploading ...');
   const dataForm = new FormData();
   dataForm.append('file_upload', img);
+  console.log('img', img)
   fetch('http://0.0.0.0:5002/profile_picture/', {
     method: 'PUT',
     headers: {
