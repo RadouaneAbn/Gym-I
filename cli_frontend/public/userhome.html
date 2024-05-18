@@ -139,7 +139,7 @@
               <path d="M21 21l-6 -6" />
             </svg>
 
-            <div style="visibility: hidden;" id="search_container" class="overflow-hidden mt-1 py-1 absolute top-full left-0 w-full h-auto  text-red shadow-md rounded-xl dark:bg-neutral-800 dark:border dark:border-neutral-700">
+            <div style="visibility: hidden;" id="search_container" class="overflow-hidden mt-1 py-1 absolute top-full left-0 w-full h-auto  text-red shadow-md rounded-xl dark:bg-neutral-800 dark:border dark:border-neutral-700 bg-neutral-800 border border-neutral-700">
                 <!-- search result -->
             </div>
             
@@ -154,7 +154,7 @@
                 <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-                <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                <div class="group-hover:block group-focus-within:block absolute top-full left-0 mt-1 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
                 {% for amenity in amenities %}
                 <div onclick="toggleCheckbox(this)" class="amenity_btn" id="{{ amenity.id }}">
                 <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
@@ -178,7 +178,7 @@
                 <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-              <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+              <div class="group-hover:block group-focus-within:block absolute top-full left-0 mt-1 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
                 {% for city in cities%}
                 <div onclick="toggleCheckbox(this)" class="city_btn" id="{{ city.id }}">
                   <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
