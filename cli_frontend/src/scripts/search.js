@@ -1,7 +1,7 @@
 function gymItem (gym) {
   return `
     <div class="search_item" id="${gym.id}">
-              <div class="relative flex items-start py-1.5 px-3 dark:hover:bg-neutral-700 ">
+              <div class="relative flex items-start py-1 px-3 dark:hover:bg-neutral-700 ">
                   <label for="hs-dropdown-item-checkbox-delete-cities" class="ms-3.5">
                     <span class="mx-2 block text-sm text-left font-medium text-white">${gym.name}</span>
                   </label>
