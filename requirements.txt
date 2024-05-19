@@ -1,0 +1,11 @@
+sqlalchemy
+pillow
+requests
+fastapi
+python-dateutil
+python-jose
+starlette
+pep8
+paypalrestsdk
+passlib
+psycopg2

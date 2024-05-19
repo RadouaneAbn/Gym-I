@@ -1,3 +1,6 @@
 **/__pycache__
 /images
 /cli_frontend/src/styles/output.css
+.env
+/versions
+/dev
