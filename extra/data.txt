@@ -1,0 +1,35 @@
+create Gym
+fatso
+23890d78-38f5-4aca-a9ab-fd27d9d2c1af
+73d8e7d2-b664-4864-9c90-4c6bb2dfb64d
+the
+desc 1
+20
+0
+3dc4fdbb-facd-45ca-a582-4a6c4eb0835c
+link1, link2, link3
+
+create Owner
+red
+abn
+red@abn.mail.com
+1234
+
+from server.models.amenity import Amenity
+from server.models.base_model import BaseModel
+from server.models.city import City
+from server.models.gym import Gym
+from server.models.client import Client
+from server.models.owner import Owner
+from server.models.review import Review
+from server.models.membership import EnrolClient
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from server.models import storage
+
+cl =storage.get(Client, "1dfb7f15-5249-458b-9391-accd2c1d2598")
+cc = cl.to_dict()
+cc
+
+
+abd4ebbf-c6c1-47a3-8b5a-fd1303bc32fe

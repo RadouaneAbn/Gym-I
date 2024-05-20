@@ -17,8 +17,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <!-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> -->
-        <script src="/cli_frontend/src/scripts/userHome.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', path='/public/output.css')}}">
+    <script src="/cli_frontend/src/scripts/userHome.js"></script>
+    <script src="/cli_frontend/src/scripts/search.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/src/styles/output.css')}}">
     <title>Gym&I</title>
 
     <script>
@@ -29,6 +30,8 @@
         }
       }
     </script>
+  
+ <link rel="stylesheet" href="/cli_frontend/src/styles/homeuser.css">
 
 </head>
 
@@ -46,7 +49,7 @@
         data-popover-target="profile-menu" />
       <ul role="menu" data-popover="profile-menu" data-popover-placement="bottom"
         class="absolute hidden group-hover:flex right-1 z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
-        <a href="/profile"><button role="menuitem"
+        <a href="/profile"><button role="menuitem" id="Profile_menu"
           class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -57,7 +60,7 @@
             My Profile
           </p>
         </button></a>
-        <a href="/profile"><button role="menuitem"
+        <a href="/history"><button role="menuitem" id="history_menu"
           class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-gray-100 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -65,7 +68,7 @@
               fill="#90A4AE"></path>
           </svg>
           <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
-            Payement
+            History
           </p>
         </button></a>
         <a href="/profile"><button role="menuitem"
@@ -116,7 +119,7 @@
           <div class="relative w-[50%]">
             <input
               type="text"
-              id="search"
+              id="search_bar"
               class="bg-gray-700 rounded-full p-2 pl-10 transition w-full"
               placeholder="Gym Name..."/>
             <svg
@@ -126,7 +129,7 @@
               height="20"
               viewBox="0 0 24 24"
               stroke-width="2"
-              stroke="currentColor"
+              stroke="white"
               fill="none"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -135,7 +138,14 @@
               <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
               <path d="M21 21l-6 -6" />
             </svg>
+
+            <div style="visibility: hidden;" id="search_container" class="overflow-hidden mt-1 py-1 absolute top-full left-0 w-full h-auto  text-red shadow-md rounded-xl dark:bg-neutral-800 dark:border dark:border-neutral-700 bg-neutral-800 border border-neutral-700">
+                <!-- search result -->
+            </div>
+            
+            
           </div>
+
 
           <div class="flex items-center justify-center">
             <div class="flex relative items-center justify-center mx-2 sm:mt-1 sm:inline-flex z-20">
@@ -144,7 +154,7 @@
                 <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-                <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+                <div class="group-hover:block group-focus-within:block absolute top-full left-0 mt-1 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
                 {% for amenity in amenities %}
                 <div onclick="toggleCheckbox(this)" class="amenity_btn" id="{{ amenity.id }}">
                 <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
@@ -168,7 +178,7 @@
                 <svg class="hs-dropdown-open:rotate-180 flex items-end justify-end size-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-              <div class="group-hover:block group-focus-within:block absolute top-full left-0 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
+              <div class="group-hover:block group-focus-within:block absolute top-full left-0 mt-1 w-30 h-44 overflow-y-scroll hidden bg-white shadow-md rounded-lg p-2 dark:bg-neutral-800 dark:border dark:border-neutral-700">
                 {% for city in cities%}
                 <div onclick="toggleCheckbox(this)" class="city_btn" id="{{ city.id }}">
                   <div class="relative flex items-start py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
@@ -202,13 +212,13 @@
               </span>
             </div>
             <div class="flex items-center gap-x-1.5">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+              <button type="button" class="decrement size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                 </svg>
               </button>
-              <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="20" data-hs-input-number-input="">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+              <input id="min-price" class="price-input hide-spin p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="number" value="{{ price_range.min }}" data-hs-input-number-input="" min="{{ price_range.min }}" max="{{ price_range.max }}" readonly>
+              <button type="button" class="increment min-inc size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                   <path d="M12 5v14"></path>
@@ -219,13 +229,13 @@
           <div class="w-30 h-full pl-1 flex justify-between items-center gap-x-3">
             
             <div class="flex items-center gap-x-1.5">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
+              <button type="button" class="decrement size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-decrement="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                 </svg>
               </button>
-              <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="text" value="150" data-hs-input-number-input="">
-              <button type="button" class="size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
+              <input id="max-price" class="price-input hide-spin p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0 dark:text-white" type="number" value="{{ price_range.max }}" data-hs-input-number-input=""  min="{{ price_range.min }}" max="{{ price_range.max }}" readonly>
+              <button type="button" class="increment size-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-input-number-increment="">
                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                   <path d="M12 5v14"></path>
@@ -247,7 +257,7 @@
   </header>
   <main>
   <div class="container mx-auto py-8 px-6">
-      <div id="gym_container" class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 lg:pt-5">
+      <div id="gym_container" class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 lg:pt-5">
         <!-- gymes here -->
       </div>
   </div>

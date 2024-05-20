@@ -1,77 +1,27 @@
 const amenityIds = [];
 const cityIds = [];
+let minPrice;
+let maxPrice;
 let page, currentPage;
 const curIcon = 'relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md transition-all bg-gray-700';
 const autIcon = 'prev_vis relative border-gray-300 border-2 h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none';
-// const token = localStorage.getItem('access_token');
 
-
-document.addEventListener("DOMContentLoaded", async function() {
-  // const inputFields = document.querySelectorAll("[data-hs-input-number-input]");
-  // const buttons = document.querySelectorAll('.btn-gym_id');
-  // const cityBtns = document.querySelectorAll('.city_btn');
-  // const amenityBtns = document.querySelectorAll('.amenity_btn');
-  const profilePicture = document.getElementById('profile_picture')
-
-  getUserInfo(profilePicture);
-  setPriceBtns();
+document.addEventListener('DOMContentLoaded', async function () {
   loadPage(1);
+  getPrice();
   paginationControl();
   filterDetector();
-  // logout();
-})
+});
 
-// function logout() {
-//   const logOutBtn = document.getElementById('logout-btn');
-
-//   logOutBtn.onclick = function () {
-//     localStorage.removeItem('access_token');
-//     window.location.href = '/signin';
-//   }
-// }
-
-// async function getUserInfo(profilePicture) {
-//   const info = await getUser();
-//   const user = info.user_info;
-
-//   profilePicture.src = user.profile_picture
-// }
-
-// async function getUser() {
-//   const response = await fetch('http://0.0.0.0:5002/users/', {
-//     method: 'GET',
-//     headers: {
-//       'Authorization': `Bearer ${token}`,
-//     }
-//   })
-//   return await response.json();
-// };
-
-function getUserInfo(profilePicture) {
-  fetch('http://0.0.0.0:5002/users/', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-  .then(res => res.json())
-  .then(data => {
-    user = data.user_info;
-    profilePicture.src = user.profile_picture;
-  })
-}
-
-
-
-function filterDetector() {
+function filterDetector () {
   const cityBtns = document.querySelectorAll('.city_btn');
   const amenityBtns = document.querySelectorAll('.amenity_btn');
 
   cityBtns.forEach(btn => {
     btn.addEventListener('click', function () {
       // console.log(btn.id)
-      const bx = btn.querySelector('input[type="checkbox"]')
-      
+      const bx = btn.querySelector('input[type="checkbox"]');
+
       if (bx.checked) {
         // console.log('check')
         cityIds.push(btn.id);
@@ -79,70 +29,74 @@ function filterDetector() {
         // console.log('uncheck')
         const idx = cityIds.indexOf(btn.id);
         if (idx !== -1) {
-          cityIds.splice(idx, 1)
+          cityIds.splice(idx, 1);
         }
       }
-    })
-  })
+    });
+  });
 
   amenityBtns.forEach(btn => {
     btn.addEventListener('click', function () {
-      // console.log(btn.id)
-      const bx = btn.querySelector('input[type="checkbox"]')
-      
+      // console.log(btn.id);
+      const bx = btn.querySelector('input[type="checkbox"]');
+
       if (bx.checked) {
-        // console.log('check')
+        // console.log('check');
         amenityIds.push(btn.id);
       } else {
-        // console.log('uncheck')
+        // console.log('uncheck');
         const idx = amenityIds.indexOf(btn.id);
         if (idx !== -1) {
-          amenityIds.splice(idx, 1)
+          amenityIds.splice(idx, 1);
         }
       }
-    })
-  })
+    });
+  });
 }
 
-function paginationControl() {
+let nextBtn;
+let prevBtn;
+let curPage;
+
+function paginationControl () {
   const filterBtn = document.getElementById('filter_btn');
   const prevPage = document.getElementById('prev_holder');
   const nextPage = document.getElementById('next_holder');
-  const curPage = document.getElementById('cur_holder');
-  const nextBtn = document.getElementById('next_btn');
-  const prevBtn = document.getElementById('prev_btn');
+  curPage = document.getElementById('cur_holder');
+  nextBtn = document.getElementById('next_btn');
+  prevBtn = document.getElementById('prev_btn');
 
-  prevPage.addEventListener('click', goPrevPage)
-  prevBtn.addEventListener('click', goPrevPage)
+  prevPage.addEventListener('click', goPrevPage);
+  prevBtn.addEventListener('click', goPrevPage);
 
-  nextPage.addEventListener('click', goNextPage)
-  nextBtn.addEventListener('click', goNextPage)
+  nextPage.addEventListener('click', goNextPage);
+  nextBtn.addEventListener('click', goNextPage);
 
   $(document).on('click', 'button.btn-gym_id', function () {
-    window.location.href = '/user/gymes/' + $(this).attr('id')
-  })
+    window.location.href = '/user/gymes/' + $(this).attr('id');
+  });
 
-  function goNextPage() {
+  function goNextPage () {
     scrollUp();
-    const pageNumber = parseInt(nextPage.outerText, 10)
+    const pageNumber = parseInt(nextPage.outerText, 10);
     loadPage(pageNumber);
     if (nextBtn.dataset.count === nextPage.outerText) {
       // console.log('hide');
       $('.next_vis').css('visibility', 'hidden');
     }
-    if (curPage.outerText === "1") {
+    if (curPage.outerText === '1') {
       // console.log('unhide');
       $('.prev_vis').css('visibility', 'visible');
     }
     prevPage.querySelector('span').textContent = curPage.outerText;
     curPage.querySelector('span').textContent = nextPage.outerText;
-    nextPage.querySelector('span').textContent = pageNumber + 1
+    nextPage.querySelector('span').textContent = pageNumber + 1;
     // console.log(pageNumber)
   }
 
-  function goPrevPage() {
+  function goPrevPage () {
     scrollUp();
-    const pageNumber = parseInt(prevPage.outerText, 10)
+    const pageNumber = parseInt(prevPage.outerText, 10);
     loadPage(pageNumber);
     if (pageNumber === 1) {
       $('.prev_vis').css('visibility', 'hidden');
@@ -159,60 +113,75 @@ function paginationControl() {
   filterBtn.addEventListener('click', () => {
     scrollUp();
     loadPage(1)
-    .then(() => {
-      console.log(nextBtn.dataset.count);
-      if (nextBtn.dataset.count === '1') {
-        $('.next_vis').css('visibility', 'hidden');
-        $('.prev_vis').css('visibility', 'hidden');
-        curPage.querySelector('span').textContent = '1';
-      } else {
-        $('.next_vis').css('visibility', 'visible');
-      }
-    });
+      .then(() => {
+        // console.log(nextBtn.dataset.count);
+        if (nextBtn.dataset.count === '1') {
+          $('.next_vis').css('visibility', 'hidden');
+          $('.prev_vis').css('visibility', 'hidden');
+          curPage.querySelector('span').textContent = '1';
+        } else {
+          $('.next_vis').css('visibility', 'visible');
+        }
+      });
   });
 }
 
-async function loadPage(page = 1) {
+async function loadPage (page = 1) {
   const pageData = await loadData(page);
   const count = Object.keys(pageData)[0];
-  $('#next_btn').attr('data-count', String(count))
+  $('#next_btn').attr('data-count', String(count));
   buildPage(Object.values(pageData)[0]);
-
 }
 
-function buildPage(gymes) {
-    const newContent = [];
-    // console.log(gymes)
-    for (gym of gymes) {
-        newContent.push(appendGym(gym));
-    }
-    // console.log(newContent.join('\n'))
-  $('div#gym_container').empty()
+function buildPage (gymes) {
+  const newContent = [];
+  // console.log(gymes)
+  for (gym of gymes) {
+    newContent.push(appendGym(gym));
+  }
+  // console.log(newContent.join('\n'))
+  $('div#gym_container').empty();
   $('div#gym_container').append(newContent.join('\n'));
 }
 
-async function loadData(page) {
-    const response = await fetch('http://0.0.0.0:5002/gym_filter/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "amenity_ids": amenityIds,
-        "city_ids": cityIds,
-        "page": page
-      })
-    })
-    return await response.json();
-};
+async function loadData (page) {
+  const minPrice = $('#min-price').val();
+  const maxPrice = $('#max-price').val();
 
-function appendGym(gym) {
-    return `
+  const bodyData = {
+    search_text: searchText,
+    amenity_ids: amenityIds,
+    city_ids: cityIds,
+    page
+  };
+
+  if (minPrice !== $('input#max-price').attr('min') || maxPrice !== $('input#max-price').attr('max')) {
+    bodyData.price_range = {
+      min: parseInt($('#min-price').val()),
+      max: parseInt($('#max-price').val())
+    };
+  } else {
+    delete bodyData.price_range;
+  }
+
+  // console.log(bodyData);
+  const response = await fetch('http://0.0.0.0:5002/api/v1/gym_filter/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(bodyData)
+  });
+  return await response.json();
+}
+
+function appendGym (gym) {
+  return `
     <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
             <div
-              class="relative mx-4 mt-4 h-44 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+              class="relative mx-4 mt-4 h-auto overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
               <img
-                class="h-[100%] w-full"
+                class="top-0 left-0"
                 src="${gym.profile_picture}"
                 alt="ui/ux review check" />
               <div
@@ -265,35 +234,6 @@ function appendGym(gym) {
     `;
 }
 
-function setPriceBtns() {
-  const decrementButtons = document.querySelectorAll("[data-hs-input-number-decrement]");
-  const incrementButtons = document.querySelectorAll("[data-hs-input-number-increment]");
-  decrementButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const input = this.parentElement.querySelector("[data-hs-input-number-input]");
-      let value = parseInt(input.value);
-      if (!isNaN(value) && value > 20 && value < 150) {
-        input.value = value - 10;
-      } else {
-        input.value = 20; // Set to 0 if value is already 0 or NaN
-      }
-    });
-  });
-  
-  incrementButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const input = this.parentElement.querySelector("[data-hs-input-number-input]");
-      let value = parseInt(input.value);
-      if (!isNaN(value) && value < 150 && value > 20) {
-        input.value = value + 20;
-      } else {
-        input.value = 150; // Set to 1 if value is NaN
-      }
-    });
-  });
-}
-
-
 function pageIcon (n, cls = autIcon, disabled = false) {
   return `
   <button
@@ -308,9 +248,36 @@ function pageIcon (n, cls = autIcon, disabled = false) {
   `;
 }
 
-function scrollUp() {
+function scrollUp () {
   window.scrollTo({
-    top: 0, // Scroll to the top of the page
-    behavior: 'smooth' // Smooth scrolling
-});
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function getPrice () {
+  const decrementButtons = document.querySelectorAll('button.decrement');
+  const incrementButtons = document.querySelectorAll('button.increment');
+  const maxValue = parseInt($('input#max-price').attr('max'));
+  const minValue = parseInt($('input#max-price').attr('min'));
+
+  decrementButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const input = this.parentElement.querySelector('.price-input');
+      const value = parseInt(input.value);
+      if (value > minValue) {
+        input.value = value - 10;
+      }
+    });
+  });
+
+  incrementButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const input = this.parentElement.querySelector('.price-input');
+      const value = parseInt(input.value);
+      if (value < maxValue) {
+        input.value = value + 10;
+      }
+    });
+  });
 }

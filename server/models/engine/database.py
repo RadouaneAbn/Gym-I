@@ -11,12 +11,13 @@ from server.models.review import Review
 from server.models.client import Client
 from server.models.owner import Owner
 from server.models.city import City
-from server.models.base_model import BaseModel, Base
+from server.models.base_model import Base
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
 from math import ceil
+from sqlalchemy import and_, desc
 
 
 load_dotenv()
@@ -65,9 +66,16 @@ class DBStorage:
                     new_dict[key] = obj
         return (new_dict)
 
-
-    def all_list(self, cls=None):
-        """query on the current database session"""
+    def all_list(self, cls=None, search_text=""):
+        """ query on the current database session
+            plus text search for search results
+        """
+        if search_text:
+            print(search_text)
+            search_text += "%"
+            return self.__session.query(Gym).filter(
+                Gym.name.ilike(search_text)
+                ).all()
         return (self.__session.query(cls).all())
 
     def new(self, obj):
@@ -99,13 +107,15 @@ class DBStorage:
         count the number of objects in storage
         """
         all_class = classes.values()
-
-        if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(server.models.storage.all(clas).values())
+        if cls:
+            all_class = cls
         else:
-            count = len(server.models.storage.all(cls).values())
+            all_class = classes.values()
+
+        count = 0
+        for _class in all_class:
+            count += self.__session.query(_class).count()
+
         return count
 
     def get(self, cls, id):
@@ -122,33 +132,65 @@ class DBStorage:
         """ This method checks if the user email is already in the database
             'checks for duplicates'
         """
-        print("email ==>", email)
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()
-        if inst:
-            return False
-        return True
+        return inst is None
 
-    def get_page(self, cls, page = 1):
+    def get_page(self, cls, page=1):
+        """ This method is for pagination
+            it return 12 instances of a page """
         offset = (page - 1) * 12
         limit = 12
         page_insts = self.__session.query(cls)\
             .offset(offset).limit(limit).all()
         return page_insts
 
-    def gymes_in_cities(self, city_ids):
-        all_gymes = self.__session.query(Gym).filter(
-            Gym.city_id.in_(city_ids)
-        ).all()
+    def gymes_in_cities(self, city_ids, search_text):
+        """ This method return all gyms in a city or cities
+            plus a search functionality"""
+        if search_text:
+            print(search_text)
+            search_text += "%"
+            all_gymes = self.__session.query(Gym).filter(
+                and_(Gym.city_id.in_(city_ids), Gym.name.ilike(search_text))
+            ).all()
+        else:
+            all_gymes = self.__session.query(Gym).filter(
+                Gym.city_id.in_(city_ids)
+            ).all()
         return all_gymes
-    
+
     def get_user(self, cls, email):
+        """ This method return a Client/Owner from its email """
         inst = self.__session.query(cls).filter(
             cls.email == email
         ).first()
         return inst
-    
+
     def pages_count(self, cls):
+        """ This method return the number of pages (gyms / 12) """
         count = self.__session.query(cls).count()
         return ceil(count / 12)
+
+    def search(self, name):
+        """ This method is responsible for the search engine """
+        gyms = self.__session.query(Gym.name, Gym.id)\
+            .filter(Gym.name.ilike(name + "%"))\
+            .offset(0).limit(10).all()
+        gyms = [{"name": gym.name, "id": gym.id} for gym in gyms]
+        return gyms
+
+    def search_all(self, name):
+        """ This method is responsible for the search result """
+        gyms = self.__session.query(Gym.name, Gym.id)\
+            .filter(Gym.name.ilike(name + "%")).all()
+        return gyms
+
+    def get_min_max_price(self):
+        """ This method return the min and max price (for filter by price) """
+        min = self.__session.query(Gym.price_by_month).order_by(
+            Gym.price_by_month).first()
+        max = self.__session.query(Gym.price_by_month).order_by(
+            desc(Gym.price_by_month)).first()
+        return {"min": min[0], "max": max[0]}

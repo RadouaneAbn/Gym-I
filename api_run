@@ -1,1 +1,0 @@
- uvicorn --host 0.0.0.0 --port 5002 server.api.app:app --reload

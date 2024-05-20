@@ -2,7 +2,6 @@
 """
 Contains class BaseModel
 """
-
 from datetime import datetime
 import server.models
 from sqlalchemy import Column, String, DateTime
@@ -62,17 +61,13 @@ class BaseModel:
         if "updated_at" in new_dict:
             new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
         new_dict["__class__"] = self.__class__.__name__
+        if new_dict["__class__"] in ["Client", "Owner"]:
+            new_dict["profile_picture"] = self.profile_picture
+            new_dict["profile_picture_original"] = self.profile_picture_original
         new_dict.pop("_sa_instance_state", None)
         new_dict.pop("password", None)
-        # new_dict.pop("amenities", None)
-        
-        # if "_sa_instance_state" in new_dict:
-        #     del new_dict["_sa_instance_state"]
-        # if not show_password:
-        #     if "password" in new_dict:
-        #         del new_dict["password"]
         return new_dict
 
     def delete(self):
-        """delete the current instance from the storage"""
+        """ delete the current instance from the database """
         server.models.storage.delete(self)
