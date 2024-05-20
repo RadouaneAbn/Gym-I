@@ -117,7 +117,7 @@ async def create_client(file_upload: UploadFile = None,
 def update_profile_picture(file_upload: UploadFile = None,
                            user: Client = Depends(check_token)):
     """ Update the profile picture of a client """
-    print(file_upload)
+    # print(file_upload)
     img = file_upload.file.read()
     img_128 = resize_128(img)
 
