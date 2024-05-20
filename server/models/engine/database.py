@@ -71,7 +71,7 @@ class DBStorage:
             plus text search for search results
         """
         if search_text:
-            print(search_text)
+            # print(search_text)
             search_text += "%"
             return self.__session.query(Gym).filter(
                 Gym.name.ilike(search_text)
@@ -150,7 +150,7 @@ class DBStorage:
         """ This method return all gyms in a city or cities
             plus a search functionality"""
         if search_text:
-            print(search_text)
+            # print(search_text)
             search_text += "%"
             all_gymes = self.__session.query(Gym).filter(
                 and_(Gym.city_id.in_(city_ids), Gym.name.ilike(search_text))
